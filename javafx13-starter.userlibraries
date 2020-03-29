@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: org.junit.platform:junit-platform-engine:1.6.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar" />
+  </library>
+  <library name="Maven: org.opentest4j:opentest4j:1.2.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-fxml:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-graphics:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar" />
+  </library>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-api:5.6.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar" />
+  </library>
+  <library name="Maven: org.apiguardian:apiguardian-api:1.1.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-controls:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar" />
+  </library>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-engine:5.6.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar" />
+  </library>
+  <library name="Maven: org.junit.platform:junit-platform-commons:1.6.0">
+    <archive path="/Users/eskilnysether/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-base:mac:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-mac.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-controls:mac:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-mac.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-base:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-fxml:mac:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-mac.jar" />
+  </library>
+  <library name="Maven: org.openjfx:javafx-graphics:mac:13">
+    <archive path="/Users/eskilnysether/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-mac.jar" />
+  </library>
+  <library name="javafx13-starter">
+    <archive path="/Users/eskilnysether/OneDrive - OsloMet/Programutvikling/javafx13-starter/javafx13-starter.iml" />
+  </library>
+  <library name="javafx13-starter1">
+    <archive path="/Users/eskilnysether/OneDrive - OsloMet/Programutvikling/javafx13-starter" />
+  </library>
+  <library name="Python 2.7 interpreter library" />
+</eclipse-userlibraries>
+
