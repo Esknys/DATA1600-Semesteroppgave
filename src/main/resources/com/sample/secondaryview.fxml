@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SecondaryController">
-    <children>
-        <Label text="Secondary View" />
-        <Button fx:id="secondaryButton" text="Switch to Main View" onAction="#changeToMainView" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
+<AnchorPane fx:id="anchorpaneid" prefHeight="455.0" prefWidth="583.0" style="-fx-background-color: #BDADAF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SecondaryController">
+   <children>
+        <Button fx:id="secondaryButton" layoutX="437.0" layoutY="14.0" onAction="#changeToMainView" text="Tilbake til hovedsiden" />
+        <Label fx:id="ansattinnloggingid" graphicTextGap="10.0" layoutX="130.0" layoutY="101.0" prefHeight="50.0" prefWidth="200.0" text="Ansattinnlogging" textAlignment="CENTER" textFill="#9e313d">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="brukerfeltid" layoutX="192.0" layoutY="167.0" />
+      <TextField fx:id="passordfeltid" layoutX="192.0" layoutY="215.0" />
+      <Text fx:id="brukerid" layoutX="100.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
+      <Text fx:id="passid" layoutX="109.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
+      <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bil-butikk.no admin-sider" wrappingWidth="179.0648193359375">
+         <effect>
+            <Glow level="0.76" />
+         </effect>
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Button fx:id="logginnansattid" layoutX="157.0" layoutY="260.0" mnemonicParsing="false" onAction="#logginnansattaction" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: #5B7A5A;" text="Logg inn" textFill="#e9e1de" />
+   </children>
+</AnchorPane>
