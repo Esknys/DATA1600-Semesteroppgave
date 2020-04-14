@@ -16,14 +16,14 @@
          <font>
             <Font size="31.0" />
          </font></Text>
-      <TextField fx:id="brukernavnfieldid" layoutX="329.0" layoutY="222.0" onAction="#kundebrukeraction" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A; -fx-border-radius: 0; -fx-background-insets: 0;" />
+      <TextField fx:id="txtBrukernavn" layoutX="324.0" layoutY="221.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A; -fx-border-radius: 0; -fx-background-insets: 0;" />
       <Text fx:id="brukernavntxtid" layoutX="231.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
-      <TextField fx:id="passordfieldid" layoutX="328.0" layoutY="262.0" onAction="#kundepassordaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A;">
+      <TextField fx:id="txtPassord" layoutX="328.0" layoutY="262.0" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A;">
          <effect>
             <Reflection fraction="0.0" topOpacity="0.0" />
          </effect></TextField>
       <Text fx:id="passordtxtid" layoutX="239.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
       <Button fx:id="mainButton" layoutX="344.0" layoutY="503.0" onAction="#changeToSecondaryView" style="-fx-background-color: #5B7A5A;" text="Ansatt? Trykk her" />
-      <Button fx:id="kundelogginnid" layoutX="344.0" layoutY="319.0" mnemonicParsing="false" onAction="#klogginnaction" style="-fx-background-color: #5B7A5A;" text="Logg inn" />
+      <Button fx:id="loggInnKnapp" layoutX="360.0" layoutY="327.0" mnemonicParsing="false" onAction="#loggInn" style="-fx-background-color: #5B7A5A;" text="Logg inn" />
    </children>
 </AnchorPane>

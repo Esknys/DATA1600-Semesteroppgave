@@ -10,60 +10,56 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-    public class MainController {
+public class MainController {
 
-        @FXML
-        private Button kundelogginnid;
+    @FXML
+    private Text bilbutikktxtid;
 
-        @FXML
-        private Text bilbutikktxtid;
+    @FXML
+    private Label primaryviewid;
 
-        @FXML
-        private Label primaryviewid;
+    @FXML
+    private Text kundeinnloggingtxtid;
 
-        @FXML
-        private Text kundeinnloggingtxtid;
+    @FXML
+    private TextField txtBrukernavn;
 
-        @FXML
-        private TextField brukernavnfieldid;
+    @FXML
+    private Text brukernavntxtid;
 
-        @FXML
-        private Text brukernavntxtid;
+    @FXML
+    private TextField txtPassord;
 
-        @FXML
-        private TextField passordfieldid;
+    @FXML
+    private Text passordtxtid;
 
-        @FXML
-        private Text passordtxtid;
+    @FXML
+    private Button mainButton;
 
-        @FXML
-        private Button mainButton;
+    @FXML
+    private Button loggInnKnapp;
 
-        @FXML
-        private void changeToSecondaryView() throws IOException {
-            App.changeView("secondaryview.fxml");
+
+    @FXML
+    private void changeToSecondaryView() throws IOException {
+        App.changeView("secondaryview.fxml");
+    }
+
+    @FXML
+    private void loggInn(ActionEvent event) throws IOException {
+
+        String brukernavn = txtBrukernavn.getText();
+        String passord = txtPassord.getText();
+
+        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
+
+            App.changeView("kundeStart.fxml");
         }
-
-        @FXML
-        void klogginnaction(ActionEvent event) {
-
-        }
-
-        @FXML
-        void kundebrukeraction(ActionEvent event) {
-
-        }
-
-        @FXML
-        void kundepassordaction(ActionEvent event) {
-
-        }
-
-
 
 
     }
 
 
+}
 
 
