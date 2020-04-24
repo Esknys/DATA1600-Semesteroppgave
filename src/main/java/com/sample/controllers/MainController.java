@@ -53,10 +53,8 @@ public class MainController {
 
         if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
 
-            App.changeView("kundeStart.fxml");
+            App.changeView("overviewScene.fxml");
         }
-
-
     }
 
 
