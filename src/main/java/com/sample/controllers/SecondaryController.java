@@ -45,11 +45,18 @@ public class SecondaryController {
         App.changeView("mainview.fxml");
     }
 
-
     @FXML
-    void logginnansattaction(ActionEvent event) {
+    void logginnansattaction(ActionEvent event) throws IOException {
 
+        String brukernavn = brukerfeltid.getText();
+        String passord = passordfeltid.getText();
+
+        if (brukernavn.equals("Superbruker") && passord.equals("Superpassord")) {
+            App.changeView("superStart.fxml");
+        }
     }
+
+
 }
 
 
