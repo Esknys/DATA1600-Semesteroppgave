@@ -1,6 +1,7 @@
 package com.sample.car;
 
 public class Engine extends Part{
+
     private String fuel;
     private int horsepower;
 

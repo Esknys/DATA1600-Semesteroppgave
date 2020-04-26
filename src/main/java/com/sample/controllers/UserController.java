@@ -1,6 +1,10 @@
 package com.sample.controllers;
 
 import com.sample.car.*;
+import com.sample.file.CarFormatter;
+import com.sample.file.FileReader;
+import com.sample.file.FileSaver;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -8,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserController {
@@ -27,11 +33,12 @@ public class UserController {
         paintjobArrayList.add(paint2);
 
     }
+
     //konstruerer deler pga mangel av innlastning fra fil
     private Engine electric = new Engine("Electroman", "Electric", 500, 200000);
-    private Engine diesel = new Engine("Diesel 200x","Diesel", 200, 150000);
+    private Engine diesel = new Engine("Diesel 200x", "Diesel", 200, 150000);
 
-    private Gearbox manual = new Gearbox("Oldschool",30000, "Manual transmission");
+    private Gearbox manual = new Gearbox("Oldschool", 30000, "Manual transmission");
     private Gearbox automatic = new Gearbox("Super auto shifter", 40000, "Automatic transmission");
 
     private Paintjob paint1 = new Paintjob("White cream", 10000, "White", "Metallic");
@@ -48,6 +55,7 @@ public class UserController {
         GEARBOX,
         PAINTJOB
     }
+
     PartType currentPartType = PartType.OVERVEIW;
 
 
@@ -64,6 +72,9 @@ public class UserController {
     private ButtonBar UIButtonbar;
 
     @FXML
+    private Button BtnSaveCar;
+
+    @FXML
     private Button BtnOverviewScene;
 
     @FXML
@@ -76,10 +87,17 @@ public class UserController {
     private Button BtnPaintjobScene;
 
     @FXML
+    private Button BtnShowCars;
+
+    @FXML
+    private TableView<?> tableViewCars;
+
+    @FXML
     private Label lblSelectPart;
 
     //Groups the parts so you can only select one at the time
     ToggleGroup tg = new ToggleGroup();
+
     @FXML
     private TilePane PartSelectorTilePane;
 
@@ -87,69 +105,100 @@ public class UserController {
     private Button btnAddToConfiguration;
 
     @FXML
-    void AddSelectedPart(ActionEvent event) {
-        String selectedPartUUID = (String) tg.getSelectedToggle().getUserData();
-        Part selectedPart = findPartInPartArrayLists(selectedPartUUID);
+    void SaveCar(ActionEvent event) {
 
-        switch(currentPartType) {
-            case OVERVEIW:
-                break;
+        try {
+            File file = new File("carregister.txt");
 
-            case ENGINE:
-                currentConfiguringCar.setEngine((Engine) selectedPart);
-                break;
+            String formatted = CarFormatter.formatCar(currentConfiguringCar);
 
-            case GEARBOX:
-                currentConfiguringCar.setGearbox((Gearbox) selectedPart);
-                break;
+            FileSaver.save(formatted, file);
+        } catch (IOException io) {
 
-            case PAINTJOB:
-                currentConfiguringCar.setPaintjob((Paintjob) selectedPart);
         }
 
     }
 
     @FXML
-    void showOverviewScene(ActionEvent event) {
+    void ShowCars(ActionEvent event) {
+/*
+        File file = new File("carregister.txt");
 
-        currentPartType = PartType.OVERVEIW;
-        updateTitleAndWidowButtons();
 
-        clearRadioButtonTilePane();
+        FileReader fileReader = new FileReader();
+
+
+        ObservableList<Car> cars = fileReader.readCars(file);
+
+        fileReader.attachTableView(tableViewCars, cars);
+
+ */
     }
 
-    @FXML
-    void showEngineScene(ActionEvent event) {
+        @FXML
+        void AddSelectedPart (ActionEvent event){
+            String selectedPartUUID = (String) tg.getSelectedToggle().getUserData();
+            Part selectedPart = findPartInPartArrayLists(selectedPartUUID);
 
-        currentPartType = PartType.ENGINE;
-        updateTitleAndWidowButtons();
+            switch (currentPartType) {
+                case OVERVEIW:
+                    break;
 
-        clearRadioButtonTilePane();
-        fillRadioButtonTilePaneWithParts(engineArrayList);
+                case ENGINE:
+                    currentConfiguringCar.setEngine((Engine) selectedPart);
+                    break;
 
-    }
+                case GEARBOX:
+                    currentConfiguringCar.setGearbox((Gearbox) selectedPart);
+                    break;
 
-    @FXML
-    void showGearboxScene(ActionEvent event) {
+                case PAINTJOB:
+                    currentConfiguringCar.setPaintjob((Paintjob) selectedPart);
+            }
 
-        currentPartType = PartType.GEARBOX;
-        updateTitleAndWidowButtons();
+        }
 
-        clearRadioButtonTilePane();
-        fillRadioButtonTilePaneWithParts(gearboxArrayList);
-    }
+        @FXML
+        void showOverviewScene (ActionEvent event){
 
-    @FXML
-    void showPaintjobScene(ActionEvent event) {
+            currentPartType = PartType.OVERVEIW;
+            updateTitleAndWidowButtons();
 
-        currentPartType = PartType.PAINTJOB;
-        updateTitleAndWidowButtons();
+            clearRadioButtonTilePane();
+        }
 
-        clearRadioButtonTilePane();
-        fillRadioButtonTilePaneWithParts(paintjobArrayList);
-    }
+        @FXML
+        void showEngineScene (ActionEvent event){
 
-    public void fillRadioButtonTilePaneWithParts(ArrayList<? extends Part> partArrayList) {
+            currentPartType = PartType.ENGINE;
+            updateTitleAndWidowButtons();
+
+            clearRadioButtonTilePane();
+            fillRadioButtonTilePaneWithParts(engineArrayList);
+
+        }
+
+        @FXML
+        void showGearboxScene (ActionEvent event){
+
+            currentPartType = PartType.GEARBOX;
+            updateTitleAndWidowButtons();
+
+            clearRadioButtonTilePane();
+            fillRadioButtonTilePaneWithParts(gearboxArrayList);
+        }
+
+        @FXML
+        void showPaintjobScene (ActionEvent event){
+
+            currentPartType = PartType.PAINTJOB;
+            updateTitleAndWidowButtons();
+
+            clearRadioButtonTilePane();
+            fillRadioButtonTilePaneWithParts(paintjobArrayList);
+        }
+
+   public void fillRadioButtonTilePaneWithParts(ArrayList<? extends Part> partArrayList) {
         for (Part p : partArrayList) {
             RadioButton radioButton = new RadioButton();
             radioButton.setText(p.getName() + "\n" + p.getPriceFormatted() + ",-");

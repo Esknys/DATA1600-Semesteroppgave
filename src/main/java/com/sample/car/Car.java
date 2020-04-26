@@ -1,9 +1,10 @@
 package com.sample.car;
 
 public class Car {
-    private Engine engine;
-    private Gearbox gearbox;
-    private Paintjob paintjob;
+    public Engine engine;
+    public Gearbox gearbox;
+    public Paintjob paintjob;
+
 
     public Car(Engine engine, Gearbox gearbox, Paintjob paintjob) {
         this.engine = engine;
