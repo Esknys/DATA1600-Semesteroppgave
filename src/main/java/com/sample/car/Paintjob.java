@@ -35,4 +35,12 @@ public class Paintjob extends Part {
                 "Color: " + getColor() + "\n" +
                 "Type: " + getType();
     }
+
+    @Override
+    public String toStringFormatted() {
+        return "Name: " + getName() + "\n" +
+                "Price: " + getPriceFormatted() + "\n" +
+                "Color: " + getColor() + "\n" +
+                "Type: " + getType();
+    }
 }
