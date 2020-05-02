@@ -1,15 +1,22 @@
 package com.sample.car;
 
-public class Car {
-    public Engine engine;
-    public Gearbox gearbox;
-    public Paintjob paintjob;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.UUID;
 
+public class Car {
+    private Engine engine;
+    private Gearbox gearbox;
+    private Paintjob paintjob;
+    private UUID uuid;
+    private String uuidString;
 
     public Car(Engine engine, Gearbox gearbox, Paintjob paintjob) {
         this.engine = engine;
         this.gearbox = gearbox;
         this.paintjob = paintjob;
+        uuid = UUID.randomUUID();
+        uuidString = uuid.toString();
     }
 
     public Engine getEngine() {
@@ -36,19 +43,32 @@ public class Car {
         this.paintjob = paintjob;
     }
 
+    public UUID getUUID() {
+        return uuid;
+    }
+
+    public String getUUIDString() {
+        return uuidString;
+    }
+
     public int getPrice() {
         return engine.getPrice() +
                 gearbox.getPrice() +
                 paintjob.getPrice();
+    }
 
+    public String getPriceFormatted() {
+        Locale locale = new Locale("no", "NO");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        return currencyFormatter.format(getPrice());
     }
 
     @Override
     public String toString() {
         return "Car:" + "\n" +
-                "Total price: " + getPrice() + "\n" +
-                "---Engine---" + "\n" + engine + "\n" +
-                "---Gearbox---" + "\n" + gearbox + "\n" +
-                "---Paintjob---" + "\n" + paintjob + "\n";
+                "Total price: " + getPriceFormatted() + "\n" +
+                "---Engine---" + "\n" + engine.toStringFormatted() + "\n" +
+                "---Gearbox---" + "\n" + gearbox.toStringFormatted() + "\n" +
+                "---Paintjob---" + "\n" + paintjob.toStringFormatted() + "\n";
     }
 }

@@ -29,5 +29,13 @@ public class Engine extends Part{
                 "Price: " + getPrice();
     }
 
+    @Override
+    public String toStringFormatted() {
+        return "Name: " + getName() + "\n" +
+                "Price: " + getPriceFormatted() + "\n" +
+                "Fuel: " + getName() + "\n" +
+                "Horsepower: " + getHorsepower() +  "HP ";
+    }
+
 
 }

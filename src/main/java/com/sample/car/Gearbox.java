@@ -23,4 +23,11 @@ public class Gearbox extends Part {
                 "Price: " + getPrice() + "\n" +
                 "Type: " + getType();
     }
+
+    @Override
+    public String toStringFormatted() {
+        return "Name: " + getName() + "\n" +
+                "Price: " + getPriceFormatted() + "\n" +
+                "Type: " + getType();
+    }
 }
