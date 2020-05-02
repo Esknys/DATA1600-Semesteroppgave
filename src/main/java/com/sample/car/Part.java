@@ -29,6 +29,8 @@ public abstract class Part {
         return price;
     }
 
+
+    //Formaterer pris til norsk format: 15000 -> kr 15 000,00
     public String getPriceFormatted() {
         Locale locale = new Locale("no", "NO");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
@@ -45,5 +47,10 @@ public abstract class Part {
 
     public String getUUIDString() {
         return uuidString;
+    }
+
+    public String toStringFormatted() {
+        return "Name: " + getName() + "\n" +
+                "Price: " + getPriceFormatted();
     }
 }
