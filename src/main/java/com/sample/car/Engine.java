@@ -12,7 +12,7 @@ public class Engine extends Part{
         this.horsepower = horsepower;
     }
 
-    public String getName() {
+    public String getFuel() {
         return fuel;
     }
 

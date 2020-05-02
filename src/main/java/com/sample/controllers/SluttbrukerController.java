@@ -1,8 +1,13 @@
 package com.sample.controllers;
 
 import com.sample.car.*;
+import com.sample.file.CarFormatter;
+import com.sample.file.FileReader;
+import com.sample.file.FileSaver;
+import com.sample.file.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -10,6 +15,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SluttbrukerController {
@@ -106,6 +113,7 @@ public class SluttbrukerController {
         carArrayList.add(testCar1);
         carArrayList.add(testCar2);
 
+
         //Legger til funksjonen updateCurretPartInfo som Listner til togglegroupen, så info om delene oppdateres
         partToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
@@ -178,7 +186,31 @@ public class SluttbrukerController {
     }
 
     @FXML
-    void saveConfiguration(ActionEvent event) {
+    void saveConfiguration(ActionEvent event) throws IOException {
+
+        FileReader fileReader = new FileReader();
+        File file = new File("carregister.txt");
+
+       try {
+
+           String formatted = CarFormatter.formatCar(currentConfiguringCar);
+
+           FileSaver.save(formatted, file);
+
+           ArrayList<Car> cars = fileReader.readCars(file);
+
+           for (Car car : cars) {
+
+               carArrayList.add(car);
+
+
+           }
+
+       } catch(IOException ioe) {
+
+           throw new InvalidCarFormatException("Feil bilformat");
+
+       }
 
     }
 
