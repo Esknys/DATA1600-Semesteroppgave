@@ -5,11 +5,11 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class Car {
-    private Engine engine;
-    private Gearbox gearbox;
-    private Paintjob paintjob;
-    private UUID uuid;
-    private String uuidString;
+    public Engine engine;
+    public Gearbox gearbox;
+    public Paintjob paintjob;
+    public UUID uuid;
+    public String uuidString;
 
     public Car(Engine engine, Gearbox gearbox, Paintjob paintjob) {
         this.engine = engine;
