@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class MainController {
@@ -39,6 +40,11 @@ public class MainController {
     @FXML
     private Button loggInnKnapp;
 
+    @FXML
+    private ImageView carpictureid;
+
+    @FXML
+    private Label exceptionid;
 
     @FXML
     private void changeToSecondaryView() throws IOException {
@@ -52,12 +58,14 @@ public class MainController {
         String passord = txtPassord.getText();
 
         if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
-
             App.changeView("sluttbruker.fxml");
+        } else if (!(brukernavn.equals("Brukernavn") && passord.equals("Passord"))){
+            // Exceptions for nå.. Må ha mange flere.
+            exceptionid.setText("Feil Brukernavn og passord");
         }
+
+
     }
 
 
 }
-
-

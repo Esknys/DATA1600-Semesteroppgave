@@ -51,12 +51,22 @@ public class SecondaryController {
         String brukernavn = brukerfeltid.getText();
         String passord = passordfeltid.getText();
 
-        if (brukernavn.equals("Superbruker") && passord.equals("Superpassord")) {
-            App.changeView("superStart.fxml");
+        if (brukernavn.equals("superbruker") && passord.equals("superpassord")) {
+            App.changeView("Superstart.fxml");
         }
+        //else {
+        //    throw new InvalidInputException("Feil brukernavn og passord. Prøv igjen");
+        //    }
     }
 
 
+
 }
+
+
+
+
+
+
 
 

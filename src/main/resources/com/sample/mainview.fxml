@@ -4,26 +4,49 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="653.0" prefWidth="810.0" style="-fx-background-color: #FA4B57;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
+<AnchorPane prefHeight="653.0" prefWidth="810.0" style="-fx-background-color: A4978E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
    <children>
-      <Text fx:id="bilbutikktxtid" fill="#49454a" layoutX="317.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bil-butikk.no" wrappingWidth="99.47265625" />
-      <Label fx:id="primaryviewid" layoutX="646.0" layoutY="59.0" text="fxmlside: mainview.fxml" />
-      <Text fx:id="kundeinnloggingtxtid" fill="#49454a" layoutX="268.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundeinnlogging" wrappingWidth="271.61817932128906">
+      <Text fx:id="bilbutikktxtid" fill="#132226" layoutX="228.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilkonfigurasjon" wrappingWidth="394.6727180480957">
          <font>
-            <Font size="31.0" />
+            <Font size="43.0" />
          </font></Text>
-      <TextField fx:id="txtBrukernavn" layoutX="324.0" layoutY="221.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A; -fx-border-radius: 0; -fx-background-insets: 0;" />
-      <Text fx:id="brukernavntxtid" layoutX="231.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" />
-      <TextField fx:id="txtPassord" layoutX="328.0" layoutY="262.0" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A;">
+      <Label fx:id="primaryviewid" layoutX="646.0" layoutY="27.0" text="fxmlside: mainview.fxml" />
+      <Text fx:id="kundeinnloggingtxtid" fill="#132226" layoutX="92.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundeinnlogging" wrappingWidth="271.61817932128906">
+         <font>
+            <Font size="23.0" />
+         </font></Text>
+      <TextField fx:id="txtBrukernavn" layoutX="181.0" layoutY="358.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A; -fx-border-radius: 0; -fx-background-insets: 0;" />
+      <Text fx:id="brukernavntxtid" fill="#132226" layoutX="67.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TextField fx:id="txtPassord" layoutX="181.0" layoutY="396.0" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A;">
          <effect>
             <Reflection fraction="0.0" topOpacity="0.0" />
          </effect></TextField>
-      <Text fx:id="passordtxtid" layoutX="239.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" />
-      <Button fx:id="mainButton" layoutX="344.0" layoutY="503.0" onAction="#changeToSecondaryView" style="-fx-background-color: #5B7A5A;" text="Ansatt? Trykk her" />
-      <Button fx:id="loggInnKnapp" layoutX="360.0" layoutY="327.0" mnemonicParsing="false" onAction="#loggInn" style="-fx-background-color: #5B7A5A;" text="Logg inn" />
+      <Text fx:id="passordtxtid" fill="#132226" layoutX="81.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Button fx:id="mainButton" layoutX="646.0" layoutY="584.0" onAction="#changeToSecondaryView" style="-fx-background-color: BE9063;" text="Ansatt? Trykk her" />
+      <Button fx:id="loggInnKnapp" layoutX="98.0" layoutY="442.0" mnemonicParsing="false" onAction="#loggInn" prefHeight="32.0" prefWidth="166.0" style="-fx-background-color: BE9063;" text="Logg inn">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <ImageView fx:id="carpictureid" fitHeight="240.0" fitWidth="357.0" layoutX="388.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Documents/SKOLE/Skole%20vår%202020/Systemutvikling/CarPictures.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="exceptionid" layoutX="33.0" layoutY="500.0" prefHeight="50.0" prefWidth="323.0" textFill="#b72a2a">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
    </children>
 </AnchorPane>

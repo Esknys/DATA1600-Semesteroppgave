@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SuperStart">
+<AnchorPane fx:id="anchorid" prefHeight="653.0" prefWidth="804.0" style="-fx-background-color: #BDADAF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SuperStart">
    <children>
-      <AnchorPane fx:id="anchor" layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0" />
+      <VBox fx:id="ExistingPartsid" layoutX="74.0" layoutY="141.0" prefHeight="404.0" prefWidth="661.0">
+         <children>
+            <BorderPane fx:id="paneid" prefHeight="199.0" prefWidth="652.0">
+               <left>
+                  <Button fx:id="ExcistingPartsID" mnemonicParsing="false" onAction="#showpartsactionid" prefHeight="35.0" prefWidth="215.0" style="-fx-background-color: #5B7A5A;" text="Eksisterende komponenter" BorderPane.alignment="CENTER" />
+               </left>
+               <center>
+                  <Label fx:id="popupid" prefHeight="142.0" prefWidth="239.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <TableView fx:id="ExistingPartsTableView" prefHeight="186.0" prefWidth="643.0">
+              <columns>
+                <TableColumn fx:id="TableViewEngine" prefWidth="75.0" text="Bilmotor" />
+                <TableColumn fx:id="TableViewGearbox" prefWidth="75.0" text="Girkasse" />
+                  <TableColumn fx:id="TableViewPaint" prefWidth="75.0" text="Maling" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Label fx:id="labelid" layoutX="171.0" layoutY="14.0" prefHeight="75.0" prefWidth="317.0" text="Administrasjonsside" textFill="#9e313d">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Line fx:id="line2id" endX="469.0" endY="-142.39999389648438" layoutX="286.0" layoutY="185.0" startX="469.0" startY="445.39996337890625" stroke="#9e313d" />
+      <Line fx:id="line1id" endX="-14.307090759277344" endY="462.79998779296875" layoutX="62.0" layoutY="174.0" startX="-14.307106018066406" startY="-131.8000030517578" stroke="#9e313d" />
+      <Text fx:id="introtxtid" layoutX="171.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legg til og slett komponenter her" wrappingWidth="337.9830265045166" />
    </children>
 </AnchorPane>
