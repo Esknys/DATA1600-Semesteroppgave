@@ -1,12 +1,9 @@
-package com.sample.file;
+package com.sample.textfile;
 
 import com.sample.car.Car;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 
 import java.io.File;
 import java.io.IOException;

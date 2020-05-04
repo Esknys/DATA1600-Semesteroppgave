@@ -1,7 +1,6 @@
-package com.sample.file;
+package com.sample.textfile;
 
 import com.sample.car.Car;
-import com.sample.car.Gearbox;
 
 public class CarFormatter {
 

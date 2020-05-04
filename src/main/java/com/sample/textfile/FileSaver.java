@@ -1,4 +1,4 @@
-package com.sample.file;
+package com.sample.textfile;
 
 import java.io.File;
 import java.io.FileWriter;

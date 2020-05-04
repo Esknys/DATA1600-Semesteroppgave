@@ -1,13 +1,12 @@
 package com.sample.controllers;
 
 import com.sample.car.*;
-import com.sample.file.CarFormatter;
-import com.sample.file.FileReader;
-import com.sample.file.FileSaver;
-import com.sample.file.InvalidCarFormatException;
+import com.sample.textfile.CarFormatter;
+import com.sample.textfile.FileReader;
+import com.sample.textfile.FileSaver;
+import com.sample.textfile.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -199,12 +198,7 @@ public class SluttbrukerController {
 
            ArrayList<Car> cars = fileReader.readCars(file);
 
-           for (Car car : cars) {
-
-               carArrayList.add(car);
-
-
-           }
+           carArrayList = cars;
 
        } catch(IOException ioe) {
 
