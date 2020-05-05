@@ -101,6 +101,9 @@ public class SluttbrukerController {
     @FXML
     public void initialize() {
         //fyller arrays for testing
+
+
+
         engineArrayList.add(electric);
         engineArrayList.add(diesel);
 
