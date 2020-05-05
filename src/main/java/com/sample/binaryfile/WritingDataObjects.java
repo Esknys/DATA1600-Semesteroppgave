@@ -1,11 +1,13 @@
 package com.sample.binaryfile;
 
+import com.sample.car.Engine;
+
 import java.io.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class WritingDataObjects {
 
-    public static void write(File file, ArrayList parts) {
+    public static void write(File file, List parts) {
 
         try (OutputStream os = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(os);) {
@@ -15,4 +17,8 @@ public class WritingDataObjects {
             e.printStackTrace();
         }
     }
+
+
+
+
 }

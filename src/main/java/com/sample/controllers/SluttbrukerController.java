@@ -1,5 +1,6 @@
 package com.sample.controllers;
 
+import com.sample.binaryfile.WritingDataObjects;
 import com.sample.car.*;
 import com.sample.textfile.CarFormatter;
 import com.sample.textfile.FileReader;
@@ -175,6 +176,13 @@ public class SluttbrukerController {
 
     @FXML
     void newCar(ActionEvent event) {
+
+        Engine e1 = new Engine("Motor", "Bensin", 1000, 200000);
+        Engine e2 = new Engine("Hybrid", "Hybrid", 500, 150000);
+
+        ArrayList<Engine> enginges = new ArrayList<>();
+
+        WritingDataObjects.writeEngines(enginges);
 
     }
 
