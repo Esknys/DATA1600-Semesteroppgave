@@ -2,51 +2,54 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="653.0" prefWidth="810.0" style="-fx-background-color: A4978E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
+<AnchorPane prefHeight="610.0" prefWidth="950.0" style="-fx-background-color: #6E6658;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.MainController">
    <children>
-      <Text fx:id="bilbutikktxtid" fill="#132226" layoutX="228.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilkonfigurasjon" wrappingWidth="394.6727180480957">
+      <Text fx:id="bilbutikktxtid" fill="WHITE" layoutX="302.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold; -fx-font-weight: bold;" text="Bilkonfigurasjon" wrappingWidth="346.67277908325195">
          <font>
-            <Font size="43.0" />
+            <Font name="Arial Nova Light" size="51.0" />
          </font></Text>
-      <Label fx:id="primaryviewid" layoutX="646.0" layoutY="27.0" text="fxmlside: mainview.fxml" />
-      <Text fx:id="kundeinnloggingtxtid" fill="#132226" layoutX="92.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kundeinnlogging" wrappingWidth="271.61817932128906">
+      <Label fx:id="primaryviewid" layoutX="772.0" layoutY="26.0" text="fxmlside: mainview.fxml" />
+      <Text fx:id="kundeinnloggingtxtid" fill="WHITE" layoutX="92.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Kundeinnlogging" wrappingWidth="271.61817932128906">
          <font>
             <Font size="23.0" />
          </font></Text>
-      <TextField fx:id="txtBrukernavn" layoutX="181.0" layoutY="358.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A; -fx-border-radius: 0; -fx-background-insets: 0;" />
-      <Text fx:id="brukernavntxtid" fill="#132226" layoutX="67.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn">
+      <TextField fx:id="txtBrukernavn" layoutX="181.0" layoutY="300.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #000000; -fx-border-width: 1;" />
+      <Text fx:id="brukernavntxtid" fill="WHITE" layoutX="73.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Brukernavn">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="txtPassord" layoutX="181.0" layoutY="396.0" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #5B7A5A;">
-         <effect>
-            <Reflection fraction="0.0" topOpacity="0.0" />
-         </effect></TextField>
-      <Text fx:id="passordtxtid" fill="#132226" layoutX="81.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord">
+      <Text fx:id="passordtxtid" fill="WHITE" layoutX="87.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Passord">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button fx:id="mainButton" layoutX="646.0" layoutY="584.0" onAction="#changeToSecondaryView" style="-fx-background-color: BE9063;" text="Ansatt? Trykk her" />
-      <Button fx:id="loggInnKnapp" layoutX="98.0" layoutY="442.0" mnemonicParsing="false" onAction="#loggInn" prefHeight="32.0" prefWidth="166.0" style="-fx-background-color: BE9063;" text="Logg inn">
+      <Button fx:id="mainButton" layoutX="98.0" layoutY="441.0" onAction="#changeToSecondaryView" prefHeight="31.0" prefWidth="166.0" style="-fx-background-color: BE9063; -fx-font-weight: bold;" text="Ansatt? Trykk her" textFill="WHITE" />
+      <Button fx:id="loggInnKnapp" layoutX="98.0" layoutY="398.0" mnemonicParsing="false" onAction="#loggInn" prefHeight="32.0" prefWidth="166.0" style="-fx-background-color: BE9063; -fx-font-weight: bold;" text="Logg inn" textFill="WHITE">
          <font>
             <Font size="10.0" />
          </font></Button>
-      <ImageView fx:id="carpictureid" fitHeight="240.0" fitWidth="357.0" layoutX="388.0" layoutY="271.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Documents/SKOLE/Skole%20vår%202020/Systemutvikling/CarPictures.jpg" />
-         </image>
-      </ImageView>
       <Label fx:id="exceptionid" layoutX="33.0" layoutY="500.0" prefHeight="50.0" prefWidth="323.0" textFill="#b72a2a">
          <font>
             <Font size="13.0" />
          </font></Label>
+      <ImageView fx:id="carpictureid" fitHeight="282.0" fitWidth="498.0" layoutX="388.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="https://cdn.stocksnap.io/img-thumbs/960w/nature-plants_9Y1TPQW3B6.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="data1600id" fill="WHITE" layoutX="302.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppe (xxx) sitt prosjekt i DATA1600 programutvikling. " wrappingWidth="346.67277908325207" />
+      <Text fx:id="kildebildeid" layoutX="400.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kilde til bildet: https://cdn.stocksnap.io/img-thumbs/960w/nature-plants_9Y1TPQW3B6.jpg" wrappingWidth="549.9828281402588">
+         <font>
+            <Font name="Arial Italic" size="10.0" />
+         </font>
+      </Text>
+      <PasswordField fx:id="Pasfieldid" layoutX="180.0" layoutY="344.0" onAction="#pasactionid" style="-fx-background-color: #E9E1DE; -fx-border-color: #000000; -fx-border-width: 1;" />
    </children>
 </AnchorPane>

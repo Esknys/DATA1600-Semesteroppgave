@@ -5,9 +5,7 @@ import java.io.IOException;
 import com.sample.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -29,7 +27,7 @@ public class MainController {
     private Text brukernavntxtid;
 
     @FXML
-    private TextField txtPassord;
+    private PasswordField Pasfieldid;
 
     @FXML
     private Text passordtxtid;
@@ -52,20 +50,32 @@ public class MainController {
     }
 
     @FXML
-    private void loggInn(ActionEvent event) throws IOException {
+    private Text data1600id;
 
-        String brukernavn = txtBrukernavn.getText();
-        String passord = txtPassord.getText();
+    @FXML
+    private Text kildebildeid;
 
-        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
-            App.changeView("sluttbruker.fxml");
-        } else if (!(brukernavn.equals("Brukernavn") && passord.equals("Passord"))){
-            // Exceptions for nå.. Må ha mange flere.
-            exceptionid.setText("Feil Brukernavn og passord");
-        }
-
+    @FXML
+    void pasactionid(ActionEvent event) {
 
     }
 
+    @FXML
+    private void loggInn(ActionEvent event) throws IOException {
 
+        String brukernavn = txtBrukernavn.getText();
+        String passord = Pasfieldid.getText();
+
+        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
+            App.changeView("sluttbruker.fxml");
+        } else {
+            exceptionid.setText("Feil passord og/eller brukernavn");
+        }
 }
+
+    }
+
+    // exceptionid.setText("Feil passord og/eller brukernavn"))
+
+
+

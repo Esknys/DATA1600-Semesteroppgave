@@ -1,5 +1,6 @@
 package com.sample.controllers;
 
+import com.sample.App;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SuperStart {
@@ -56,6 +58,14 @@ public class SuperStart {
         popupid.setText("Hei dette er test");
 
 
+    }
+
+    @FXML
+    private Button Backadminid;
+
+    @FXML
+    void BackActionID(ActionEvent event) throws IOException {
+        App.changeView("secondaryview.fxml");
     }
 
     @FXML

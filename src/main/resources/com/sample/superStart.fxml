@@ -11,17 +11,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorid" prefHeight="653.0" prefWidth="804.0" style="-fx-background-color: #BDADAF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SuperStart">
+<AnchorPane fx:id="anchorid" prefHeight="610.0" prefWidth="950.0" style="-fx-background-color: #BDADAF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SuperStart">
    <children>
       <VBox fx:id="ExistingPartsid" layoutX="74.0" layoutY="141.0" prefHeight="404.0" prefWidth="661.0">
          <children>
             <BorderPane fx:id="paneid" prefHeight="199.0" prefWidth="652.0">
-               <left>
-                  <Button fx:id="ExcistingPartsID" mnemonicParsing="false" onAction="#showpartsactionid" prefHeight="35.0" prefWidth="215.0" style="-fx-background-color: #5B7A5A;" text="Eksisterende komponenter" BorderPane.alignment="CENTER" />
-               </left>
                <center>
                   <Label fx:id="popupid" prefHeight="142.0" prefWidth="239.0" BorderPane.alignment="CENTER" />
                </center>
+               <left>
+                  <Button fx:id="ExcistingPartsID" mnemonicParsing="false" onAction="#showpartsactionid" prefHeight="35.0" prefWidth="215.0" style="-fx-background-color: #5B7A5A;" text="Eksisterende komponenter" BorderPane.alignment="CENTER" />
+               </left>
             </BorderPane>
             <TableView fx:id="ExistingPartsTableView" prefHeight="186.0" prefWidth="643.0">
               <columns>
@@ -32,13 +32,18 @@
             </TableView>
          </children>
       </VBox>
-      <Label fx:id="labelid" layoutX="171.0" layoutY="14.0" prefHeight="75.0" prefWidth="317.0" text="Administrasjonsside" textFill="#9e313d">
+      <Label fx:id="labelid" layoutX="340.0" layoutY="14.0" prefHeight="75.0" prefWidth="317.0" text="Administrasjonsside" textFill="#9e313d">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Line fx:id="line2id" endX="469.0" endY="-142.39999389648438" layoutX="286.0" layoutY="185.0" startX="469.0" startY="445.39996337890625" stroke="#9e313d" />
-      <Line fx:id="line1id" endX="-14.307090759277344" endY="462.79998779296875" layoutX="62.0" layoutY="174.0" startX="-14.307106018066406" startY="-131.8000030517578" stroke="#9e313d" />
-      <Text fx:id="introtxtid" layoutX="171.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legg til og slett komponenter her" wrappingWidth="337.9830265045166" />
+      <Line fx:id="line2id" endX="469.0" endY="-142.39999389648438" layoutX="435.0" layoutY="215.0" startX="469.00006103515625" startY="354.5999755859375" stroke="#9e313d" />
+      <Line fx:id="line1id" endX="-14.307109832763672" endY="359.5999755859375" layoutX="63.0" layoutY="204.0" startX="-14.307106018066406" startY="-131.8000030517578" stroke="#9e313d" />
+      <Text fx:id="introtxtid" layoutX="356.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legg til og slett komponenter her" wrappingWidth="213.18303871154785" />
+      <Button fx:id="Backadminid" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#BackActionID" prefHeight="38.0" prefWidth="80.0" style="-fx-background-color: #9e313d; -fx-font-weight: bold;" text="Tilbake" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="10.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
