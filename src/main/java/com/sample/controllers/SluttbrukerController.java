@@ -1,13 +1,14 @@
 package com.sample.controllers;
 
-import com.sample.binaryfile.WritingDataObjects;
+import com.sample.App;
 import com.sample.car.*;
-import com.sample.textfile.CarFormatter;
-import com.sample.textfile.FileReader;
-import com.sample.textfile.FileSaver;
-import com.sample.textfile.InvalidCarFormatException;
+import com.sample.file.CarFormatter;
+import com.sample.file.FileReader;
+import com.sample.file.FileSaver;
+import com.sample.file.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -99,8 +100,20 @@ public class SluttbrukerController {
     private Label lblCurrentConfiguration;
 
     @FXML
+    private Button backbutton;
+
+    @FXML
+    void backtomainviewid(ActionEvent event) throws IOException {
+        App.changeView("mainview.fxml");
+    }
+
+
+    @FXML
     public void initialize() {
         //fyller arrays for testing
+
+
+
         engineArrayList.add(electric);
         engineArrayList.add(diesel);
 
@@ -177,13 +190,6 @@ public class SluttbrukerController {
     @FXML
     void newCar(ActionEvent event) {
 
-        Engine e1 = new Engine("Motor", "Bensin", 1000, 200000);
-        Engine e2 = new Engine("Hybrid", "Hybrid", 500, 150000);
-
-        ArrayList<Engine> enginges = new ArrayList<>();
-
-        WritingDataObjects.writeEngines(enginges);
-
     }
 
     @FXML
@@ -206,7 +212,12 @@ public class SluttbrukerController {
 
            ArrayList<Car> cars = fileReader.readCars(file);
 
-           carArrayList = cars;
+           for (Car car : cars) {
+
+               carArrayList.add(car);
+
+
+           }
 
        } catch(IOException ioe) {
 
@@ -364,47 +375,47 @@ public class SluttbrukerController {
     public void updateTitleAndWidowButtons() {
         switch(currentPartType) {
             case OVERVEIW:
-                setTitle("Overview");
+                setTitle("OVERSIKT");
                 enableAllSceneButtons();
                 BtnOverviewScene.setDisable(true);
                 btnAddToConfiguration.setVisible(false);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select car configuration");
-                lblPartInfoTitle.setText("Car info");
+                lblSelectPart.setText("Velg bilkonfigurasjon");
+                lblPartInfoTitle.setText("Bil info");
                 btnBarCarConfigs.setVisible(true);
                 break;
 
             case ENGINE:
-                setTitle("Engine");
+                setTitle("MOTOR");
                 enableAllSceneButtons();
                 BtnEngineScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg motordel");
+                lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case GEARBOX:
-                setTitle("Gearbox");
+                setTitle("GIRKASSE");
                 enableAllSceneButtons();
                 BtnGearboxScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg girkasse");
+                lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case PAINTJOB:
-                setTitle("Paintjob");
+                setTitle("MALINGSFARGE");
                 enableAllSceneButtons();
                 BtnPaintjobScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg farge");
+                lblPartInfoTitle.setText("Fargeinfo");
                 btnBarCarConfigs.setVisible(false);
 
 
