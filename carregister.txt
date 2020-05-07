@@ -3,14 +3,3 @@ Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White 
 Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
 Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
 Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
