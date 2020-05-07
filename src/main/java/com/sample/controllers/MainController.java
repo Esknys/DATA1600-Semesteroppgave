@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class MainController {
@@ -43,6 +44,9 @@ public class MainController {
 
     @FXML
     private Label exceptionid;
+
+    @FXML
+    private Pane paneid;
 
     @FXML
     private void changeToSecondaryView() throws IOException {

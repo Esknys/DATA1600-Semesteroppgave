@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane fx:id="Anch1id" prefHeight="610.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Addon">
+   <children>
+      <AnchorPane fx:id="anch2id" layoutX="252.0" prefHeight="610.0" prefWidth="740.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane fx:id="pane1id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #90AFC5;">
+               <children>
+                  <Label fx:id="labelengine" alignment="CENTER" layoutX="38.0" layoutY="140.0" prefHeight="416.0" prefWidth="320.0" style="-fx-background-color: #808000;" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextFlow fx:id="txtflowid" prefHeight="75.0" prefWidth="678.0">
+                     <children>
+                        <Text fx:id="enginetitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="MOTOR" wrappingWidth="1.0">
+                           <font>
+                              <Font size="68.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <Button fx:id="engineinputid" layoutX="424.0" layoutY="195.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="32.0" prefWidth="177.0" text="Legg til motor-del" />
+                  <TextField fx:id="enginetextfield" layoutX="401.0" layoutY="244.0" prefHeight="34.0" prefWidth="227.0" />
+               </children></Pane>
+            <Pane fx:id="pane2id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #336B87;">
+               <children>
+                  <Label fx:id="labelgearbox" alignment="CENTER" layoutX="34.0" layoutY="136.0" prefHeight="424.0" prefWidth="320.0" style="-fx-background-color: #808000;" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextFlow fx:id="txtflowid2" prefHeight="117.0" prefWidth="565.0">
+                     <children>
+                        <Text fx:id="gearboxtitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="GIRKASSE" wrappingWidth="171.58310890197754">
+                           <font>
+                              <Font size="68.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextField fx:id="gearboxtextfield" layoutX="399.0" layoutY="240.0" prefHeight="34.0" prefWidth="208.0" />
+                  <Button fx:id="gearboxinputid" layoutX="427.0" layoutY="196.0" mnemonicParsing="false" onAction="#GearboxInputAction" prefHeight="34.0" prefWidth="177.0" text="Legg til Girkasse" />
+               </children></Pane>
+            <Pane fx:id="pane3id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #2f9fd0;">
+               <children>
+                  <Button fx:id="paintinputid" layoutX="434.0" layoutY="199.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="170.0" text="Legg til malingsfarge" />
+                  <Label fx:id="labelpaint" alignment="CENTER" layoutX="34.0" layoutY="141.0" prefHeight="416.0" prefWidth="320.0" style="-fx-background-color: #808000;" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextFlow fx:id="txtflow3" prefHeight="154.0" prefWidth="516.0">
+                     <children>
+                        <Text fx:id="painttitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="MALING">
+                           <font>
+                              <Font size="68.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextField fx:id="painttextfield" layoutX="406.0" layoutY="238.0" prefHeight="34.0" prefWidth="227.0" />
+               </children></Pane>
+            <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #BBD9EE;">
+               <children>
+                  <Label fx:id="labelwheel" alignment="CENTER" layoutX="30.0" layoutY="141.0" prefHeight="416.0" prefWidth="333.0" style="-fx-background-color: #808000;" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextFlow fx:id="txtflow4" prefHeight="138.0" prefWidth="462.0">
+                     <children>
+                        <Text fx:id="wheeltitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="HJUL">
+                           <font>
+                              <Font size="68.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextField fx:id="wheeltextfield" layoutX="397.0" layoutY="240.0" prefHeight="34.0" prefWidth="240.0" />
+                  <Button fx:id="wheelinputid" layoutX="425.0" layoutY="198.0" mnemonicParsing="false" onAction="#WheelInputAction" prefHeight="34.0" prefWidth="177.0" text="Legg til hjuldeltype" />
+               </children></Pane>
+            <Pane fx:id="pane5id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #D3AC2B;">
+               <children>
+                  <TextField fx:id="extratextfield" layoutX="400.0" layoutY="239.0" prefHeight="34.0" prefWidth="240.0" />
+                  <Label fx:id="labelextra" alignment="CENTER" layoutX="36.0" layoutY="141.0" prefHeight="416.0" prefWidth="320.0" style="-fx-background-color: #808000;" textFill="WHITE" />
+                  <TextFlow fx:id="txtflow5" layoutX="2.0" prefHeight="109.0" prefWidth="678.0">
+                     <children>
+                        <Text fx:id="extratitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="EKSTRAUTSTYR">
+                           <font>
+                              <Font size="49.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <Button fx:id="extrainputid" layoutX="426.0" layoutY="196.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="177.0" text="Legg til ekstrautstyr-del" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="610.0" prefWidth="249.0" style="-fx-background-color: #CBD0D8;">
+         <children>
+            <Button fx:id="engineid" alignment="BASELINE_LEFT" layoutY="62.0" mnemonicParsing="false" onAction="#engineaction" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: CBD0D8;" text="                  MOTOR">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="gearboxid" alignment="BASELINE_LEFT" layoutY="96.0" mnemonicParsing="false" onAction="#gearboxaction" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: CBD0D8;" text="                  GIRKASSE">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="paintid" alignment="BASELINE_LEFT" layoutY="130.0" mnemonicParsing="false" onAction="#paintaction" prefHeight="33.0" prefWidth="250.0" style="-fx-background-color: CBD0D8;" text="                  MALINGSFARGE">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="wheelsid" alignment="BASELINE_LEFT" layoutY="164.0" mnemonicParsing="false" onAction="#wheeilsaction" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: CBD0D8;" text="                  HJUL">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="extraid" alignment="BASELINE_LEFT" layoutY="198.0" mnemonicParsing="false" onAction="#extraaction" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: CBD0D8;" text="                  EKSTRAUTSTYR">
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <AnchorPane fx:id="anch3" layoutX="-4.0" layoutY="-2.0" prefHeight="610.0" prefWidth="58.0" style="-fx-background-color: #90AFC5;">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <children>
+                  <ImageView fx:id="img1" fitHeight="24.0" fitWidth="28.0" layoutX="16.0" layoutY="66.0">
+                     <image>
+                        <Image url="https://i.ibb.co/cvxdXn0/Engine.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="img2" fitHeight="24.0" fitWidth="22.0" layoutX="19.0" layoutY="102.0">
+                     <image>
+                        <Image url="https://i.ibb.co/jvftT1w/girkasse.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="img3" fitHeight="24.0" fitWidth="28.0" layoutX="15.0" layoutY="135.0">
+                     <image>
+                        <Image url="https://i.ibb.co/W5RF1K9/MALING.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="img4" fitHeight="24.0" fitWidth="28.0" layoutX="15.0" layoutY="172.0">
+                     <image>
+                        <Image url="https://i.ibb.co/WFRPqrQ/Hjul.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="img5" fitHeight="24.0" fitWidth="22.0" layoutX="19.0" layoutY="209.0">
+                     <image>
+                        <Image url="https://i.ibb.co/tL5NgF8/846296.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>

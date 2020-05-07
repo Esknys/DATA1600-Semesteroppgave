@@ -390,7 +390,7 @@ public class SluttbrukerController {
                 enableAllSceneButtons();
                 BtnEngineScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg del");
+                lblSelectPart.setText("Velg motordel");
                 lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 
@@ -402,7 +402,7 @@ public class SluttbrukerController {
                 enableAllSceneButtons();
                 BtnGearboxScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg del");
+                lblSelectPart.setText("Velg girkasse");
                 lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 

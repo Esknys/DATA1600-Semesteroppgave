@@ -22,22 +22,6 @@ public class SuperStart {
     private AnchorPane anchorid;
 
     @FXML
-    private VBox ExistingPartsid;
-
-
-    @FXML
-    private TableView<?> ExistingPartsTableView;
-
-    @FXML
-    private TableColumn<?, ?> TableViewEngine;
-
-    @FXML
-    private TableColumn<?, ?> TableViewGearbox;
-
-    @FXML
-    private TableColumn<?, ?> TableViewPaint;
-
-    @FXML
     private Label labelid;
 
     @FXML
@@ -49,19 +33,19 @@ public class SuperStart {
     @FXML
     private Text introtxtid;
 
-    @FXML
-    private Button ExcistingPartsID;
-
-    @FXML
-    void showpartsactionid(ActionEvent event) {
-
-        popupid.setText("Hei dette er test");
-
-
-    }
 
     @FXML
     private Button Backadminid;
+
+
+    @FXML
+    private Button addonbutton;
+
+    @FXML
+    private Button deletebutton;
+
+    @FXML
+    private TreeTableView<?> tableview;
 
     @FXML
     void BackActionID(ActionEvent event) throws IOException {
@@ -69,7 +53,15 @@ public class SuperStart {
     }
 
     @FXML
-    private Label popupid;
+    void addonaction(ActionEvent event) throws IOException {
+            App.changeView("addon.fxml");
+    }
+
+    @FXML
+    void deleteaction(ActionEvent event) {
+
+    }
+
 
 
 }
