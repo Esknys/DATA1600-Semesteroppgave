@@ -29,7 +29,7 @@
             <Image url="https://cdn.stocksnap.io/img-thumbs/960w/nature-plants_9Y1TPQW3B6.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="paneid" layoutX="57.0" layoutY="206.0" prefHeight="342.0" prefWidth="338.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #88BDBC; -fx-border-width: 3;">
+      <Pane fx:id="paneid" layoutX="57.0" layoutY="206.0" prefHeight="342.0" prefWidth="338.0" style="-fx-border-color: #FFFFFF; -fx-background-color: #CBD0D8; -fx-border-width: 3;">
          <children>
             <TextField fx:id="txtBrukernavn" layoutX="151.0" layoutY="91.0" style="-fx-background-color: #E9E1DE; -fx-border-color: #000000; -fx-border-width: 1;" />
             <Text fx:id="kundeinnloggingtxtid" fill="#254e58" layoutX="50.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Kundeinnlogging" wrappingWidth="271.61817932128906">

@@ -9,10 +9,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorpaneid" prefHeight="610.0" prefWidth="950.0" style="-fx-background-color: #BDADAF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SecondaryController">
+<AnchorPane fx:id="anchorpaneid" prefHeight="610.0" prefWidth="950.0" style="-fx-background-color: #CBD0D8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.SecondaryController">
    <children>
-        <Button fx:id="secondaryButton" layoutX="416.0" layoutY="342.0" onAction="#changeToMainView" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #5B7A5A; -fx-font-weight: bold;" text="Tilbake til hovedsiden" textFill="WHITE" />
-        <Label fx:id="ansattinnloggingid" graphicTextGap="10.0" layoutX="367.0" layoutY="142.0" prefHeight="55.0" prefWidth="240.0" text="Ansattinnlogging" textAlignment="CENTER" textFill="#9e313d">
+        <Button fx:id="secondaryButton" layoutX="416.0" layoutY="342.0" onAction="#changeToMainView" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #687864; -fx-font-weight: bold;" text="Tilbake til hovedsiden" textFill="WHITE" />
+        <Label fx:id="ansattinnloggingid" graphicTextGap="10.0" layoutX="367.0" layoutY="142.0" prefHeight="55.0" prefWidth="240.0" text="Ansattinnlogging" textAlignment="CENTER" textFill="#206ba4">
          <font>
             <Font size="29.0" />
          </font>
@@ -33,7 +33,7 @@
          <font>
             <Font size="14.0" />
          </font></Text>
-      <Button fx:id="logginnansattid" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" onAction="#logginnansattaction" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #5B7A5A; -fx-font-weight: bold;" text="Logg inn" textFill="#e9e1de" />
+      <Button fx:id="logginnansattid" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" onAction="#logginnansattaction" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #687864; -fx-font-weight: bold;" text="Logg inn" textFill="#e9e1de" />
       <PasswordField fx:id="passwordfieldid" layoutX="458.0" layoutY="256.0" prefHeight="26.0" prefWidth="166.0" />
    </children>
 </AnchorPane>

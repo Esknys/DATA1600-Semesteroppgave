@@ -19,7 +19,7 @@
             <DropShadow />
          </effect>
          <children>
-            <Pane fx:id="pane1id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #90AFC5;">
+            <Pane fx:id="pane1id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #5d5c61;">
                <children>
                   <Label fx:id="labelengine" alignment="TOP_CENTER" layoutX="38.0" layoutY="341.0" prefHeight="215.0" prefWidth="578.0" style="-fx-background-color: #808000;" textFill="WHITE" wrapText="true">
                      <font>
@@ -28,20 +28,20 @@
                   </Label>
                   <TextFlow fx:id="txtflowid" prefHeight="75.0" prefWidth="678.0">
                      <children>
-                        <Text fx:id="enginetitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="MOTOR" wrappingWidth="1.0">
+                        <Text fx:id="enginetitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MOTOR" wrappingWidth="1.0">
                            <font>
                               <Font size="68.0" />
                            </font>
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="engineinputid" layoutX="408.0" layoutY="160.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="56.0" prefWidth="164.0" text="Lagre" />
+                  <Button fx:id="engineinputid" layoutX="408.0" layoutY="160.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="56.0" prefWidth="164.0" style="-fx-background-color: #206ba4;" text="Lagre" textFill="WHITE" />
                   <TextField fx:id="enginetextfield" layoutX="27.0" layoutY="106.0" prefHeight="41.0" prefWidth="220.0" promptText="Skriv inn navn her" />
                   <TextField fx:id="fueltextfield" layoutX="28.0" layoutY="166.0" prefHeight="41.0" prefWidth="220.0" promptText="Legg inn drivstofftype her" />
                   <TextField fx:id="horsepowertextfield" layoutX="27.0" layoutY="226.0" prefHeight="48.0" prefWidth="227.0" promptText="Skriv inn hestekrefter her" />
                   <TextField fx:id="pricetextfield" layoutX="22.0" layoutY="278.0" prefHeight="48.0" prefWidth="227.0" promptText="Legg til pris her " />
                </children></Pane>
-            <Pane fx:id="pane2id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #336B87;">
+            <Pane fx:id="pane2id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #379683;">
                <children>
                   <Label fx:id="labelgearbox" alignment="TOP_CENTER" layoutX="34.0" layoutY="338.0" prefHeight="222.0" prefWidth="586.0" style="-fx-background-color: #808000;" textFill="WHITE" wrapText="true">
                      <font>
@@ -50,7 +50,7 @@
                   </Label>
                   <TextFlow fx:id="txtflowid2" prefHeight="117.0" prefWidth="565.0">
                      <children>
-                        <Text fx:id="gearboxtitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="GIRKASSE" wrappingWidth="171.58310890197754">
+                        <Text fx:id="gearboxtitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GIRKASSE" wrappingWidth="171.58310890197754">
                            <font>
                               <Font size="68.0" />
                            </font>
@@ -58,13 +58,13 @@
                      </children>
                   </TextFlow>
                   <TextField fx:id="gearboxtextfield" layoutX="201.0" layoutY="107.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her" />
-                  <Button fx:id="gearboxinputid" layoutX="231.0" layoutY="282.0" mnemonicParsing="false" onAction="#GearboxInputAction" prefHeight="41.0" prefWidth="203.0" text="Legg til Girkasse" />
+                  <Button fx:id="gearboxinputid" layoutX="231.0" layoutY="282.0" mnemonicParsing="false" onAction="#GearboxInputAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #206ba4;" text="Legg til Girkasse" textFill="WHITE" />
                   <TextField fx:id="gearboxtextfield2" layoutX="202.0" layoutY="167.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn type her" />
                   <TextField fx:id="gearboxtextfield3" layoutX="202.0" layoutY="225.0" prefHeight="48.0" prefWidth="260.0" promptText="Skriv inn pris her" />
                </children></Pane>
-            <Pane fx:id="pane3id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #2f9fd0;">
+            <Pane fx:id="pane3id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #8D8741;">
                <children>
-                  <Button fx:id="paintinputid" layoutX="434.0" layoutY="199.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="170.0" text="Legg til malingsfarge" />
+                  <Button fx:id="paintinputid" layoutX="434.0" layoutY="199.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="170.0" style="-fx-background-color: #206ba4;" text="Legg til malingsfarge" textFill="WHITE" />
                   <Label fx:id="labelpaint" alignment="TOP_CENTER" layoutX="34.0" layoutY="335.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="222.0" prefWidth="578.0" style="-fx-background-color: #808000;" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="14.0" />
@@ -72,7 +72,7 @@
                   </Label>
                   <TextFlow fx:id="txtflow3" prefHeight="154.0" prefWidth="516.0">
                      <children>
-                        <Text fx:id="painttitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="MALING">
+                        <Text fx:id="painttitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MALING">
                            <font>
                               <Font size="68.0" />
                            </font>
@@ -84,7 +84,7 @@
                   <TextField fx:id="painttextfield3" layoutX="28.0" layoutY="228.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn type her" />
                   <TextField fx:id="painttextfield4" layoutX="30.0" layoutY="281.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn pris her " />
                </children></Pane>
-            <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #BBD9EE;">
+            <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #5579A5;">
                <children>
                   <Label fx:id="labelwheel" alignment="TOP_CENTER" layoutX="30.0" layoutY="335.0" prefHeight="222.0" prefWidth="586.0" style="-fx-background-color: #808000;" textFill="WHITE" wrapText="true">
                      <font>
@@ -93,7 +93,7 @@
                   </Label>
                   <TextFlow fx:id="txtflow4" prefHeight="138.0" prefWidth="462.0">
                      <children>
-                        <Text fx:id="wheeltitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="HJUL">
+                        <Text fx:id="wheeltitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="HJUL">
                            <font>
                               <Font size="68.0" />
                            </font>
@@ -101,23 +101,23 @@
                      </children>
                   </TextFlow>
                   <TextField fx:id="wheeltextfield" layoutX="200.0" layoutY="103.0" prefHeight="48.0" prefWidth="267.0" promptText="Skriv inn navnet her" />
-                  <Button fx:id="wheelinputid" layoutX="231.0" layoutY="288.0" mnemonicParsing="false" onAction="#WheelInputAction" prefHeight="34.0" prefWidth="203.0" text="Legg til hjuldeltype" />
+                  <Button fx:id="wheelinputid" layoutX="231.0" layoutY="288.0" mnemonicParsing="false" onAction="#WheelInputAction" prefHeight="34.0" prefWidth="203.0" style="-fx-background-color: #206ba4;" text="Legg til hjuldeltype" textFill="WHITE" />
                   <TextField fx:id="wheeltextfield2" layoutX="202.0" layoutY="167.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn beskrivelse her " />
                   <TextField fx:id="wheeltextfield3" layoutX="202.0" layoutY="230.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn pris her" />
                </children></Pane>
-            <Pane fx:id="pane5id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #D3AC2B;">
+            <Pane fx:id="pane5id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #B1A296;">
                <children>
                   <Label fx:id="labelextra" alignment="TOP_CENTER" layoutX="36.0" layoutY="335.0" prefHeight="222.0" prefWidth="578.0" style="-fx-background-color: #808000;" textFill="WHITE" wrapText="true" />
                   <TextFlow fx:id="txtflow5" layoutX="2.0" prefHeight="109.0" prefWidth="678.0">
                      <children>
-                        <Text fx:id="extratitleid" strokeType="OUTSIDE" strokeWidth="0.0" text="EKSTRAUTSTYR">
+                        <Text fx:id="extratitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EKSTRAUTSTYR">
                            <font>
                               <Font size="49.0" />
                            </font>
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="extrainputid" layoutX="234.0" layoutY="289.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #90AFC5;" text="Legg til ekstrautstyr-del" />
+                  <Button fx:id="extrainputid" layoutX="234.0" layoutY="289.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #206ba4;" text="Legg til ekstrautstyr-del" textFill="WHITE" />
                   <TextField fx:id="extratextfield" layoutX="202.0" layoutY="106.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her " style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield2" layoutX="202.0" layoutY="168.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn beskrivelse her" style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield3" layoutX="202.0" layoutY="230.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn pris her" style="-fx-background-color: #FFFFFF;" />
