@@ -1,6 +1,5 @@
 package com.sample.controllers;
 
-import com.sample.App;
 import com.sample.car.*;
 import com.sample.file.CarFormatter;
 import com.sample.file.FileReader;
@@ -100,20 +99,8 @@ public class SluttbrukerController {
     private Label lblCurrentConfiguration;
 
     @FXML
-    private Button backbutton;
-
-    @FXML
-    void backtomainviewid(ActionEvent event) throws IOException {
-        App.changeView("mainview.fxml");
-    }
-
-
-    @FXML
     public void initialize() {
         //fyller arrays for testing
-
-
-
         engineArrayList.add(electric);
         engineArrayList.add(diesel);
 
@@ -375,47 +362,47 @@ public class SluttbrukerController {
     public void updateTitleAndWidowButtons() {
         switch(currentPartType) {
             case OVERVEIW:
-                setTitle("OVERSIKT");
+                setTitle("Overview");
                 enableAllSceneButtons();
                 BtnOverviewScene.setDisable(true);
                 btnAddToConfiguration.setVisible(false);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg bilkonfigurasjon");
-                lblPartInfoTitle.setText("Bil info");
+                lblSelectPart.setText("Select car configuration");
+                lblPartInfoTitle.setText("Car info");
                 btnBarCarConfigs.setVisible(true);
                 break;
 
             case ENGINE:
-                setTitle("MOTOR");
+                setTitle("Engine");
                 enableAllSceneButtons();
                 BtnEngineScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg motordel");
-                lblPartInfoTitle.setText("Del-info");
+                lblSelectPart.setText("Select part");
+                lblPartInfoTitle.setText("Part info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case GEARBOX:
-                setTitle("GIRKASSE");
+                setTitle("Gearbox");
                 enableAllSceneButtons();
                 BtnGearboxScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg girkasse");
-                lblPartInfoTitle.setText("Del-info");
+                lblSelectPart.setText("Select part");
+                lblPartInfoTitle.setText("Part info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case PAINTJOB:
-                setTitle("MALINGSFARGE");
+                setTitle("Paintjob");
                 enableAllSceneButtons();
                 BtnPaintjobScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Velg farge");
-                lblPartInfoTitle.setText("Fargeinfo");
+                lblSelectPart.setText("Select part");
+                lblPartInfoTitle.setText("Part info");
                 btnBarCarConfigs.setVisible(false);
 
 
