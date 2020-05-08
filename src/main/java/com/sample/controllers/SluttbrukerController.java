@@ -2,10 +2,10 @@ package com.sample.controllers;
 
 import com.sample.App;
 import com.sample.car.*;
-import com.sample.file.CarFormatter;
-import com.sample.file.FileReader;
-import com.sample.file.FileSaver;
-import com.sample.file.InvalidCarFormatException;
+import com.sample.textfile.CarFormatter;
+import com.sample.textfile.FileReader;
+import com.sample.textfile.FileSaver;
+import com.sample.textfile.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
