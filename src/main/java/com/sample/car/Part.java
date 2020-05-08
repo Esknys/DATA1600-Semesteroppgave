@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.UUID;
 
-public abstract class Part implements Serializable {
+public abstract class Part {
 
     private String name;
     private int price;

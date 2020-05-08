@@ -1,8 +1,12 @@
 package com.sample.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.sample.App;
+import com.sample.binaryfile.EngineFormatter;
+import com.sample.binaryfile.WritingDataObjects;
+import com.sample.car.Engine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -201,6 +205,18 @@ public class Addon {
         String horsepowerinput = horsepowertextfield.getText();
         String priceinput = pricetextfield.getText();
         labelengine.setText(engineinput + ", " + fuelinput + ", " + horsepowerinput + ", " + priceinput);
+
+        int hp = Integer.parseInt(horsepowerinput);
+        int price = Integer.parseInt(priceinput);
+
+        Engine engine = new Engine(engineinput, fuelinput, hp, price);
+
+        String formatted = EngineFormatter.formatEngine(engine);
+
+        File file = new File("engines.jobj");
+
+        WritingDataObjects.write(file, formatted);
+
     }
 
     @FXML
