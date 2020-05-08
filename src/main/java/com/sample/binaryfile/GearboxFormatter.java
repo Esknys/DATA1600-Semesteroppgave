@@ -6,11 +6,10 @@ public class GearboxFormatter {
 
     public static String DELIMITER = "::";
 
-    public static String formatGearbox(Gearbox g) {
+  //  public static void String formatGearbox(Gearbox g) {
 
-        String name = g.getName();
-        String price = Integer.toString(g.getPrice());
-        String
+    //    String name = g.getName();
+    //    String price = Integer.toString(g.getPrice());
 
-    }
+   // }
 }

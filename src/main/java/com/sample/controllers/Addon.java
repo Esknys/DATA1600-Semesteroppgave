@@ -45,6 +45,23 @@ public class Addon {
     @FXML
     private Label labelengine;
 
+
+    @FXML
+    private TableView<?> tableviewengine;
+
+    @FXML
+    private TableColumn<?, ?> enginecol1;
+
+    @FXML
+    private TableColumn<?, ?> enginecol2;
+
+    @FXML
+    private TableColumn<?, ?> enginecol3;
+
+    @FXML
+    private TableColumn<?, ?> enginecol4;
+
+
     @FXML
     private TextFlow txtflowid;
 
@@ -67,6 +84,18 @@ public class Addon {
 
     @FXML
     private Label labelgearbox;
+
+    @FXML
+    private TableView<?> tableviewgearbox;
+
+    @FXML
+    private TableColumn<?, ?> gearboxcol1;
+
+    @FXML
+    private TableColumn<?, ?> gerboxcol2;
+
+    @FXML
+    private TableColumn<?, ?> gearboxcol3;
 
     @FXML
     private TextFlow txtflowid2;
@@ -102,6 +131,21 @@ public class Addon {
     private Label labelpaint;
 
     @FXML
+    private TableView<?> tableviewpaint;
+
+    @FXML
+    private TableColumn<?, ?> paintcol1;
+
+    @FXML
+    private TableColumn<?, ?> paintcol2;
+
+    @FXML
+    private TableColumn<?, ?> paintcol3;
+
+    @FXML
+    private TableColumn<?, ?> paintcol4;
+
+    @FXML
     private TextFlow txtflow3;
 
     @FXML
@@ -127,6 +171,18 @@ public class Addon {
     private Label labelwheel;
 
     @FXML
+    private TableView<?> tableviewheel;
+
+    @FXML
+    private TableColumn<?, ?> wheelcol1;
+
+    @FXML
+    private TableColumn<?, ?> wheelcol2;
+
+    @FXML
+    private TableColumn<?, ?> wheelcol3;
+
+    @FXML
     private TextFlow txtflow4;
 
     @FXML
@@ -150,6 +206,18 @@ public class Addon {
 
     @FXML
     private Label labelextra;
+
+    @FXML
+    private TableView<?> tableviewextra;
+
+    @FXML
+    private TableColumn<?, ?> extracol1;
+
+    @FXML
+    private TableColumn<?, ?> extracol2;
+
+    @FXML
+    private TableColumn<?, ?> extracol3;
 
     @FXML
     private TextFlow txtflow5;
