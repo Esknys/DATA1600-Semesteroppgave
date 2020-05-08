@@ -30,6 +30,15 @@ public class Addon {
     private TextField enginetextfield;
 
     @FXML
+    private TextField fueltextfield;
+
+    @FXML
+    private TextField horsepowertextfield;
+
+    @FXML
+    private TextField pricetextfield;
+
+    @FXML
     private Label labelengine;
 
     @FXML
@@ -62,6 +71,12 @@ public class Addon {
     private Text gearboxtitleid;
 
     @FXML
+    private TextField gearboxtextfield2;
+
+    @FXML
+    private TextField gearboxtextfield3;
+
+    @FXML
     private Pane pane3id;
 
     @FXML
@@ -69,6 +84,15 @@ public class Addon {
 
     @FXML
     private TextField painttextfield;
+
+    @FXML
+    private TextField painttextfield2;
+
+    @FXML
+    private TextField painttextfield3;
+
+    @FXML
+    private TextField painttextfield4;
 
     @FXML
     private Label labelpaint;
@@ -85,6 +109,12 @@ public class Addon {
 
     @FXML
     private TextField wheeltextfield;
+
+    @FXML
+    private TextField wheeltextfield2;
+
+    @FXML
+    private TextField wheeltextfield3;
 
     @FXML
     private Button wheelinputid;
@@ -107,6 +137,12 @@ public class Addon {
 
     @FXML
     private TextField extratextfield;
+
+    @FXML
+    private TextField extratextfield2;
+
+    @FXML
+    private TextField extratextfield3;
 
     @FXML
     private Label labelextra;
@@ -150,35 +186,57 @@ public class Addon {
     @FXML
     private ImageView img5;
 
+    @FXML
+    private Button backbuttonid;
+
+    @FXML
+    void BackActionButton(ActionEvent event) throws IOException {
+        App.changeView("secondaryview.fxml");
+    }
 
     @FXML
     void EngineInputAction(ActionEvent event) {
         String engineinput = enginetextfield.getText();
-        labelengine.setText(engineinput);
+        String fuelinput = fueltextfield.getText();
+        String horsepowerinput = horsepowertextfield.getText();
+        String priceinput = pricetextfield.getText();
+        labelengine.setText(engineinput + ", " + fuelinput + ", " + horsepowerinput + ", " + priceinput);
     }
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
         String gearboxinput = gearboxtextfield.getText();
-        labelgearbox.setText(gearboxinput);
+        String typeinput = gearboxtextfield2.getText();
+        String priceinput = gearboxtextfield3.getText();
+        labelgearbox.setText(gearboxinput+ ", " + typeinput + ", " + priceinput);
     }
 
     @FXML
     void PaintInputAction(ActionEvent event) {
         String paintinput = painttextfield.getText();
-        labelpaint.setText(paintinput);
+        String paintcolor = painttextfield2.getText();
+        String painttype = painttextfield3.getText();
+        String paintprice = painttextfield4.getText();
+        labelpaint.setText("Navnet på malingenstypen du legger til er " + paintinput + " , og fargen er "  + paintcolor
+                + " og typen er " + painttype + " og prisen er " + paintprice);
     }
 
     @FXML
     void ExtraInputAction(ActionEvent event) {
         String extrapartinput = extratextfield.getText();
-        labelextra.setText(extrapartinput);
+        String extraparttype = extratextfield2.getText();
+        String extrapartprice = extratextfield3.getText();
+        labelextra.setText("Navnet på ekstradelen du har lagt til er"  + extrapartinput + ". Navnet på hva slags" +
+                "type det er, er " + extraparttype + ". Prisen på delen er " + extrapartprice);
     }
 
     @FXML
     void WheelInputAction(ActionEvent event) {
         String wheelpartinput = wheeltextfield.getText();
-        labelwheel.setText(wheelpartinput);
+        String wheeltype = wheeltextfield2.getText();
+        String wheelprice = wheeltextfield3.getText();
+        labelwheel.setText("Navnet på hjultypen du legger til er " + wheelpartinput + "Typen på hjulene er " +
+                wheeltype + ", og prisen på hjulene er " + wheelprice);
     }
 
     // Når denne knappen trykkes, skal alle motorene som finnes lastes opp
