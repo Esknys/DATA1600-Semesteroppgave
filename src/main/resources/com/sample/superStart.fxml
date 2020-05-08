@@ -28,7 +28,7 @@
             <DropShadow />
          </effect>
          <font>
-            <Font size="20.0" />
+            <Font size="15.0" />
          </font></Button>
       <Button fx:id="deletebutton" layoutX="498.0" layoutY="155.0" mnemonicParsing="false" onAction="#deleteaction" prefHeight="214.0" prefWidth="227.0" style="-fx-background-color: #687864; -fx-border-color: #31708E;" text="SLETT KOMPONENT">
          <effect>

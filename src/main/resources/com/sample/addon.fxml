@@ -177,6 +177,7 @@
                         <Image url="https://i.ibb.co/tL5NgF8/846296.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="backbuttonid" layoutX="3.0" layoutY="8.0" minHeight="18.0" minWidth="22.0" mnemonicParsing="false" onAction="#BackActionButton" prefHeight="32.0" prefWidth="58.0" style="-fx-background-color: #206ba4;" text="Tilbake" textFill="WHITE" />
                </children>
             </AnchorPane>
          </children>
