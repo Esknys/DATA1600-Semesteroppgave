@@ -5,8 +5,12 @@ import java.io.IOException;
 
 import com.sample.App;
 import com.sample.binaryfile.EngineFormatter;
+import com.sample.binaryfile.GearboxFormatter;
+import com.sample.binaryfile.PaintjobFormatter;
 import com.sample.binaryfile.WritingDataObjects;
 import com.sample.car.Engine;
+import com.sample.car.Gearbox;
+import com.sample.car.Paintjob;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -272,7 +276,6 @@ public class Addon {
         String fuelinput = fueltextfield.getText();
         String horsepowerinput = horsepowertextfield.getText();
         String priceinput = pricetextfield.getText();
-        labelengine.setText(engineinput + ", " + fuelinput + ", " + horsepowerinput + ", " + priceinput);
 
         int hp = Integer.parseInt(horsepowerinput);
         int price = Integer.parseInt(priceinput);
@@ -292,7 +295,17 @@ public class Addon {
         String gearboxinput = gearboxtextfield.getText();
         String typeinput = gearboxtextfield2.getText();
         String priceinput = gearboxtextfield3.getText();
-        labelgearbox.setText(gearboxinput+ ", " + typeinput + ", " + priceinput);
+
+        int price = Integer.parseInt(priceinput);
+
+        Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
+
+        String formatted = GearboxFormatter.formatGearbox(gearbox);
+
+        File file = new File("gearboxes.jobj");
+
+        WritingDataObjects.write(file, formatted);
+
     }
 
     @FXML
@@ -301,8 +314,17 @@ public class Addon {
         String paintcolor = painttextfield2.getText();
         String painttype = painttextfield3.getText();
         String paintprice = painttextfield4.getText();
-        labelpaint.setText("Navnet på malingenstypen du legger til er " + paintinput + " , og fargen er "  + paintcolor
-                + " og typen er " + painttype + " og prisen er " + paintprice);
+
+        int price = Integer.parseInt(paintprice);
+
+        Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
+
+        String formatted = PaintjobFormatter.formatPaintjob(paintjob);
+
+        File file = new File("paintjobs.jobj");
+
+        WritingDataObjects.write(file, formatted);
+
     }
 
     @FXML
