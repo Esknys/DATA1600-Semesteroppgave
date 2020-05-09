@@ -1,6 +1,8 @@
 package com.sample.car;
 
-public class Engine extends Part {
+import java.io.Serializable;
+
+public class Engine extends Part implements Serializable {
 
     private String fuel;
     private int horsepower;

@@ -1,13 +1,18 @@
 package com.sample.controllers;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -270,31 +275,36 @@ public class Addon {
 
     @FXML
     void EngineInputAction(ActionEvent event) {
-        String engineinput = enginetextfield.getText();
-        String fuelinput = fueltextfield.getText();
-        String horsepowerinput = horsepowertextfield.getText();
-        String priceinput = pricetextfield.getText();
-
-        int hp = Integer.parseInt(horsepowerinput);
-        int price = Integer.parseInt(priceinput);
-
-        Engine engine = new Engine(engineinput, fuelinput, hp, price);
-
-        String formatted = EngineFormatter.formatEngine(engine);
 
         File file = new File("engines.jobj");
 
-        WritingDataObjects.write(file, formatted);
+        try (InputStream is = new FileInputStream(file);
+             ObjectInputStream ois = new ObjectInputStream(is);) {
 
-        try {
+            String engineinput = enginetextfield.getText();
+            String fuelinput = fueltextfield.getText();
+            String horsepowerinput = horsepowertextfield.getText();
+            String priceinput = pricetextfield.getText();
 
-            ObservableList<Engine> engines = ReadEngines.readEngines(file);
+            int hp = Integer.parseInt(horsepowerinput);
+            int price = Integer.parseInt(priceinput);
 
-            System.out.println(engines.size());
+            Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
-        } catch (IOException ioe) {
+            while(true) {
 
-        }
+                @SuppressWarnings("unchecked")
+                List<Engine> engines = (List<Engine>) ois.readObject();
+                engines.forEach(System.out::println);
+
+
+                engines.add(engine);
+                WriteEngines.write(file, engines);
+            }
+
+
+
+        } catch (IOException | ClassNotFoundException e) {}
 
     }
 
@@ -308,11 +318,8 @@ public class Addon {
 
         Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
-        String formatted = GearboxFormatter.formatGearbox(gearbox);
-
         File file = new File("gearboxes.jobj");
 
-        WritingDataObjects.write(file, formatted);
 
     }
 
@@ -327,11 +334,8 @@ public class Addon {
 
         Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
 
-        String formatted = PaintjobFormatter.formatPaintjob(paintjob);
-
         File file = new File("paintjobs.jobj");
 
-        WritingDataObjects.write(file, formatted);
 
     }
 
