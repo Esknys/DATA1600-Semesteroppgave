@@ -1,6 +1,7 @@
 package com.sample.car;
 
-public class Engine extends Part{
+public class Engine extends Part {
+
     private String fuel;
     private int horsepower;
 
@@ -11,7 +12,7 @@ public class Engine extends Part{
         this.horsepower = horsepower;
     }
 
-    public String getName() {
+    public String getFuel() {
         return fuel;
     }
 

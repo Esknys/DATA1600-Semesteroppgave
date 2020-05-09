@@ -1,8 +1,14 @@
 package com.sample.controllers;
 
+import com.sample.App;
 import com.sample.car.*;
+import com.sample.textfile.CarFormatter;
+import com.sample.textfile.FileReader;
+import com.sample.textfile.FileSaver;
+import com.sample.textfile.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -10,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SluttbrukerController {
@@ -92,8 +100,20 @@ public class SluttbrukerController {
     private Label lblCurrentConfiguration;
 
     @FXML
+    private Button backbutton;
+
+    @FXML
+    void backtomainviewid(ActionEvent event) throws IOException {
+        App.changeView("mainview.fxml");
+    }
+
+
+    @FXML
     public void initialize() {
         //fyller arrays for testing
+
+
+
         engineArrayList.add(electric);
         engineArrayList.add(diesel);
 
@@ -105,6 +125,7 @@ public class SluttbrukerController {
 
         carArrayList.add(testCar1);
         carArrayList.add(testCar2);
+
 
         //Legger til funksjonen updateCurretPartInfo som Listner til togglegroupen, så info om delene oppdateres
         partToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
@@ -178,7 +199,31 @@ public class SluttbrukerController {
     }
 
     @FXML
-    void saveConfiguration(ActionEvent event) {
+    void saveConfiguration(ActionEvent event) throws IOException {
+
+        FileReader fileReader = new FileReader();
+        File file = new File("carregister.txt");
+
+       try {
+
+           String formatted = CarFormatter.formatCar(currentConfiguringCar);
+
+           FileSaver.save(formatted, file);
+
+           ArrayList<Car> cars = fileReader.readCars(file);
+
+           for (Car car : cars) {
+
+               carArrayList.add(car);
+
+
+           }
+
+       } catch(IOException ioe) {
+
+           throw new InvalidCarFormatException("Feil bilformat");
+
+       }
 
     }
 
@@ -330,47 +375,47 @@ public class SluttbrukerController {
     public void updateTitleAndWidowButtons() {
         switch(currentPartType) {
             case OVERVEIW:
-                setTitle("Overview");
+                setTitle("OVERSIKT");
                 enableAllSceneButtons();
                 BtnOverviewScene.setDisable(true);
                 btnAddToConfiguration.setVisible(false);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select car configuration");
-                lblPartInfoTitle.setText("Car info");
+                lblSelectPart.setText("Velg bilkonfigurasjon");
+                lblPartInfoTitle.setText("Bil info");
                 btnBarCarConfigs.setVisible(true);
                 break;
 
             case ENGINE:
-                setTitle("Engine");
+                setTitle("MOTOR");
                 enableAllSceneButtons();
                 BtnEngineScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg motordel");
+                lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case GEARBOX:
-                setTitle("Gearbox");
+                setTitle("GIRKASSE");
                 enableAllSceneButtons();
                 BtnGearboxScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg girkasse");
+                lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
 
 
                 break;
 
             case PAINTJOB:
-                setTitle("Paintjob");
+                setTitle("MALINGSFARGE");
                 enableAllSceneButtons();
                 BtnPaintjobScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg farge");
+                lblPartInfoTitle.setText("Fargeinfo");
                 btnBarCarConfigs.setVisible(false);
 
 

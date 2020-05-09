@@ -1,10 +1,12 @@
 package com.sample.car;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.UUID;
 
 public abstract class Part {
+
     private String name;
     private int price;
     private UUID uuid;
