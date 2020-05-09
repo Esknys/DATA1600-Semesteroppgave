@@ -1,16 +1,14 @@
 package com.sample.controllers;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
 import com.sample.App;
-import com.sample.binaryfile.EngineFormatter;
-import com.sample.binaryfile.GearboxFormatter;
-import com.sample.binaryfile.PaintjobFormatter;
-import com.sample.binaryfile.WritingDataObjects;
+import com.sample.binaryfile.*;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -287,6 +285,16 @@ public class Addon {
         File file = new File("engines.jobj");
 
         WritingDataObjects.write(file, formatted);
+
+        try {
+
+            ObservableList<Engine> engines = ReadEngines.readEngines(file);
+
+            System.out.println(engines.size());
+
+        } catch (IOException ioe) {
+
+        }
 
     }
 
