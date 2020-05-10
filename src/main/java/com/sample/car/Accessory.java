@@ -1,6 +1,8 @@
 package com.sample.car;
 
-public class Accessory extends Part{
+import java.io.Serializable;
+
+public class Accessory extends Part implements Serializable {
     private String description;
 
     public Accessory(String name, String description, int price) {

@@ -1,6 +1,8 @@
 package com.sample.car;
 
-public class Paintjob extends Part {
+import java.io.Serializable;
+
+public class Paintjob extends Part implements Serializable {
 
     private String color;
     private String type;
