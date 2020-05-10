@@ -11,6 +11,9 @@ import com.sample.binaryfile.WritingDataObjects;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
+import com.sample.textfile.FileReader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -280,6 +283,7 @@ public class Addon {
         int hp = Integer.parseInt(horsepowerinput);
         int price = Integer.parseInt(priceinput);
 
+        // Her lages det nye motor-objektet!
         Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
         String formatted = EngineFormatter.formatEngine(engine);
@@ -288,7 +292,13 @@ public class Addon {
 
         WritingDataObjects.write(file, formatted);
 
+
+
+
     }
+
+
+
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
@@ -299,6 +309,9 @@ public class Addon {
         int price = Integer.parseInt(priceinput);
 
         Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
+
+        // Her kan jeg lage de til i tableview(?)
+
 
         String formatted = GearboxFormatter.formatGearbox(gearbox);
 
@@ -318,6 +331,7 @@ public class Addon {
         int price = Integer.parseInt(paintprice);
 
         Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
+
 
         String formatted = PaintjobFormatter.formatPaintjob(paintjob);
 

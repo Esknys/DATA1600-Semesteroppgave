@@ -15,4 +15,7 @@ public class PaintjobFormatter {
 
         return "\n" + name + DELIMITER + price + DELIMITER + color + DELIMITER + type;
 
+    }
+
 }
+
