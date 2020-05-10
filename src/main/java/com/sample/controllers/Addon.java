@@ -1,19 +1,17 @@
 package com.sample.controllers;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
 
 import com.sample.App;
-import com.sample.binaryfile.*;
+import com.sample.binaryfile.EngineFormatter;
+import com.sample.binaryfile.GearboxFormatter;
+import com.sample.binaryfile.PaintjobFormatter;
+import com.sample.binaryfile.WritingDataObjects;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
-import com.sample.car.Wheel;
+import com.sample.textfile.FileReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -285,23 +283,22 @@ public class Addon {
         int hp = Integer.parseInt(horsepowerinput);
         int price = Integer.parseInt(priceinput);
 
+        // Her lages det nye motor-objektet!
         Engine engine = new Engine(engineinput, fuelinput, hp, price);
+
+        String formatted = EngineFormatter.formatEngine(engine);
 
         File file = new File("engines.jobj");
 
-        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+        WritingDataObjects.write(file, formatted);
 
-            ObjectInputStream ois = new ObjectInputStream(is);
 
-            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
 
-            engines.add(engine);
-            WriteEngines.write(file, engines);
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
     }
+
+
+
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
@@ -313,22 +310,16 @@ public class Addon {
 
         Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
+        // Her kan jeg lage de til i tableview(?)
+
+
+        String formatted = GearboxFormatter.formatGearbox(gearbox);
+
         File file = new File("gearboxes.jobj");
 
-        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+        WritingDataObjects.write(file, formatted);
 
-            ObjectInputStream ois = new ObjectInputStream(is);
-
-            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
-
-            gearboxes.add(gearbox);
-            WriteGearboxes.write(file, gearboxes);
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
-}
+    }
 
     @FXML
     void PaintInputAction(ActionEvent event) {
@@ -341,20 +332,12 @@ public class Addon {
 
         Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
 
+
+        String formatted = PaintjobFormatter.formatPaintjob(paintjob);
+
         File file = new File("paintjobs.jobj");
 
-        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
-
-            ObjectInputStream ois = new ObjectInputStream(is);
-
-            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
-
-            paintjobs.add(paintjob);
-            WritePaintjobs.write(file, paintjobs);
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        WritingDataObjects.write(file, formatted);
 
     }
 
@@ -372,11 +355,8 @@ public class Addon {
         String wheelpartinput = wheeltextfield.getText();
         String wheeltype = wheeltextfield2.getText();
         String wheelprice = wheeltextfield3.getText();
-
-        int wp = Integer.parseInt(wheelprice);
-
-        Wheel wheel = new Wheel()
-
+        labelwheel.setText("Navnet på hjultypen du legger til er " + wheelpartinput + "Typen på hjulene er " +
+                wheeltype + ", og prisen på hjulene er " + wheelprice);
     }
 
     // Når denne knappen trykkes, skal alle motorene som finnes lastes opp
