@@ -13,6 +13,7 @@ import com.sample.binaryfile.*;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
+import com.sample.car.Wheel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -288,19 +289,20 @@ public class Addon {
 
         File file = new File("engines.jobj");
 
-        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+     /*   try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
             ObjectInputStream ois = new ObjectInputStream(is);
 
-            ArrayList<Engine> engines = (ArrayList<Engine>)ois.readObject();
-            engines.forEach(System.out::println);
+            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
+*/
+     ArrayList<Engine> engines = new ArrayList<>();
 
-           engines.add(engine);
-           WriteEngines.write(file, engines);
+            engines.add(engine);
+            WriteEngines.write(file, engines);
 
-        } catch (IOException | ClassNotFoundException e) {
+     /*   } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
     }
 
     @FXML
@@ -315,8 +317,20 @@ public class Addon {
 
         File file = new File("gearboxes.jobj");
 
+        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
 
-    }
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+
+            gearboxes.add(gearbox);
+            WriteGearboxes.write(file, gearboxes);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+}
 
     @FXML
     void PaintInputAction(ActionEvent event) {
@@ -331,6 +345,18 @@ public class Addon {
 
         File file = new File("paintjobs.jobj");
 
+        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+
+            paintjobs.add(paintjob);
+            WritePaintjobs.write(file, paintjobs);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -348,8 +374,9 @@ public class Addon {
         String wheelpartinput = wheeltextfield.getText();
         String wheeltype = wheeltextfield2.getText();
         String wheelprice = wheeltextfield3.getText();
-        labelwheel.setText("Navnet på hjultypen du legger til er " + wheelpartinput + "Typen på hjulene er " +
-                wheeltype + ", og prisen på hjulene er " + wheelprice);
+
+        int wp = Integer.parseInt(wheelprice);
+
     }
 
     // Når denne knappen trykkes, skal alle motorene som finnes lastes opp
