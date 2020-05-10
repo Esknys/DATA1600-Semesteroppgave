@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.TilePane?>
@@ -24,10 +25,12 @@
          <bottom>
             <ButtonBar fx:id="UIButtonbar" buttonMinWidth="120.0" prefHeight="38.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <buttons>
-                  <Button fx:id="BtnOverviewScene" disable="true" mnemonicParsing="false" onAction="#showOverviewScene" style="-fx-background-color: #6E6658; -fx-font-weight: bold;" text="OVERSIKT" textFill="WHITE" />
-                  <Button fx:id="BtnEngineScene" mnemonicParsing="false" onAction="#showEngineScene" style="-fx-background-color: #6E6658; -fx-font-weight: bold;" text="MOTOR" textFill="WHITE" />
-                  <Button fx:id="BtnGearboxScene" mnemonicParsing="false" onAction="#showGearboxScene" style="-fx-background-color: #6E6658; -fx-font-weight: bold;" text="GIRBOKS" textFill="WHITE" />
-                  <Button fx:id="BtnPaintjobScene" mnemonicParsing="false" onAction="#showPaintjobScene" style="-fx-background-color: #6E6658; -fx-font-weight: bold;" text="MALNG" textFill="WHITE" />
+                  <Button fx:id="BtnOverviewScene" disable="true" mnemonicParsing="false" onAction="#showOverviewScene" text="OVERVIEW" />
+                  <Button fx:id="BtnEngineScene" mnemonicParsing="false" onAction="#showEngineScene" text="ENGINE" />
+                  <Button fx:id="BtnGearboxScene" mnemonicParsing="false" onAction="#showGearboxScene" text="GEARBOX" />
+                  <Button fx:id="BtnPaintjobScene" mnemonicParsing="false" onAction="#showPaintjobScene" text="PAINTJOB" />
+                  <Button fx:id="BtnWheelScene" mnemonicParsing="false" onAction="#showWheelScene" text="WHEELS" />
+                  <Button fx:id="BtnAccessoryScene" mnemonicParsing="false" onAction="#showAccessoryScene" text="ACCESSORIES" />
                </buttons>
             </ButtonBar>
          </bottom>
@@ -71,8 +74,12 @@
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCurrentConfiguration" alignment="TOP_LEFT" prefHeight="489.0" prefWidth="205.0" textAlignment="LEFT" />
-                  <Button fx:id="btnSaveConfiguration" alignment="CENTER" mnemonicParsing="false" onAction="#saveConfiguration" style="-fx-background-color: #2A3132;" text="LAGRE KONFIGURASJON" textFill="WHITE" />
+                  <ScrollPane prefHeight="600" prefWidth="195.0">
+                     <content>
+                        <Label fx:id="lblCurrentConfiguration" alignment="TOP_LEFT" prefHeight="495.0" prefWidth="195.0" textAlignment="LEFT" />
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="btnSaveConfiguration" alignment="CENTER" mnemonicParsing="false" onAction="#saveConfiguration" text="Save configuration" />
                </children>
             </VBox>
          </right>

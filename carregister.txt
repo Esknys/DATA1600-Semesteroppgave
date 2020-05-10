@@ -1,11 +1,3 @@
-Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Diesel 200x::Diesel::200::150000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
-Electroman::Electric::500::200000::Oldschool::Manual transmission::30000::White cream::White::Metallic::10000
+Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::Night black::Black::Metallic::15000::Offroad::Metall::22::23000
+Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::Night black::Black::Metallic::15000::Offroad::Metall::22::23000
+Diesel 200x::Diesel::200::150000::Super auto shifter::Automatic transmission::40000::Night black::Black::Metallic::15000::Offroad::Metall::22::23000

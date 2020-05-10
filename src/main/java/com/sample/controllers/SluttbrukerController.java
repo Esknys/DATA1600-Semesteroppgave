@@ -32,12 +32,22 @@ public class SluttbrukerController {
     private Paintjob paint1 = new Paintjob("White cream", 10000, "White", "Metallic");
     private Paintjob paint2 = new Paintjob("Night black", 15000, "Black", "Metallic");
 
+    private Wheel wheel1 = new Wheel("Sport", "Lettmetall", 20, 20000);
+    private Wheel wheel2 = new Wheel("Offroad", "Metall", 22, 23000);
+
+    private Accessory accessory1 = new Accessory("GPS 2.0", "Beste gps som finnes på markedet!", 10000);
+    private Accessory accessory2 = new Accessory("Skinnseter", "Oppgraderte seter i ekte skinn", 20000);
+
     private ArrayList<Engine> engineArrayList = new ArrayList<>();
     private ArrayList<Gearbox> gearboxArrayList = new ArrayList<>();
     private ArrayList<Paintjob> paintjobArrayList = new ArrayList<>();
+    private ArrayList<Wheel> wheelArrayList = new ArrayList<>();
+    private ArrayList<Accessory> accessoryArrayList = new ArrayList<>();
 
-    Car testCar1 = new Car(diesel, manual, paint1);
-    Car testCar2 = new Car(electric, automatic, paint2);
+    Car testCar1 = new Car(diesel, manual, paint1, wheel1);
+    Car testCar2 = new Car(electric, automatic, paint2, wheel2);
+
+
 
     private ArrayList<Car> carArrayList = new ArrayList<>();
 
@@ -46,7 +56,9 @@ public class SluttbrukerController {
         OVERVEIW,
         ENGINE,
         GEARBOX,
-        PAINTJOB
+        PAINTJOB,
+        WHEEL,
+        ACCESSORY
     }
 
     PartType currentPartType = PartType.OVERVEIW;
@@ -55,7 +67,7 @@ public class SluttbrukerController {
     ToggleGroup partToggleGroup = new ToggleGroup();
     ToggleGroup carToggleGroup = new ToggleGroup();
 
-    Car currentConfiguringCar = new Car(electric, manual, paint1);
+    Car currentConfiguringCar = new Car(electric, manual, paint1, wheel2);
 
     @FXML
     private BorderPane mainBorderPane;
@@ -80,6 +92,12 @@ public class SluttbrukerController {
 
     @FXML
     private Button BtnPaintjobScene;
+
+    @FXML
+    private Button BtnWheelScene;
+
+    @FXML
+    private Button BtnAccessoryScene;
 
     @FXML
     private Label lblSelectPart;
@@ -111,9 +129,6 @@ public class SluttbrukerController {
     @FXML
     public void initialize() {
         //fyller arrays for testing
-
-
-
         engineArrayList.add(electric);
         engineArrayList.add(diesel);
 
@@ -123,8 +138,30 @@ public class SluttbrukerController {
         paintjobArrayList.add(paint1);
         paintjobArrayList.add(paint2);
 
-        carArrayList.add(testCar1);
-        carArrayList.add(testCar2);
+        wheelArrayList.add(wheel1);
+        wheelArrayList.add(wheel2);
+
+        accessoryArrayList.add(accessory1);
+        accessoryArrayList.add(accessory2);
+
+
+
+        FileReader fileReader = new FileReader();
+
+        File file = new File("carregister.txt");
+
+        ArrayList<Car> cars = new ArrayList<>();
+
+        try {
+            cars = fileReader.readCars(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        carArrayList = cars;
+
+
+        //carArrayList.add(testCar1);
+        //carArrayList.add(testCar2);
 
 
         //Legger til funksjonen updateCurretPartInfo som Listner til togglegroupen, så info om delene oppdateres
@@ -148,15 +185,11 @@ public class SluttbrukerController {
             }
         });
 
-
         currentPartType = PartType.OVERVEIW;
         updateTitleAndWidowButtons();
         fillRadioButtonTilePaneWithCarConfigurations(carArrayList);
 
-
-
         System.out.println("Initialized");
-
     }
 
     @FXML
@@ -180,6 +213,14 @@ public class SluttbrukerController {
                 case PAINTJOB:
                     currentConfiguringCar.setPaintjob((Paintjob) selectedPart);
                     break;
+
+                case WHEEL:
+                    currentConfiguringCar.setWheel((Wheel)selectedPart);
+                    break;
+
+                case ACCESSORY:
+                    currentConfiguringCar.addAccessory((Accessory)selectedPart);
+
             }
 
         }
@@ -207,22 +248,12 @@ public class SluttbrukerController {
        try {
 
            String formatted = CarFormatter.formatCar(currentConfiguringCar);
-
            FileSaver.save(formatted, file);
-
            ArrayList<Car> cars = fileReader.readCars(file);
-
-           for (Car car : cars) {
-
-               carArrayList.add(car);
-
-
-           }
+           carArrayList = cars;
 
        } catch(IOException ioe) {
-
            throw new InvalidCarFormatException("Feil bilformat");
-
        }
 
     }
@@ -273,6 +304,25 @@ public class SluttbrukerController {
         clearRadioButtonTilePane();
         fillRadioButtonTilePaneWithParts(paintjobArrayList);
     }
+
+    @FXML
+    void showWheelScene(ActionEvent event) {
+        currentPartType = PartType.WHEEL;
+        updateTitleAndWidowButtons();
+
+        clearRadioButtonTilePane();
+        fillRadioButtonTilePaneWithParts(wheelArrayList);
+    }
+
+    @FXML
+    void showAccessoryScene(ActionEvent event) {
+        currentPartType = PartType.ACCESSORY;
+        updateTitleAndWidowButtons();
+
+        clearRadioButtonTilePane();
+        fillRadioButtonTilePaneWithParts(accessoryArrayList);
+    }
+
 
     public void fillRadioButtonTilePaneWithParts(ArrayList<? extends Part> partArrayList) {
 
@@ -345,7 +395,16 @@ public class SluttbrukerController {
                 returningPart = p;
             }
         }
-
+        for (Part p : wheelArrayList) {
+            if (p.getUUIDString() == UUIDString) {
+                returningPart = p;
+            }
+        }
+        for (Part p : accessoryArrayList) {
+            if (p.getUUIDString() == UUIDString) {
+                returningPart = p;
+            }
+        }
         return returningPart;
     }
 
@@ -364,6 +423,8 @@ public class SluttbrukerController {
         BtnEngineScene.setDisable(false);
         BtnGearboxScene.setDisable(false);
         BtnPaintjobScene.setDisable(false);
+        BtnWheelScene.setDisable(false);
+        BtnAccessoryScene.setDisable(false);
         btnAddToConfiguration.setVisible(true);
 
     }
@@ -416,6 +477,30 @@ public class SluttbrukerController {
                 clearCurrentPartInfo();
                 lblSelectPart.setText("Velg farge");
                 lblPartInfoTitle.setText("Fargeinfo");
+                btnBarCarConfigs.setVisible(false);
+
+
+                break;
+
+            case WHEEL:
+                setTitle("Wheels");
+                enableAllSceneButtons();
+                BtnWheelScene.setDisable(true);
+                clearCurrentPartInfo();
+                lblSelectPart.setText("Select part");
+                lblPartInfoTitle.setText("Part info");
+                btnBarCarConfigs.setVisible(false);
+
+
+                break;
+
+            case ACCESSORY:
+                setTitle("Accessories");
+                enableAllSceneButtons();
+                BtnAccessoryScene.setDisable(true);
+                clearCurrentPartInfo();
+                lblSelectPart.setText("Select part");
+                lblPartInfoTitle.setText("Part info");
                 btnBarCarConfigs.setVisible(false);
 
 

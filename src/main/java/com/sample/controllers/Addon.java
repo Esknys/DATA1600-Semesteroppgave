@@ -1,17 +1,18 @@
 package com.sample.controllers;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sample.App;
-import com.sample.binaryfile.EngineFormatter;
-import com.sample.binaryfile.GearboxFormatter;
-import com.sample.binaryfile.PaintjobFormatter;
-import com.sample.binaryfile.WritingDataObjects;
+import com.sample.binaryfile.*;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
-import com.sample.textfile.FileReader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -283,22 +284,24 @@ public class Addon {
         int hp = Integer.parseInt(horsepowerinput);
         int price = Integer.parseInt(priceinput);
 
-        // Her lages det nye motor-objektet!
         Engine engine = new Engine(engineinput, fuelinput, hp, price);
-
-        String formatted = EngineFormatter.formatEngine(engine);
 
         File file = new File("engines.jobj");
 
-        WritingDataObjects.write(file, formatted);
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
+            ObjectInputStream ois = new ObjectInputStream(is);
 
+            ArrayList<Engine> engines = (ArrayList<Engine>)ois.readObject();
+            engines.forEach(System.out::println);
 
+           engines.add(engine);
+           WriteEngines.write(file, engines);
 
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
-
-
-
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
@@ -310,14 +313,8 @@ public class Addon {
 
         Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
-        // Her kan jeg lage de til i tableview(?)
-
-
-        String formatted = GearboxFormatter.formatGearbox(gearbox);
-
         File file = new File("gearboxes.jobj");
 
-        WritingDataObjects.write(file, formatted);
 
     }
 
@@ -332,12 +329,8 @@ public class Addon {
 
         Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
 
-
-        String formatted = PaintjobFormatter.formatPaintjob(paintjob);
-
         File file = new File("paintjobs.jobj");
 
-        WritingDataObjects.write(file, formatted);
 
     }
 
