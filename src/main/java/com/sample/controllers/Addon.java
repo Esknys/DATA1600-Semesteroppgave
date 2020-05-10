@@ -289,20 +289,18 @@ public class Addon {
 
         File file = new File("engines.jobj");
 
-     /*   try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
             ObjectInputStream ois = new ObjectInputStream(is);
 
             ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
-*/
-     ArrayList<Engine> engines = new ArrayList<>();
 
             engines.add(engine);
             WriteEngines.write(file, engines);
 
-     /*   } catch (IOException | ClassNotFoundException e) {
+       } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
     }
 
     @FXML
