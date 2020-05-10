@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -275,37 +276,31 @@ public class Addon {
 
     @FXML
     void EngineInputAction(ActionEvent event) {
+        String engineinput = enginetextfield.getText();
+        String fuelinput = fueltextfield.getText();
+        String horsepowerinput = horsepowertextfield.getText();
+        String priceinput = pricetextfield.getText();
+
+        int hp = Integer.parseInt(horsepowerinput);
+        int price = Integer.parseInt(priceinput);
+
+        Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
         File file = new File("engines.jobj");
 
-        try (InputStream is = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(is);) {
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
-            String engineinput = enginetextfield.getText();
-            String fuelinput = fueltextfield.getText();
-            String horsepowerinput = horsepowertextfield.getText();
-            String priceinput = pricetextfield.getText();
+            ObjectInputStream ois = new ObjectInputStream(is);
 
-            int hp = Integer.parseInt(horsepowerinput);
-            int price = Integer.parseInt(priceinput);
+            ArrayList<Engine> engines = (ArrayList<Engine>)ois.readObject();
+            engines.forEach(System.out::println);
 
-            Engine engine = new Engine(engineinput, fuelinput, hp, price);
+           engines.add(engine);
+           WriteEngines.write(file, engines);
 
-            while(true) {
-
-                @SuppressWarnings("unchecked")
-                List<Engine> engines = (List<Engine>) ois.readObject();
-                engines.forEach(System.out::println);
-
-
-                engines.add(engine);
-                WriteEngines.write(file, engines);
-            }
-
-
-
-        } catch (IOException | ClassNotFoundException e) {}
-
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
