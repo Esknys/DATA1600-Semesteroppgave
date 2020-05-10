@@ -15,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
