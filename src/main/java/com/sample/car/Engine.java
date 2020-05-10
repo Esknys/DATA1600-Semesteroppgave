@@ -33,10 +33,10 @@ public class Engine extends Part implements Serializable {
 
     @Override
     public String toStringFormatted() {
-        return "Name: " + getName() + "\n" +
-                "Price: " + getPriceFormatted() + "\n" +
-                "Fuel: " + getName() + "\n" +
-                "Horsepower: " + getHorsepower() +  "HP ";
+        return "Navn: " + getName() + "\n" +
+                "Pris: " + getPriceFormatted() + "\n" +
+                "Drivstoff: " + getName() + "\n" +
+                "Hestekrefter: " + getHorsepower() +  " HK ";
     }
 
 
