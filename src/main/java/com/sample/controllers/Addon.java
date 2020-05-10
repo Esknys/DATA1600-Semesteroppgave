@@ -2,18 +2,16 @@ package com.sample.controllers;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
 import com.sample.car.Engine;
 import com.sample.car.Gearbox;
 import com.sample.car.Paintjob;
-import com.sample.car.Wheel;
+import com.sample.car.Part;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +54,7 @@ public class Addon {
 
 
     @FXML
-    private TableView<?> tableviewengine;
+    private TableView<Engine> tableviewengine;
 
     @FXML
     private TableColumn<?, ?> enginecol1;
@@ -298,6 +296,17 @@ public class Addon {
             engines.add(engine);
             WriteEngines.write(file, engines);
 
+            ObservableList<Engine> enginesObservable = FXCollections.observableArrayList();
+
+            for (Engine e : engines) {
+                enginesObservable.add(e);
+            }
+
+            enginesObservable.forEach(System.out::println);
+
+            tableviewengine.setItems(enginesObservable);
+
+
        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -343,6 +352,7 @@ public class Addon {
 
         File file = new File("paintjobs.jobj");
 
+
         try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
 
             ObjectInputStream ois = new ObjectInputStream(is);
@@ -351,6 +361,7 @@ public class Addon {
 
             paintjobs.add(paintjob);
             WritePaintjobs.write(file, paintjobs);
+
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());

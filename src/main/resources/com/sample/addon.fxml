@@ -14,6 +14,8 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane fx:id="Anch1id" prefHeight="610.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.controllers.Addon">
    <children>
       <AnchorPane fx:id="anch2id" layoutX="252.0" prefHeight="610.0" prefWidth="740.0">
@@ -28,12 +30,28 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                      <graphic>
-                        <TableView fx:id="tableviewengine" prefHeight="213.0" prefWidth="570.0">
+                        <TableView fx:id="tableviewengine" editable="true" prefHeight="213.0" prefWidth="570.0">
                           <columns>
-                              <TableColumn fx:id="enginecol1" prefWidth="75.0" text="Column X" />
-                            <TableColumn fx:id="enginecol2" prefWidth="75.0" text="C1" />
-                            <TableColumn fx:id="enginecol3" prefWidth="75.0" text="C2" />
-                              <TableColumn fx:id="enginecol4" prefWidth="75.0" text="Column X" />
+                              <TableColumn fx:id="enginecol1" prefWidth="75.0" text="Navn" >
+                             <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                             </cellValueFactory>
+                          </TableColumn>
+                            <TableColumn fx:id="enginecol2" prefWidth="75.0" text="Drivstoff" >
+                             <cellValueFactory>
+                                <PropertyValueFactory property="fuel" />
+                             </cellValueFactory>
+                          </TableColumn>
+                            <TableColumn fx:id="enginecol3" prefWidth="75.0" text="Hestekrefter" >
+                             <cellValueFactory>
+                                <PropertyValueFactory property="horsepower" />
+                             </cellValueFactory>
+                          </TableColumn>
+                              <TableColumn fx:id="enginecol4" prefWidth="75.0" text="Pris" >
+                             <cellValueFactory>
+                                <PropertyValueFactory property="price" />
+                             </cellValueFactory>
+                          </TableColumn>
                           </columns>
                         </TableView>
                      </graphic>
