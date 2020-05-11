@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
@@ -219,15 +218,6 @@ public class Addon {
     private TableColumn<Accessory, Integer> extracol3;
 
     @FXML
-    private TextField textfieldextrafilter;
-
-    @FXML
-    private Button extrafilterid;
-
-    @FXML
-    private ChoiceBox<String> choiceboxextra;
-
-    @FXML
     private TextFlow txtflow5;
 
     @FXML
@@ -293,7 +283,7 @@ public class Addon {
 
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-      //  tableviewengine.getItems().add(engine);
+        tableviewengine.getItems().add(engine);
 
         File file = new File("engines.jobj");
 
@@ -306,15 +296,10 @@ public class Addon {
             engines.add(engine);
             WriteEngines.write(file, engines);
 
-
-                if (tableviewengine.getItems().isEmpty()) {
-                    for (Engine e : engines) {
-                        tableviewengine.getItems().add(e);
-                    }
-                } else {
-                    tableviewengine.getItems().add(engines.get(engines.size() - 1));
-                }
-
+            // Vet ikke om den under fungerer
+            for (Engine e : engines) {
+                tableviewengine.getItems().add(e);
+            }
 
        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -352,14 +337,6 @@ public class Addon {
 
             gearboxes.add(gearbox);
             WriteGearboxes.write(file, gearboxes);
-
-            if (tableviewgearbox.getItems().isEmpty()) {
-                for (Gearbox g : gearboxes) {
-                    tableviewgearbox.getItems().add(g);
-                }
-            } else {
-                tableviewgearbox.getItems().add(gearboxes.get(gearboxes.size() - 1));
-            }
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -399,14 +376,6 @@ public class Addon {
             paintjobs.add(paintjob);
             WritePaintjobs.write(file, paintjobs);
 
-            if (tableviewpaint.getItems().isEmpty()) {
-                for (Paintjob p : paintjobs) {
-                    tableviewpaint.getItems().add(p);
-                }
-            } else {
-                tableviewpaint.getItems().add(paintjobs.get(paintjobs.size() - 1));
-            }
-
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -434,8 +403,6 @@ public class Addon {
         tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         tableviewheel.getItems().add(wheel);
-
-
     }
 
 
@@ -459,8 +426,6 @@ public class Addon {
         tableviewextra.getItems().add(extra);
 
     }
-
-
 
 
     @FXML
