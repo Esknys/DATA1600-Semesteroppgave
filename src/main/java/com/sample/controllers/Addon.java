@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import com.sample.App;
 import com.sample.binaryfile.*;
 import com.sample.car.*;
+import com.sample.exeptions.InputException;
+import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -266,15 +268,6 @@ public class Addon {
 
     @FXML
     void EngineInputAction(ActionEvent event) {
-        String engineinput = enginetextfield.getText();
-        String fuelinput = fueltextfield.getText();
-        String horsepowerinput = horsepowertextfield.getText();
-        String priceinput = pricetextfield.getText();
-
-        int hp = Integer.parseInt(horsepowerinput);
-        int price = Integer.parseInt(priceinput);
-
-        Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
         enginecol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         enginecol2.setCellValueFactory(new PropertyValueFactory<>("fuel"));
@@ -283,28 +276,51 @@ public class Addon {
 
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableviewengine.getItems().add(engine);
+        String engineinput;
+        String fuelinput;
+        String horsepowerinput;
+        String priceinput;
+        int hp;
+        int price;
 
-        File file = new File("engines.jobj");
+        boolean valid = true;
 
-            try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+        if (enginetextfield.getText().isEmpty() && fueltextfield.getText().isEmpty() && horsepowertextfield.getText().isEmpty() && pricetextfield.getText().isEmpty()) {
 
-            ObjectInputStream ois = new ObjectInputStream(is);
 
-            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
+        }
 
-            engines.add(engine);
-            WriteEngines.write(file, engines);
+            engineinput = enginetextfield.getText();
+            fuelinput = fueltextfield.getText();
+            horsepowerinput = horsepowertextfield.getText();
+            priceinput = pricetextfield.getText();
 
-            // Vet ikke om den under fungerer
-            for (Engine e : engines) {
-                tableviewengine.getItems().add(e);
+            hp = Integer.parseInt(horsepowerinput);
+            price = Integer.parseInt(priceinput);
+
+
+
+                File file = new File("engines.jobj");
+
+                try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+
+                    ObjectInputStream ois = new ObjectInputStream(is);
+
+                    ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
+
+                    engines.add(engine);
+                    WriteEngines.write(file, engines);
+
+                    // Vet ikke om den under fungerer
+                    for (Engine e : engines) {
+                        tableviewengine.getItems().add(e);
+                    }
+
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
-       } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
 
     @FXML
