@@ -403,6 +403,23 @@ public class Addon {
         tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         tableviewheel.getItems().add(wheel);
+
+        File file = new File("wheels.jobj");
+
+
+        try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
+
+            wheels.add(wheel);
+            WriteWheels.write(file, wheels);
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -424,6 +441,23 @@ public class Addon {
         tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         tableviewextra.getItems().add(extra);
+
+        File file = new File("accessories.jobj");
+
+
+        try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+
+            accessories.add(extra);
+            WriteAccessories.write(file, accessories);
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
