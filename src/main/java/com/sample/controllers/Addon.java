@@ -7,24 +7,28 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
-import com.sample.car.Engine;
-import com.sample.car.Gearbox;
-import com.sample.car.Paintjob;
+import com.sample.car.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+
 public class Addon {
+
+
+
 
     @FXML
     private AnchorPane Anch1id;
@@ -55,19 +59,19 @@ public class Addon {
 
 
     @FXML
-    private TableView<?> tableviewengine;
+    private TableView<Engine> tableviewengine;
 
     @FXML
-    private TableColumn<?, ?> enginecol1;
+    private TableColumn<Engine, String> enginecol1;
 
     @FXML
-    private TableColumn<?, ?> enginecol2;
+    private TableColumn<Engine, String> enginecol2;
 
     @FXML
-    private TableColumn<?, ?> enginecol3;
+    private TableColumn<Engine, Integer> enginecol3;
 
     @FXML
-    private TableColumn<?, ?> enginecol4;
+    private TableColumn<Engine, Integer> enginecol4;
 
 
     @FXML
@@ -292,18 +296,25 @@ public class Addon {
 
             ObjectInputStream ois = new ObjectInputStream(is);
 
-            ArrayList<Engine> engines = (ArrayList<Engine>)ois.readObject();
+            // Her kommer engine arraylist, object input stream.. Lagd en inputstrem
+
+            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
             engines.forEach(System.out::println);
 
-           engines.add(engine);
-           WriteEngines.write(file, engines);
+            // Legger til nytt objekt
+            engines.add(engine);
+            WriteEngines.write(file, engines);
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 
-    @FXML
+
+
+        @FXML
     void GearboxInputAction(ActionEvent event) {
         String gearboxinput = gearboxtextfield.getText();
         String typeinput = gearboxtextfield2.getText();

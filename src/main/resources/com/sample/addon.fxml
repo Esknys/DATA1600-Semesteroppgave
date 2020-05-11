@@ -28,14 +28,7 @@
                         <Font name="Arial" size="15.0" />
                      </font>
                      <graphic>
-                        <TableView fx:id="tableviewengine" prefHeight="213.0" prefWidth="570.0">
-                          <columns>
-                              <TableColumn fx:id="enginecol1" prefWidth="75.0" text="Column X" />
-                            <TableColumn fx:id="enginecol2" prefWidth="75.0" text="C1" />
-                            <TableColumn fx:id="enginecol3" prefWidth="75.0" text="C2" />
-                              <TableColumn fx:id="enginecol4" prefWidth="75.0" text="Column X" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="tableviewengine" prefHeight="213.0" prefWidth="570.0" />
                      </graphic>
                   </Label>
                   <TextFlow fx:id="txtflowid" prefHeight="75.0" prefWidth="678.0">
@@ -47,7 +40,7 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="engineinputid" layoutX="408.0" layoutY="160.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="56.0" prefWidth="164.0" style="-fx-background-color: #206ba4;" text="Lagre" textFill="WHITE" />
+                  <Button fx:id="engineinputid" layoutX="408.0" layoutY="160.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="56.0" prefWidth="164.0" style="-fx-background-color: #206ba4;" text="Oppdater" textFill="WHITE" />
                   <TextField fx:id="enginetextfield" layoutX="27.0" layoutY="106.0" prefHeight="41.0" prefWidth="220.0" promptText="Skriv inn navn her" />
                   <TextField fx:id="fueltextfield" layoutX="28.0" layoutY="166.0" prefHeight="41.0" prefWidth="220.0" promptText="Legg inn drivstofftype her" />
                   <TextField fx:id="horsepowertextfield" layoutX="27.0" layoutY="226.0" prefHeight="48.0" prefWidth="227.0" promptText="Skriv inn hestekrefter her" />

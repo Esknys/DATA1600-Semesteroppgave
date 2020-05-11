@@ -5,5 +5,7 @@ module com.sample {
 
 
     opens com.sample.controllers to javafx.fxml;
+    opens com.sample.car to javafx.base;
+
     exports com.sample;
 }
