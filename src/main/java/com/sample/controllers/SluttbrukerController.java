@@ -1,9 +1,7 @@
 package com.sample.controllers;
 
 import com.sample.App;
-import com.sample.binaryfile.WriteEngines;
-import com.sample.binaryfile.WriteGearboxes;
-import com.sample.binaryfile.WritePaintjobs;
+import com.sample.binaryfile.*;
 import com.sample.car.*;
 import com.sample.textfile.CarFormatter;
 import com.sample.textfile.FileReader;
@@ -135,13 +133,6 @@ public class SluttbrukerController {
 
     @FXML
     public void initialize() {
-        //fyller arrays for testing
-
-        wheelArrayList.add(wheel1);
-        wheelArrayList.add(wheel2);
-
-        accessoryArrayList.add(accessory1);
-        accessoryArrayList.add(accessory2);
 
 
         try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
@@ -169,6 +160,27 @@ public class SluttbrukerController {
             ObjectInputStream ois = new ObjectInputStream(is);
 
             paintjobArrayList = (ArrayList<Paintjob>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            wheelArrayList = (ArrayList<Wheel>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            accessoryArrayList = (ArrayList<Accessory>) ois.readObject();
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
