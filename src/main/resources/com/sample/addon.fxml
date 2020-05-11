@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -129,10 +130,10 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="extrainputid" layoutX="234.0" layoutY="289.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #206ba4;" text="Legg til ekstrautstyr-del" textFill="WHITE" />
-                  <TextField fx:id="extratextfield" layoutX="202.0" layoutY="106.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her " style="-fx-background-color: #FFFFFF;" />
-                  <TextField fx:id="extratextfield2" layoutX="202.0" layoutY="168.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn beskrivelse her" style="-fx-background-color: #FFFFFF;" />
-                  <TextField fx:id="extratextfield3" layoutX="202.0" layoutY="230.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn pris her" style="-fx-background-color: #FFFFFF;" />
+                  <Button fx:id="extrainputid" layoutX="71.0" layoutY="305.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="181.0" style="-fx-background-color: #206ba4;" text="Oppdater/legg til" textFill="WHITE" />
+                  <TextField fx:id="extratextfield" layoutX="52.0" layoutY="106.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn navnet her " style="-fx-background-color: #FFFFFF;" />
+                  <TextField fx:id="extratextfield2" layoutX="51.0" layoutY="168.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn beskrivelse her" style="-fx-background-color: #FFFFFF;" />
+                  <TextField fx:id="extratextfield3" layoutX="50.0" layoutY="230.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn pris her" style="-fx-background-color: #FFFFFF;" />
                   <TableView fx:id="tableviewextra" layoutX="69.0" layoutY="358.0" prefHeight="222.0" prefWidth="586.0">
                     <columns>
                       <TableColumn fx:id="extracol1" prefWidth="75.0" text="Navn" />
@@ -140,6 +141,9 @@
                         <TableColumn fx:id="extracol3" prefWidth="75.0" text="Pris" />
                     </columns>
                   </TableView>
+                  <TextField fx:id="textfieldextrafilter" layoutX="547.0" layoutY="297.0" prefHeight="32.0" prefWidth="83.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
+                  <Button fx:id="extrafilterid" layoutX="648.0" layoutY="296.0" minWidth="43.0" mnemonicParsing="false" onAction="#extrafilteraction" prefHeight="32.0" prefWidth="62.0" style="-fx-background-color: #206ba4;" text="Filtrer" />
+                  <ChoiceBox fx:id="choiceboxextra" layoutX="433.0" layoutY="296.0" prefHeight="32.0" prefWidth="93.0" style="-fx-background-color: #206ba4;" />
                </children>
             </Pane>
          </children>
