@@ -1,5 +1,8 @@
 package com.sample.car;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -31,9 +34,7 @@ public abstract class Part implements Serializable {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    public void setPrice(int price) { this.price = price; }
 
     //Formaterer pris til norsk format: 15000 -> kr 15 000,00
     public String getPriceFormatted() {

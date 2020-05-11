@@ -1,6 +1,8 @@
 package com.sample.car;
 
-public class Wheel extends Part{
+import java.io.Serializable;
+
+public class Wheel extends Part implements Serializable {
     private int size;
     private String type;
 

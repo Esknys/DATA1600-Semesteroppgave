@@ -1,6 +1,8 @@
 package com.sample.textfile;
 
 import com.sample.car.*;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +10,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileReader {
+
+    public void attachTableView(TableView tv, ObservableList<Engine> engine) {
+        tv.setItems(engine);
+    }
+
+
 
     public ArrayList<Car> readCars(File file)
             throws IOException
@@ -62,5 +70,6 @@ public class FileReader {
 
         return new Car(engine, gearbox, paintjob, wheel);
     }
+
 
 }

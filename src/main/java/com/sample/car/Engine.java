@@ -1,11 +1,14 @@
 package com.sample.car;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.Serializable;
 
 public class Engine extends Part implements Serializable {
 
-    private String fuel;
-    private int horsepower;
+    public String fuel;
+    public int horsepower;
 
     public Engine(String name, String fuel, int horsepower, int price) {
         super(name, price);

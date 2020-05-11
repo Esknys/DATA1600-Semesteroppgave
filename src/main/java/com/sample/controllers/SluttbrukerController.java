@@ -1,6 +1,9 @@
 package com.sample.controllers;
 
 import com.sample.App;
+import com.sample.binaryfile.WriteEngines;
+import com.sample.binaryfile.WriteGearboxes;
+import com.sample.binaryfile.WritePaintjobs;
 import com.sample.car.*;
 import com.sample.textfile.CarFormatter;
 import com.sample.textfile.FileReader;
@@ -15,9 +18,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
-
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class SluttbrukerController {
@@ -129,14 +136,6 @@ public class SluttbrukerController {
     @FXML
     public void initialize() {
         //fyller arrays for testing
-        engineArrayList.add(electric);
-        engineArrayList.add(diesel);
-
-        gearboxArrayList.add(manual);
-        gearboxArrayList.add(automatic);
-
-        paintjobArrayList.add(paint1);
-        paintjobArrayList.add(paint2);
 
         wheelArrayList.add(wheel1);
         wheelArrayList.add(wheel2);
@@ -145,6 +144,35 @@ public class SluttbrukerController {
         accessoryArrayList.add(accessory2);
 
 
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            engineArrayList = (ArrayList<Engine>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            gearboxArrayList = (ArrayList<Gearbox>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            paintjobArrayList = (ArrayList<Paintjob>) ois.readObject();
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         FileReader fileReader = new FileReader();
 

@@ -1,6 +1,7 @@
 package com.sample.controllers;
 
 import java.io.IOException;
+import java.time.Year;
 
 import com.sample.App;
 import javafx.event.ActionEvent;
@@ -70,11 +71,14 @@ public class MainController {
         String brukernavn = txtBrukernavn.getText();
         String passord = Pasfieldid.getText();
 
-        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
+      /*  if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {*/
             App.changeView("sluttbruker.fxml");
-        } else {
+      /*
+    } else {
             exceptionid.setText("Feil passord og/eller brukernavn");
         }
+
+       */
 }
 
     }

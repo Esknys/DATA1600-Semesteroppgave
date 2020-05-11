@@ -1,6 +1,8 @@
 package com.sample.car;
 
-public class Gearbox extends Part {
+import java.io.Serializable;
+
+public class Gearbox extends Part implements Serializable {
 
     private String type;
 

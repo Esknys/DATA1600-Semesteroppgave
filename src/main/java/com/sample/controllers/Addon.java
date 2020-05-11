@@ -2,12 +2,9 @@ package com.sample.controllers;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
@@ -24,11 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-
 public class Addon {
-
-
-
 
     @FXML
     private AnchorPane Anch1id;
@@ -53,9 +46,6 @@ public class Addon {
 
     @FXML
     private TextField pricetextfield;
-
-    @FXML
-    private Label labelengine;
 
 
     @FXML
@@ -95,19 +85,16 @@ public class Addon {
     private Button gearboxinputid;
 
     @FXML
-    private Label labelgearbox;
+    private TableView<Gearbox> tableviewgearbox;
 
     @FXML
-    private TableView<?> tableviewgearbox;
+    private TableColumn<Gearbox, String> gearboxcol1;
 
     @FXML
-    private TableColumn<?, ?> gearboxcol1;
+    private TableColumn<Gearbox, String> gearboxcol2;
 
     @FXML
-    private TableColumn<?, ?> gerboxcol2;
-
-    @FXML
-    private TableColumn<?, ?> gearboxcol3;
+    private TableColumn<Gearbox, Integer> gearboxcol3;
 
     @FXML
     private TextFlow txtflowid2;
@@ -139,23 +126,21 @@ public class Addon {
     @FXML
     private TextField painttextfield4;
 
-    @FXML
-    private Label labelpaint;
 
     @FXML
-    private TableView<?> tableviewpaint;
+    private TableView<Paintjob> tableviewpaint;
 
     @FXML
-    private TableColumn<?, ?> paintcol1;
+    private TableColumn<Paintjob, String> paintcol1;
 
     @FXML
-    private TableColumn<?, ?> paintcol2;
+    private TableColumn<Paintjob, String> paintcol2;
 
     @FXML
-    private TableColumn<?, ?> paintcol3;
+    private TableColumn<Paintjob, String> paintcol3;
 
     @FXML
-    private TableColumn<?, ?> paintcol4;
+    private TableColumn<Paintjob, Integer> paintcol4;
 
     @FXML
     private TextFlow txtflow3;
@@ -177,22 +162,26 @@ public class Addon {
     private TextField wheeltextfield3;
 
     @FXML
+    private TextField wheeltextfield4;
+
+    @FXML
     private Button wheelinputid;
 
-    @FXML
-    private Label labelwheel;
 
     @FXML
-    private TableView<?> tableviewheel;
+    private TableView<Wheel> tableviewheel;
 
     @FXML
-    private TableColumn<?, ?> wheelcol1;
+    private TableColumn<Wheel, String> wheelcol1;
 
     @FXML
-    private TableColumn<?, ?> wheelcol2;
+    private TableColumn<Wheel, String> wheelcol2;
 
     @FXML
-    private TableColumn<?, ?> wheelcol3;
+    private TableColumn<Wheel, Integer> wheelcol3;
+
+    @FXML
+    private TableColumn<Wheel, Integer> wheelcol4;
 
     @FXML
     private TextFlow txtflow4;
@@ -217,19 +206,16 @@ public class Addon {
     private TextField extratextfield3;
 
     @FXML
-    private Label labelextra;
+    private TableView<Accessory> tableviewextra;
 
     @FXML
-    private TableView<?> tableviewextra;
+    private TableColumn<Accessory, String> extracol1;
 
     @FXML
-    private TableColumn<?, ?> extracol1;
+    private TableColumn<Accessory, String> extracol2;
 
     @FXML
-    private TableColumn<?, ?> extracol2;
-
-    @FXML
-    private TableColumn<?, ?> extracol3;
+    private TableColumn<Accessory, Integer> extracol3;
 
     @FXML
     private TextFlow txtflow5;
@@ -290,31 +276,38 @@ public class Addon {
 
         Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
+        enginecol1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        enginecol2.setCellValueFactory(new PropertyValueFactory<>("fuel"));
+        enginecol3.setCellValueFactory(new PropertyValueFactory<>("horsepower"));
+        enginecol4.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tableviewengine.getItems().add(engine);
+
         File file = new File("engines.jobj");
 
         try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
             ObjectInputStream ois = new ObjectInputStream(is);
 
-            // Her kommer engine arraylist, object input stream.. Lagd en inputstrem
-
             ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
-            engines.forEach(System.out::println);
 
-            // Legger til nytt objekt
             engines.add(engine);
             WriteEngines.write(file, engines);
 
-        } catch (IOException | ClassNotFoundException e) {
+            // Vet ikke om den under fungerer
+            for (Engine e : engines) {
+                tableviewengine.getItems().add(e);
+            }
+
+       } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 
 
-
-        @FXML
+    @FXML
     void GearboxInputAction(ActionEvent event) {
         String gearboxinput = gearboxtextfield.getText();
         String typeinput = gearboxtextfield2.getText();
@@ -324,10 +317,32 @@ public class Addon {
 
         Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
+        gearboxcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        gearboxcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
+        gearboxcol3.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
+        tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tableviewgearbox.getItems().add(gearbox);
+
+
         File file = new File("gearboxes.jobj");
 
+        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
 
-    }
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+
+            gearboxes.add(gearbox);
+            WriteGearboxes.write(file, gearboxes);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+}
 
     @FXML
     void PaintInputAction(ActionEvent event) {
@@ -340,43 +355,92 @@ public class Addon {
 
         Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
 
+        paintcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        paintcol2.setCellValueFactory(new PropertyValueFactory<>("color"));
+        paintcol3.setCellValueFactory(new PropertyValueFactory<>("type"));
+        paintcol4.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tableviewpaint.getItems().add(paintjob);
+
         File file = new File("paintjobs.jobj");
 
 
-    }
+        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
 
-    @FXML
-    void ExtraInputAction(ActionEvent event) {
-        String extrapartinput = extratextfield.getText();
-        String extraparttype = extratextfield2.getText();
-        String extrapartprice = extratextfield3.getText();
-        labelextra.setText("Navnet på ekstradelen du har lagt til er"  + extrapartinput + ". Navnet på hva slags" +
-                "type det er, er " + extraparttype + ". Prisen på delen er " + extrapartprice);
+            ObjectInputStream ois = new ObjectInputStream(is);
+
+            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+
+            paintjobs.add(paintjob);
+            WritePaintjobs.write(file, paintjobs);
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @FXML
     void WheelInputAction(ActionEvent event) {
         String wheelpartinput = wheeltextfield.getText();
         String wheeltype = wheeltextfield2.getText();
-        String wheelprice = wheeltextfield3.getText();
-        labelwheel.setText("Navnet på hjultypen du legger til er " + wheelpartinput + "Typen på hjulene er " +
-                wheeltype + ", og prisen på hjulene er " + wheelprice);
+        String wheelsize = wheeltextfield3.getText();
+        String wheelprice = wheeltextfield4.getText();
+
+        int ws = Integer.parseInt(wheelsize);
+        int wp = Integer.parseInt(wheelprice);
+
+        Wheel wheel = new Wheel(wheelpartinput, wheeltype, ws, wp);
+
+        wheelcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        wheelcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
+        wheelcol3.setCellValueFactory(new PropertyValueFactory<>("size"));
+        wheelcol4.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tableviewheel.getItems().add(wheel);
     }
 
-    // Når denne knappen trykkes, skal alle motorene som finnes lastes opp
+
+    @FXML
+    void ExtraInputAction(ActionEvent event) {
+        String extrapartinput = extratextfield.getText();
+        String extraparttype = extratextfield2.getText();
+        String extrapartprice = extratextfield3.getText();
+
+        int price = Integer.parseInt(extrapartprice);
+
+        Accessory extra = new Accessory(extrapartinput, extraparttype, price);
+
+        extracol1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        extracol2.setCellValueFactory(new PropertyValueFactory<>("description"));
+        extracol3.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
+        tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tableviewextra.getItems().add(extra);
+
+    }
+
+
     @FXML
     void engineaction(ActionEvent event) {
         if (event.getSource() == engineid) {
             pane1id.toFront();
-            labelengine.setText("Her skal det komme de eksisterende motorene");
         }
+        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     void extraaction(ActionEvent event) {
         if (event.getSource() == extraid) {
             pane5id.toFront();
-            labelextra.setText("Her skal det komme de eksisterende ekstrautstyret");
+            tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
     }
 
@@ -384,7 +448,7 @@ public class Addon {
     void gearboxaction(ActionEvent event) {
         if (event.getSource() == gearboxid) {
             pane2id.toFront();
-            labelgearbox.setText("Her skal det komme de eksisterende girkassene");
+            tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
     }
 
@@ -392,15 +456,15 @@ public class Addon {
     void paintaction(ActionEvent event) {
         if (event.getSource() == paintid) {
             pane3id.toFront();
-            labelpaint.setText("Her skal det komme de eksisterende malingsfargene");
         }
+        tableviewpaint.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     void wheeilsaction(ActionEvent event) {
         if (event.getSource() == wheelsid) {
             pane4id.toFront();
-            labelwheel.setText("Her skal det komme de hjulene");
+            tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
     }
 
