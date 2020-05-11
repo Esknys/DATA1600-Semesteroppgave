@@ -287,7 +287,7 @@ public class Addon {
 
         File file = new File("engines.jobj");
 
-        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+            try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
             ObjectInputStream ois = new ObjectInputStream(is);
 
