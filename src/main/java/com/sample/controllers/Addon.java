@@ -276,29 +276,58 @@ public class Addon {
 
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        String engineinput;
-        String fuelinput;
-        String horsepowerinput;
-        String priceinput;
-        int hp;
-        int price;
-
-        boolean valid = true;
-
         if (enginetextfield.getText().isEmpty() && fueltextfield.getText().isEmpty() && horsepowertextfield.getText().isEmpty() && pricetextfield.getText().isEmpty()) {
 
+            try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
-        }
+                ObjectInputStream ois = new ObjectInputStream(is);
 
-            engineinput = enginetextfield.getText();
-            fuelinput = fueltextfield.getText();
-            horsepowerinput = horsepowertextfield.getText();
-            priceinput = pricetextfield.getText();
+                ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
 
-            hp = Integer.parseInt(horsepowerinput);
-            price = Integer.parseInt(priceinput);
+                // Vet ikke om den under fungerer
+                for (Engine e : engines) {
+                    tableviewengine.getItems().add(e);
+                }
 
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
 
+        } else {
+
+            String engineinput = enginetextfield.getText();
+            String fuelinput = fueltextfield.getText();
+            String horsepowerinput = horsepowertextfield.getText();
+            String priceinput = pricetextfield.getText();
+
+            int hp = 0;
+            int price = 0;
+
+            boolean valid = true;
+
+            if (engineinput.matches("[[A-ZÆØÅ][a-zæøå]*]")) {
+
+            } else {
+                valid = false;
+            }
+            if (fuelinput.matches("[[A-ZÆØÅ][a-zæøå]*]")) {
+            } else {
+                valid = false;
+            }
+            if (horsepowerinput.matches("[0-9]*")) {
+                hp = Integer.parseInt(horsepowerinput);
+            } else {
+                valid = false;
+            }
+            if (priceinput.matches("[0-9]*")) {
+                price = Integer.parseInt(priceinput);
+            } else {
+                valid = false;
+            }
+
+            if (valid) {
+
+                Engine engine = new Engine(engineinput, fuelinput, hp, price);
 
                 File file = new File("engines.jobj");
 
@@ -319,7 +348,11 @@ public class Addon {
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
+
             }
+
+        }
+    }
 
 
 
