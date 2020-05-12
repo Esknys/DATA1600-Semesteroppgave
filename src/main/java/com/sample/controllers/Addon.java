@@ -305,12 +305,9 @@ public class Addon {
 
             boolean valid = true;
 
-            if (engineinput.matches("[[A-ZÆØÅ][a-zæøå]*]")) {
-
-            } else {
-                valid = false;
-            }
-            if (fuelinput.matches("[[A-ZÆØÅ][a-zæøå]*]")) {
+            if (engineinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else { valid = false; }
+            if (fuelinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
             } else {
                 valid = false;
             }
@@ -348,9 +345,7 @@ public class Addon {
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
-
             }
-
         }
     }
 
@@ -358,40 +353,80 @@ public class Addon {
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
-        String gearboxinput = gearboxtextfield.getText();
-        String typeinput = gearboxtextfield2.getText();
-        String priceinput = gearboxtextfield3.getText();
-
-        int price = Integer.parseInt(priceinput);
-
-        Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
         gearboxcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         gearboxcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
         gearboxcol3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
         tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableviewgearbox.getItems().add(gearbox);
+        if (gearboxtextfield.getText().isEmpty() && gearboxtextfield2.getText().isEmpty() && gearboxtextfield3.getText().isEmpty()) {
 
+            try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
 
-        File file = new File("gearboxes.jobj");
+                ObjectInputStream ois = new ObjectInputStream(is);
 
-        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+                ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
 
-            ObjectInputStream ois = new ObjectInputStream(is);
+                for (Gearbox g : gearboxes) {
+                    tableviewgearbox.getItems().add(g);
+                }
 
-            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
 
-            gearboxes.add(gearbox);
-            WriteGearboxes.write(file, gearboxes);
+            String gearboxinput = gearboxtextfield.getText();
+            String typeinput = gearboxtextfield2.getText();
+            String priceinput = gearboxtextfield3.getText();
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            int price = 0;
+
+            boolean valid = true;
+
+            if (gearboxinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                valid = false;
+            }
+            if (typeinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                valid = false;
+            }
+            if (priceinput.matches("[0-9]*")) {
+                price = Integer.parseInt(priceinput);
+            } else {
+                valid = false;
+            }
+
+            if (valid) {
+
+                Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
+
+                tableviewgearbox.getItems().add(gearbox);
+
+                File file = new File("gearboxes.jobj");
+
+                try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+
+                    ObjectInputStream ois = new ObjectInputStream(is);
+
+                    ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+
+                    gearboxes.add(gearbox);
+                    WriteGearboxes.write(file, gearboxes);
+
+                    for (Gearbox g : gearboxes) {
+                        tableviewgearbox.getItems().add(g);
+                    }
+
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
         }
-
-}
+    }
 
     @FXML
     void PaintInputAction(ActionEvent event) {
