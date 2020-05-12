@@ -1,10 +1,15 @@
 package com.sample.car;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.UUID;
 
-public abstract class Part {
+public abstract class Part implements Serializable {
+
     private String name;
     private int price;
     private UUID uuid;
@@ -29,16 +34,13 @@ public abstract class Part {
         return price;
     }
 
+    public void setPrice(int price) { this.price = price; }
 
     //Formaterer pris til norsk format: 15000 -> kr 15 000,00
     public String getPriceFormatted() {
         Locale locale = new Locale("no", "NO");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         return currencyFormatter.format(price);
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public UUID getUUID() {

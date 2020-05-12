@@ -5,11 +5,9 @@ import java.io.IOException;
 import com.sample.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -29,7 +27,7 @@ public class SecondaryController {
     private TextField brukerfeltid;
 
     @FXML
-    private TextField passordfeltid;
+    private PasswordField passwordfieldid;
 
     @FXML
     private Text brukerid;
@@ -49,14 +47,24 @@ public class SecondaryController {
     void logginnansattaction(ActionEvent event) throws IOException {
 
         String brukernavn = brukerfeltid.getText();
-        String passord = passordfeltid.getText();
+        String passord = passwordfieldid.getText();
 
-        if (brukernavn.equals("Superbruker") && passord.equals("Superpassord")) {
-            App.changeView("superStart.fxml");
-        }
+      /*  if (brukernavn.equals("superbruker") && passord.equals("superpassord")) {
+         */   App.changeView("addon.fxml");
+     /*   }*/
+        //else {
+        //    throw new InvalidInputException("Feil brukernavn og passord. Prøv igjen");
+        //    }
     }
 
 
+
 }
+
+
+
+
+
+
 
 

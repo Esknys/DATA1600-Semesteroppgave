@@ -1,0 +1,2 @@
+Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000::Sport::Lettmetall::20::20000
+Electroman::Electric::500::200000::Super auto shifter::Automatic transmission::40000::White cream::White::Metallic::10000::Sport::Lettmetall::20::20000

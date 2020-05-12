@@ -2,24 +2,23 @@ package com.sample.car;
 
 import java.io.Serializable;
 
-public class Paintjob extends Part implements Serializable {
-
-    private String color;
+public class Wheel extends Part implements Serializable {
+    private int size;
     private String type;
 
-    public Paintjob(String name, int price, String color, String type) {
+    public Wheel(String name, String type, int size, int price) {
         super(name, price);
-        this.color = color;
+
         this.type = type;
+        this.size = size;
     }
 
-
-    public String getColor() {
-        return color;
+    public int getSize() {
+        return size;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getType() {
@@ -33,16 +32,18 @@ public class Paintjob extends Part implements Serializable {
     @Override
     public String toString() {
         return "UUID: " + getUUIDString() + "\n" +
-                "Price: " + getPrice() + "\n" +
-                "Color: " + getColor() + "\n" +
-                "Type: " + getType();
+                "Type: " + getType() + "\n" +
+                "Size: " + getSize() +  " inches" + "\n" +
+                "Price: " + getPrice();
     }
 
     @Override
     public String toStringFormatted() {
         return "Navn: " + getName() + "\n" +
                 "Pris: " + getPriceFormatted() + "\n" +
-                "Farge: " + getColor() + "\n" +
-                "Type: " + getType();
+                "Type: " + getType() + "\n" +
+                "Størrelse: " + getSize() +  " Tommer";
     }
+
+
 }

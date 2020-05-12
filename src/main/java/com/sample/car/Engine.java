@@ -1,7 +1,5 @@
 package com.sample.car;
 
-
-import com.sample.car.Part;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
