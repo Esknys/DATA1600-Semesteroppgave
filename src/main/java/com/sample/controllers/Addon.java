@@ -303,6 +303,19 @@ public class Addon {
 
             boolean valid = true;
 
+            if (enginetextfield.getText().isEmpty()) {
+
+            }
+            if (fueltextfield.getText().isEmpty()) {
+
+            }
+            if (horsepowertextfield.getText().isEmpty()) {
+
+            }
+            if (pricetextfield.getText().isEmpty()) {
+
+            }
+
             if (enginetextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 engineinput = enginetextfield.getText();
             } else { valid = false; }
@@ -378,24 +391,31 @@ public class Addon {
             }
         } else {
 
-            String gearboxinput = gearboxtextfield.getText();
-            String typeinput = gearboxtextfield2.getText();
-            String priceinput = gearboxtextfield3.getText();
+            String gearboxinput = "";
+            String typeinput = "";
 
             int price = 0;
 
             boolean valid = true;
 
-            if (gearboxinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (gearboxtextfield.getText().isEmpty()) {}
+
+            if (gearboxtextfield2.getText().isEmpty()) {}
+
+            if (gearboxtextfield3.getText().isEmpty()) {}
+
+            if (gearboxtextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                gearboxinput = gearboxtextfield.getText();
             } else {
                 valid = false;
             }
-            if (typeinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (gearboxtextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                typeinput = gearboxtextfield2.getText();
             } else {
                 valid = false;
             }
-            if (priceinput.matches("[0-9]*")) {
-                price = Integer.parseInt(priceinput);
+            if (gearboxtextfield3.getText().matches("[0-9]*")) {
+                price = Integer.parseInt(gearboxtextfield3.getText());
             } else {
                 valid = false;
             }
@@ -456,29 +476,39 @@ public class Addon {
             }
         } else {
 
-            String paintinput = painttextfield.getText();
-            String paintcolor = painttextfield2.getText();
-            String painttype = painttextfield3.getText();
-            String paintprice = painttextfield4.getText();
+            String paintinput = "";
+            String paintcolor = "";
+            String painttype = "";
 
             int price = 0;
 
             boolean valid = true;
 
-            if (paintinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield.getText().isEmpty()) {}
+
+            if (painttextfield2.getText().isEmpty()) {}
+
+            if (painttextfield3.getText().isEmpty()) {}
+
+            if (painttextfield4.getText().isEmpty()) {}
+
+            if (painttextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                paintinput = painttextfield.getText();
             } else {
                 valid = false;
             }
-            if (paintcolor.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                paintcolor = painttextfield2.getText();
             } else {
                 valid = false;
             }
-            if (painttype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield3.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                painttype = painttextfield3.getText();
             } else {
                 valid = false;
             }
-            if (paintprice.matches("[0-9]*")) {
-                price = Integer.parseInt(paintprice);
+            if (painttextfield4.getText().matches("[0-9]*")) {
+                price = Integer.parseInt(painttextfield4.getText());
             } else {
                 valid = false;
             }
@@ -539,25 +569,30 @@ public class Addon {
             }
         } else {
 
-            String wheelpartinput = wheeltextfield.getText();
-            String wheeltype = wheeltextfield2.getText();
-            String wheelsize = wheeltextfield3.getText();
-            String wheelprice = wheeltextfield4.getText();
+            String wheelpartinput = "";
+            String wheeltype = "";
 
             int ws = 0;
             int wp = 0;
 
             boolean value = true;
 
-            if (wheelpartinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (wheeltextfield.getText().isEmpty()) {}
+            if (wheeltextfield2.getText().isEmpty()) {}
+            if (wheeltextfield3.getText().isEmpty()) {}
+            if (wheeltextfield4.getText().isEmpty()) {}
+
+            if (wheeltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                wheelpartinput = wheeltextfield.getText();
             } else {value = false;}
-            if (wheeltype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (wheeltextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                wheeltype = wheeltextfield2.getText();
             } else {value = false;}
-            if (wheelsize.matches("[0-9]*")) {
-                ws = Integer.parseInt(wheelsize);
+            if (wheeltextfield3.getText().matches("[0-9]*")) {
+                ws = Integer.parseInt(wheeltextfield3.getText());
             } else {value = false;}
-            if (wheelprice.matches("[0-9]*")) {
-                wp = Integer.parseInt(wheelprice);
+            if (wheeltextfield4.getText().matches("[0-9]*")) {
+                wp = Integer.parseInt(wheeltextfield4.getText());
             } else {value = false;}
 
             if (value) {
@@ -618,24 +653,29 @@ public class Addon {
             }
         } else {
 
-            String extrapartinput = extratextfield.getText();
-            String extraparttype = extratextfield2.getText();
-            String extrapartprice = extratextfield3.getText();
+            String extrapartinput = "";
+            String extraparttype = "";
 
             int price = 0;
 
             boolean value = true;
 
-            if (extrapartinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (extratextfield.getText().isEmpty()) {}
+            if (extratextfield2.getText().isEmpty()) {}
+            if (extratextfield3.getText().isEmpty()) {}
+
+            if (extratextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                extrapartinput = extratextfield.getText();
             } else {
                 value = false;
             }
-            if (extraparttype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (extratextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                extraparttype = extratextfield2.getText();
             } else {
                 value = false;
             }
-            if (extrapartprice.matches("[0-9]*")) {
-                price = Integer.parseInt(extrapartprice);
+            if (extratextfield3.getText().matches("[0-9]*")) {
+                price = Integer.parseInt(extratextfield3.getText());
             } else {
                 value = false;
             }
