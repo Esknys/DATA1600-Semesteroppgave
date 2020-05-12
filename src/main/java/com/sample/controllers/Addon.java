@@ -295,29 +295,29 @@ public class Addon {
 
         } else {
 
-            String engineinput = enginetextfield.getText();
-            String fuelinput = fueltextfield.getText();
-            String horsepowerinput = horsepowertextfield.getText();
-            String priceinput = pricetextfield.getText();
+            String engineinput = "";
+            String fuelinput = "";
 
             int hp = 0;
             int price = 0;
 
             boolean valid = true;
 
-            if (engineinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (enginetextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                engineinput = enginetextfield.getText();
             } else { valid = false; }
-            if (fuelinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (fueltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+                fuelinput = fueltextfield.getText();
             } else {
                 valid = false;
             }
-            if (horsepowerinput.matches("[0-9]*")) {
-                hp = Integer.parseInt(horsepowerinput);
+            if (horsepowertextfield.getText().matches("[0-9]*")) {
+                hp = Integer.parseInt(horsepowertextfield.getText());
             } else {
                 valid = false;
             }
-            if (priceinput.matches("[0-9]*")) {
-                price = Integer.parseInt(priceinput);
+            if (pricetextfield.getText().matches("[0-9]*")) {
+                price = Integer.parseInt(pricetextfield.getText());
             } else {
                 valid = false;
             }
@@ -345,10 +345,11 @@ public class Addon {
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
+            } else {
+
             }
         }
     }
-
 
 
     @FXML
@@ -403,8 +404,6 @@ public class Addon {
 
                 Gearbox gearbox = new Gearbox(gearboxinput, price, typeinput);
 
-                tableviewgearbox.getItems().add(gearbox);
-
                 File file = new File("gearboxes.jobj");
 
                 try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
@@ -424,60 +423,97 @@ public class Addon {
                     System.out.println(e.getMessage());
                 }
 
+            } else {
+
             }
         }
     }
 
     @FXML
     void PaintInputAction(ActionEvent event) {
-        String paintinput = painttextfield.getText();
-        String paintcolor = painttextfield2.getText();
-        String painttype = painttextfield3.getText();
-        String paintprice = painttextfield4.getText();
-
-        int price = Integer.parseInt(paintprice);
-
-        Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
 
         paintcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         paintcol2.setCellValueFactory(new PropertyValueFactory<>("color"));
         paintcol3.setCellValueFactory(new PropertyValueFactory<>("type"));
         paintcol4.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableviewpaint.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableviewpaint.getItems().add(paintjob);
+        if (painttextfield.getText().isEmpty() && painttextfield2.getText().isEmpty() && painttextfield3.getText().isEmpty() && painttextfield4.getText().isEmpty()) {
 
-        File file = new File("paintjobs.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
 
+                ObjectInputStream ois = new ObjectInputStream(is);
 
-        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+                ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
 
-            ObjectInputStream ois = new ObjectInputStream(is);
+                for (Paintjob p : paintjobs) {
+                    tableviewpaint.getItems().add(p);
+                }
 
-            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
 
-            paintjobs.add(paintjob);
-            WritePaintjobs.write(file, paintjobs);
+            String paintinput = painttextfield.getText();
+            String paintcolor = painttextfield2.getText();
+            String painttype = painttextfield3.getText();
+            String paintprice = painttextfield4.getText();
 
+            int price = 0;
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            boolean valid = true;
+
+            if (paintinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                valid = false;
+            }
+            if (paintcolor.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                valid = false;
+            }
+            if (painttype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                valid = false;
+            }
+            if (paintprice.matches("[0-9]*")) {
+                price = Integer.parseInt(paintprice);
+            } else {
+                valid = false;
+            }
+
+            if (valid) {
+
+                Paintjob paintjob = new Paintjob(paintinput, price, paintcolor, painttype);
+
+                File file = new File("paintjobs.jobj");
+
+                try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+
+                    ObjectInputStream ois = new ObjectInputStream(is);
+
+                    ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+
+                    paintjobs.add(paintjob);
+                    WritePaintjobs.write(file, paintjobs);
+
+                    for (Paintjob p : paintjobs) {
+                        tableviewpaint.getItems().add(p);
+                    }
+
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            } else {
+
+            }
         }
-
     }
 
     @FXML
     void WheelInputAction(ActionEvent event) {
-        String wheelpartinput = wheeltextfield.getText();
-        String wheeltype = wheeltextfield2.getText();
-        String wheelsize = wheeltextfield3.getText();
-        String wheelprice = wheeltextfield4.getText();
-
-        int ws = Integer.parseInt(wheelsize);
-        int wp = Integer.parseInt(wheelprice);
-
-        Wheel wheel = new Wheel(wheelpartinput, wheeltype, ws, wp);
 
         wheelcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         wheelcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -486,7 +522,47 @@ public class Addon {
 
         tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableviewheel.getItems().add(wheel);
+        if (wheeltextfield.getText().isEmpty() && wheeltextfield2.getText().isEmpty() && wheeltextfield3.getText().isEmpty() && wheeltextfield4.getText().isEmpty()) {
+
+            try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+
+                ObjectInputStream ois = new ObjectInputStream(is);
+
+                ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
+
+                for (Wheel w : wheels) {
+                    tableviewheel.getItems().add(w);
+                }
+
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+
+            String wheelpartinput = wheeltextfield.getText();
+            String wheeltype = wheeltextfield2.getText();
+            String wheelsize = wheeltextfield3.getText();
+            String wheelprice = wheeltextfield4.getText();
+
+            int ws = 0;
+            int wp = 0;
+
+            boolean value = true;
+
+            if (wheelpartinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {value = false;}
+            if (wheeltype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {value = false;}
+            if (wheelsize.matches("[0-9]*")) {
+                ws = Integer.parseInt(wheelsize);
+            } else {value = false;}
+            if (wheelprice.matches("[0-9]*")) {
+                wp = Integer.parseInt(wheelprice);
+            } else {value = false;}
+
+            if (value) {
+
+        Wheel wheel = new Wheel(wheelpartinput, wheeltype, ws, wp);
 
         File file = new File("wheels.jobj");
 
@@ -500,49 +576,96 @@ public class Addon {
             wheels.add(wheel);
             WriteWheels.write(file, wheels);
 
+            for (Wheel w : wheels) {
+                tableviewheel.getItems().add(w);
+            }
+
+            tableviewheel.getItems().add(wheel);
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
+            } else {}
+        }
+
     }
 
 
     @FXML
     void ExtraInputAction(ActionEvent event) {
-        String extrapartinput = extratextfield.getText();
-        String extraparttype = extratextfield2.getText();
-        String extrapartprice = extratextfield3.getText();
-
-        int price = Integer.parseInt(extrapartprice);
-
-        Accessory extra = new Accessory(extrapartinput, extraparttype, price);
 
         extracol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         extracol2.setCellValueFactory(new PropertyValueFactory<>("description"));
         extracol3.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
         tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        tableviewextra.getItems().add(extra);
+        if (extratextfield.getText().isEmpty() && extratextfield2.getText().isEmpty() && extratextfield3.getText().isEmpty()) {
 
-        File file = new File("accessories.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
 
+                ObjectInputStream ois = new ObjectInputStream(is);
 
-        try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+                ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
 
-            ObjectInputStream ois = new ObjectInputStream(is);
+                for (Accessory a : accessories) {
+                    tableviewextra.getItems().add(a);
+                }
 
-            ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
 
-            accessories.add(extra);
-            WriteAccessories.write(file, accessories);
+            String extrapartinput = extratextfield.getText();
+            String extraparttype = extratextfield2.getText();
+            String extrapartprice = extratextfield3.getText();
 
+            int price = 0;
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            boolean value = true;
+
+            if (extrapartinput.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                value = false;
+            }
+            if (extraparttype.matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {
+                value = false;
+            }
+            if (extrapartprice.matches("[0-9]*")) {
+                price = Integer.parseInt(extrapartprice);
+            } else {
+                value = false;
+            }
+
+            if (value) {
+
+                Accessory extra = new Accessory(extrapartinput, extraparttype, price);
+
+                File file = new File("accessories.jobj");
+
+                try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+                    ObjectInputStream ois = new ObjectInputStream(is);
+
+                    ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+
+                    accessories.add(extra);
+                    WriteAccessories.write(file, accessories);
+
+                    for (Accessory a : accessories) {
+                        tableviewextra.getItems().add(a);
+                    }
+
+                    tableviewextra.getItems().add(extra);
+
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else { }
         }
-
     }
 
 
