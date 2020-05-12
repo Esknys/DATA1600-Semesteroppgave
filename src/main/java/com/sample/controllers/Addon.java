@@ -218,6 +218,15 @@ public class Addon {
     private TableColumn<Accessory, Integer> extracol3;
 
     @FXML
+    private TextField textfieldextrafilter;
+
+    @FXML
+    private Button extrafilterid;
+
+    @FXML
+    private ChoiceBox<?> choiceboxextra;
+
+    @FXML
     private TextFlow txtflow5;
 
     @FXML
@@ -424,6 +433,11 @@ public class Addon {
         tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         tableviewextra.getItems().add(extra);
+
+    }
+
+    @FXML
+    void extrafilteraction(ActionEvent event) {
 
     }
 
