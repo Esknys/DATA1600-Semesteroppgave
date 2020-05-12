@@ -1,8 +1,16 @@
 package com.sample.car;
 
-public class Engine extends Part{
-    private String fuel;
-    private int horsepower;
+
+import com.sample.car.Part;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
+import java.io.Serializable;
+
+public class Engine extends Part implements Serializable {
+
+    public String fuel;
+    public int horsepower;
 
     public Engine(String name, String fuel, int horsepower, int price) {
         super(name, price);
@@ -11,7 +19,7 @@ public class Engine extends Part{
         this.horsepower = horsepower;
     }
 
-    public String getName() {
+    public String getFuel() {
         return fuel;
     }
 
@@ -30,10 +38,10 @@ public class Engine extends Part{
 
     @Override
     public String toStringFormatted() {
-        return "Name: " + getName() + "\n" +
-                "Price: " + getPriceFormatted() + "\n" +
-                "Fuel: " + getName() + "\n" +
-                "Horsepower: " + getHorsepower() +  "HP ";
+        return "Navn: " + getName() + "\n" +
+                "Pris: " + getPriceFormatted() + "\n" +
+                "Drivstoff: " + getName() + "\n" +
+                "Hestekrefter: " + getHorsepower() +  " HK ";
     }
 
 
