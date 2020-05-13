@@ -33,22 +33,27 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="engineinputid" layoutX="408.0" layoutY="160.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="56.0" prefWidth="240.0" style="-fx-background-color: #206ba4;" text="Legg til og oppdater" textFill="WHITE" />
-                  <TextField fx:id="enginetextfield" layoutX="27.0" layoutY="106.0" prefHeight="41.0" prefWidth="220.0" promptText="Skriv inn navn her" />
-                  <TextField fx:id="fueltextfield" layoutX="28.0" layoutY="166.0" prefHeight="41.0" prefWidth="220.0" promptText="Legg inn drivstofftype her" />
-                  <TextField fx:id="horsepowertextfield" layoutX="27.0" layoutY="226.0" prefHeight="41.0" prefWidth="220.0" promptText="Skriv inn hestekrefter her" />
-                  <TextField fx:id="pricetextfield" layoutX="22.0" layoutY="278.0" prefHeight="41.0" prefWidth="213.0" promptText="Legg til pris her " />
+                  <Button fx:id="engineinputid" layoutX="296.0" layoutY="289.0" mnemonicParsing="false" onAction="#EngineInputAction" prefHeight="41.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater/legg til" textFill="WHITE" />
+                  <TextField fx:id="enginetextfield" layoutX="27.0" layoutY="106.0" prefHeight="41.0" prefWidth="213.0" promptText="Skriv inn navn her" />
+                  <TextField fx:id="horsepowertextfield" layoutX="356.0" layoutY="105.0" prefHeight="41.0" prefWidth="229.0" promptText="Skriv inn hestekrefter her" />
+                  <TextField fx:id="pricetextfield" layoutX="353.0" layoutY="165.0" prefHeight="48.0" prefWidth="229.0" promptText="Legg til pris her " />
+                  <TextField fx:id="fueltextfield" layoutX="28.0" layoutY="166.0" prefHeight="41.0" prefWidth="213.0" promptText="Legg inn drivstofftype her" />
                   <TableView fx:id="tableviewengine" editable="true" layoutX="31.0" layoutY="340.0" prefHeight="215.0" prefWidth="586.0">
                      <columns>
                         <TableColumn fx:id="enginecol1" prefWidth="75.0" text="Navn" />
-                        <TableColumn fx:id="enginecol2" prefWidth="75.0" text="Type" />
+                        <TableColumn fx:id="enginecol2" prefWidth="75.0" text="Drivstoff" />
                         <TableColumn fx:id="enginecol3" prefWidth="75.0" text="Hestekrefter" />
                         <TableColumn fx:id="enginecol4" prefWidth="75.0" text="Pris" />
                      </columns>
                   </TableView>
+                  <Button fx:id="enginefilterid" layoutX="635.0" layoutY="294.0" mnemonicParsing="false" onAction="#EngineFilterAction" prefHeight="34.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
+                  <ChoiceBox fx:id="choiceboxengine" layoutX="453.0" layoutY="298.0" prefHeight="28.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
+                  <TextField fx:id="textfieldenginefilter" layoutX="545.0" layoutY="298.0" prefHeight="28.0" prefWidth="81.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
+                  <Button fx:id="enginedeleteid" layoutX="146.0" layoutY="294.0" mnemonicParsing="false" onAction="#EngineDeleteAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
                </children></Pane>
             <Pane fx:id="pane2id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #379683;">
                <children>
+                  <Button fx:id="gearboxdeleteid" layoutX="148.0" layoutY="295.0" mnemonicParsing="false" onAction="#GearboxDeleteAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
                   <TextFlow fx:id="txtflowid2" prefHeight="117.0" prefWidth="565.0">
                      <children>
                         <Text fx:id="gearboxtitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GIRKASSE" wrappingWidth="171.58310890197754">
@@ -59,7 +64,7 @@
                      </children>
                   </TextFlow>
                   <TextField fx:id="gearboxtextfield" layoutX="201.0" layoutY="107.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her" />
-                  <Button fx:id="gearboxinputid" layoutX="231.0" layoutY="282.0" mnemonicParsing="false" onAction="#GearboxInputAction" prefHeight="41.0" prefWidth="203.0" style="-fx-background-color: #206ba4;" text="Legg til Girkasse" textFill="WHITE" />
+                  <Button fx:id="gearboxinputid" layoutX="295.0" layoutY="295.0" mnemonicParsing="false" onAction="#GearboxInputAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Opppdater/legg til" textFill="WHITE" />
                   <TextField fx:id="gearboxtextfield2" layoutX="202.0" layoutY="167.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn type her" />
                   <TextField fx:id="gearboxtextfield3" layoutX="202.0" layoutY="225.0" prefHeight="48.0" prefWidth="260.0" promptText="Skriv inn pris her" />
                   <TableView fx:id="tableviewgearbox" layoutX="32.0" layoutY="335.0" prefHeight="222.0" prefWidth="586.0">
@@ -69,10 +74,14 @@
                         <TableColumn fx:id="gearboxcol3" prefWidth="75.0" text="Pris" />
                     </columns>
                   </TableView>
+                  <Button fx:id="gearboxfilterid" layoutX="631.0" layoutY="295.0" minWidth="47.0" mnemonicParsing="false" onAction="#GearboxFilterAction" prefHeight="34.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
+                  <TextField fx:id="textfieldgearboxfilter" layoutX="541.0" layoutY="298.0" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #FFFFFF;" />
+                  <ChoiceBox fx:id="choiceboxgearbox" layoutX="449.0" layoutY="296.0" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #BBD9EE #BBD9EE #BBD9EE #BBD9EE;" />
                </children></Pane>
             <Pane fx:id="pane3id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #8D8741;">
                <children>
-                  <Button fx:id="paintinputid" layoutX="434.0" layoutY="199.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="170.0" style="-fx-background-color: #206ba4;" text="Legg til malingsfarge" textFill="WHITE" />
+                  <Button fx:id="paintdeleteid" layoutX="147.0" layoutY="296.0" mnemonicParsing="false" onAction="#PaintDeleteAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slegg valgte rad" textFill="WHITE" />
+                  <Button fx:id="paintinputid" layoutX="294.0" layoutY="295.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater/Legg til" textFill="WHITE" />
                   <TextFlow fx:id="txtflow3" prefHeight="154.0" prefWidth="516.0">
                      <children>
                         <Text fx:id="painttitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="MALING">
@@ -83,9 +92,9 @@
                      </children>
                   </TextFlow>
                   <TextField fx:id="painttextfield" layoutX="32.0" layoutY="103.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn navn her" />
-                  <TextField fx:id="painttextfield2" layoutX="27.0" layoutY="167.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn farge her" />
-                  <TextField fx:id="painttextfield3" layoutX="28.0" layoutY="228.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn type her" />
-                  <TextField fx:id="painttextfield4" layoutX="30.0" layoutY="281.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn pris her " />
+                  <TextField fx:id="painttextfield2" layoutX="27.0" layoutY="167.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn farge her" />
+                  <TextField fx:id="painttextfield3" layoutX="370.0" layoutY="104.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn type her" />
+                  <TextField fx:id="painttextfield4" layoutX="400.0" layoutY="164.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn pris her " />
                   <TableView fx:id="tableviewpaint" layoutX="35.0" layoutY="336.0" prefHeight="222.0" prefWidth="578.0">
                     <columns>
                       <TableColumn fx:id="paintcol1" prefWidth="75.0" text="Navn" />
@@ -94,9 +103,15 @@
                         <TableColumn fx:id="paintcol4" prefWidth="75.0" text="Pris" />
                     </columns>
                   </TableView>
+                  <Button fx:id="paintfilterid" layoutX="632.0" layoutY="294.0" mnemonicParsing="false" onAction="#PaintFilterAction" prefHeight="34.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
+                  <TextField fx:id="textfieldpaintfilter" layoutX="538.0" layoutY="294.0" prefHeight="32.0" prefWidth="87.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
+                  <ChoiceBox fx:id="choiceboxpaint" layoutX="449.0" layoutY="294.0" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #BBD9EE;" />
                </children></Pane>
             <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #5579A5;">
                <children>
+                  <ChoiceBox fx:id="choiceboxwheel" layoutX="451.0" layoutY="295.0" prefHeight="34.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
+                  <TextField fx:id="textfieldwheelfilter" layoutX="539.0" layoutY="292.0" prefHeight="32.0" prefWidth="87.0" />
+                  <Button fx:id="wheelfilterid" layoutX="630.0" layoutY="289.0" mnemonicParsing="false" onAction="#WheelFilterAction" prefHeight="41.0" prefWidth="70.0" style="-fx-background-color: #BBD9EE;" text="Filter" />
                   <TextFlow fx:id="txtflow4" prefHeight="138.0" prefWidth="462.0">
                      <children>
                         <Text fx:id="wheeltitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="HJUL">
@@ -106,12 +121,12 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <TextField fx:id="wheeltextfield" layoutX="33.0" layoutY="103.0" prefHeight="48.0" prefWidth="233.0" promptText="Skriv inn navnet her" />
-                  <Button fx:id="wheelinputid" layoutX="231.0" layoutY="288.0" mnemonicParsing="false" onAction="#WheelInputAction" prefHeight="34.0" prefWidth="203.0" style="-fx-background-color: #206ba4;" text="Legg til hjuldeltype" textFill="WHITE" />
-                  <TextField fx:id="wheeltextfield2" layoutX="29.0" layoutY="167.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn beskrivelse her " />
-                  <TextField fx:id="wheeltextfield3" layoutX="20.0" layoutY="230.0" prefHeight="41.0" prefWidth="250.0" promptText="Skriv inn størrelse her" />
-                  <TextField fx:id="wheeltextfield4" layoutX="23.0" layoutY="288.0" prefHeight="41.0" prefWidth="240.0" promptText="Skriv inn pris her" />
-                  <TableView fx:id="tableviewheel" layoutX="37.0" layoutY="336.0" prefHeight="222.0" prefWidth="578.0">
+                  <Button fx:id="wheelinputid" layoutX="295.0" layoutY="295.0" mnemonicParsing="false" onAction="#WheelInputAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater/Legg til" textFill="WHITE" />
+                  <TextField fx:id="wheeltextfield" layoutX="53.0" layoutY="103.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn navnet her" />
+                  <TextField fx:id="wheeltextfield2" layoutX="49.0" layoutY="167.0" prefHeight="48.0" prefWidth="240.0" promptText="Skriv inn beskrivelse her " />
+                  <TextField fx:id="wheeltextfield3" layoutX="364.0" layoutY="104.0" prefHeight="48.0" prefWidth="260.0" promptText="Skriv inn størrelse her" />
+                  <TextField fx:id="wheeltextfield4" layoutX="364.0" layoutY="174.0" prefHeight="48.0" prefWidth="260.0" promptText="Skriv inn pris her" />
+                  <TableView fx:id="tableviewheel" layoutX="87.0" layoutY="359.0" prefHeight="222.0" prefWidth="555.0">
                     <columns>
                       <TableColumn fx:id="wheelcol1" prefWidth="75.0" text="Navn" />
                       <TableColumn fx:id="wheelcol2" prefWidth="75.0" text="Type" />
@@ -119,9 +134,11 @@
                         <TableColumn fx:id="wheelcol4" prefWidth="75.0" text="Pris" />
                     </columns>
                   </TableView>
+                  <Button fx:id="wheeldeleteid" layoutX="144.0" layoutY="297.0" mnemonicParsing="false" onAction="#WheelDeleteAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
                </children></Pane>
             <Pane fx:id="pane5id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #B1A296;">
                <children>
+                  <ChoiceBox fx:id="choiceboxextra" layoutX="452.0" layoutY="297.0" prefHeight="28.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
                   <TextFlow fx:id="txtflow5" layoutX="2.0" prefHeight="109.0" prefWidth="678.0">
                      <children>
                         <Text fx:id="extratitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EKSTRAUTSTYR">
@@ -131,7 +148,7 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="extrainputid" layoutX="296.0" layoutY="295.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater liste" textFill="WHITE" />
+                  <Button fx:id="extrainputid" layoutX="296.0" layoutY="295.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater/legg til " textFill="WHITE" />
                   <TextField fx:id="extratextfield" layoutX="202.0" layoutY="106.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her " style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield2" layoutX="202.0" layoutY="168.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn beskrivelse her" style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield3" layoutX="202.0" layoutY="230.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn pris her" style="-fx-background-color: #FFFFFF;" />
@@ -144,7 +161,6 @@
                   </TableView>
                   <Button fx:id="extrafilterid" layoutX="633.0" layoutY="294.0" mnemonicParsing="false" onAction="#ExtraFilterAction" prefHeight="32.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
                   <TextField fx:id="textfieldextrafilter" layoutX="544.0" layoutY="298.0" prefHeight="24.0" prefWidth="81.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
-                  <ChoiceBox fx:id="choiceboxextra" layoutX="452.0" layoutY="297.0" prefHeight="28.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
                   <Button fx:id="extradeletid" layoutX="147.0" layoutY="295.0" mnemonicParsing="false" onAction="#ExtraDeleteAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE">
                      <effect>
                         <Blend />
