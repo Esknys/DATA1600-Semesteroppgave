@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -129,17 +131,27 @@
                         </Text>
                      </children>
                   </TextFlow>
-                  <Button fx:id="extrainputid" layoutX="234.0" layoutY="289.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #206ba4;" text="Legg til ekstrautstyr-del" textFill="WHITE" />
+                  <Button fx:id="extrainputid" layoutX="296.0" layoutY="295.0" mnemonicParsing="false" onAction="#ExtraInputAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater liste" textFill="WHITE" />
                   <TextField fx:id="extratextfield" layoutX="202.0" layoutY="106.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her " style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield2" layoutX="202.0" layoutY="168.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn beskrivelse her" style="-fx-background-color: #FFFFFF;" />
                   <TextField fx:id="extratextfield3" layoutX="202.0" layoutY="230.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn pris her" style="-fx-background-color: #FFFFFF;" />
-                  <TableView fx:id="tableviewextra" layoutX="69.0" layoutY="358.0" prefHeight="222.0" prefWidth="586.0">
+                  <TableView fx:id="tableviewextra" layoutX="85.0" layoutY="358.0" prefHeight="222.0" prefWidth="555.0">
                     <columns>
                       <TableColumn fx:id="extracol1" prefWidth="75.0" text="Navn" />
                       <TableColumn fx:id="extracol2" prefWidth="75.0" text="Type" />
                         <TableColumn fx:id="extracol3" prefWidth="75.0" text="Pris" />
                     </columns>
                   </TableView>
+                  <Button fx:id="extrafilterid" layoutX="633.0" layoutY="294.0" mnemonicParsing="false" onAction="#ExtraFilterAction" prefHeight="32.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
+                  <TextField fx:id="textfieldextrafilter" layoutX="544.0" layoutY="298.0" prefHeight="24.0" prefWidth="81.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
+                  <ChoiceBox fx:id="choiceboxextra" layoutX="452.0" layoutY="297.0" prefHeight="28.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
+                  <Button fx:id="extradeletid" layoutX="147.0" layoutY="295.0" mnemonicParsing="false" onAction="#ExtraDeleteAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </Button>
+                  <Button fx:id="extrachangeid" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#ExtraChangeAction" prefHeight="32.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
+                  <Button layoutX="14.0" layoutY="308.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
                </children>
             </Pane>
          </children>

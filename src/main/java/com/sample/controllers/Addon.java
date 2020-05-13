@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.sample.App;
 import com.sample.binaryfile.*;
@@ -24,6 +27,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class Addon {
+
+    ArrayList<Accessory> globalaccessories = new ArrayList<Accessory>();
+    ObservableList extrachoiceboxlist = FXCollections.observableArrayList();
+
 
     @FXML
     private AnchorPane Anch1id;
@@ -48,7 +55,6 @@ public class Addon {
 
     @FXML
     private TextField pricetextfield;
-
 
     @FXML
     private TableView<Engine> tableviewengine;
@@ -220,6 +226,21 @@ public class Addon {
     private TableColumn<Accessory, Integer> extracol3;
 
     @FXML
+    private Button extrafilterid;
+
+    @FXML
+    private TextField textfieldextrafilter;
+
+    @FXML
+    private Button extradeletid;
+
+    @FXML
+    private Button extrachangeid;
+
+    @FXML
+    private Button extrachangeid2;
+
+    @FXML
     private TextFlow txtflow5;
 
     @FXML
@@ -262,6 +283,41 @@ public class Addon {
     private Button backbuttonid;
 
     @FXML
+    private ChoiceBox<String> choiceboxextra;
+
+    // Det som dukker opp når man loader FXML filen
+    @FXML
+    public void initialize() {
+
+        loadDataExtra();
+        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableviewpaint.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+
+        // Extra filopplastning under slik at alle elementene dukker opp ved starten av programmet
+        // Under så initaliserer vi filen til globale variabelen.
+
+        try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            File file = new File("accessories.jobj");
+
+            ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+            this.globalaccessories =  accessories;
+
+            // Det under funker ikke foreløpig..
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+
+
+    @FXML
     void BackActionButton(ActionEvent event) throws IOException {
         App.changeView("secondaryview.fxml");
     }
@@ -276,6 +332,7 @@ public class Addon {
 
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        // Om alle tekstfeltene er tomte
         if (enginetextfield.getText().isEmpty() && fueltextfield.getText().isEmpty() && horsepowertextfield.getText().isEmpty() && pricetextfield.getText().isEmpty()) {
 
             try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
@@ -284,10 +341,16 @@ public class Addon {
 
                 ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
 
-                // Vet ikke om den under fungerer
-                for (Engine e : engines) {
-                    tableviewengine.getItems().add(e);
-                }
+                // Trykker på knappen og alle feltene er tomme, så oppdaterer fortsatt alle seg.
+                // Men om det allerede er ting i tableviewet, så kan ikke alle
+                // objektene postes på nytt om man oppdaterer, og det ikke er noe
+                // tekst i tekstfeltene likevel.
+
+              if (tableviewengine.getItems().isEmpty()) {
+                  for (Engine e : engines) {
+                      tableviewengine.getItems().add(e);
+                  }
+              }
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -350,9 +413,13 @@ public class Addon {
                     engines.add(engine);
                     WriteEngines.write(file, engines);
 
-                    // Vet ikke om den under fungerer
-                    for (Engine e : engines) {
-                        tableviewengine.getItems().add(e);
+
+                    if (tableviewengine.getItems().isEmpty()) {
+                        for (Engine e : engines) {
+                            tableviewengine.getItems().add(e);
+                        }
+                    } else {
+                        tableviewengine.getItems().add(engines.get(engines.size()-1));
                     }
 
                 } catch (IOException | ClassNotFoundException e) {
@@ -382,8 +449,10 @@ public class Addon {
 
                 ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
 
-                for (Gearbox g : gearboxes) {
-                    tableviewgearbox.getItems().add(g);
+                if (tableviewgearbox.getItems().isEmpty()) {
+                    for (Gearbox g : gearboxes) {
+                        tableviewgearbox.getItems().add(g);
+                    }
                 }
 
             } catch (IOException | ClassNotFoundException e) {
@@ -435,8 +504,12 @@ public class Addon {
                     gearboxes.add(gearbox);
                     WriteGearboxes.write(file, gearboxes);
 
-                    for (Gearbox g : gearboxes) {
-                        tableviewgearbox.getItems().add(g);
+                    if (tableviewgearbox.getItems().isEmpty()) {
+                        for (Gearbox g : gearboxes) {
+                            tableviewgearbox.getItems().add(g);
+                        }
+                    } else {
+                        tableviewgearbox.getItems().add(gearboxes.get(gearboxes.size()-1));
                     }
 
                 } catch (IOException | ClassNotFoundException e) {
@@ -467,8 +540,10 @@ public class Addon {
 
                 ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
 
-                for (Paintjob p : paintjobs) {
-                    tableviewpaint.getItems().add(p);
+                if (tableviewpaint.getItems().isEmpty()) {
+                    for (Paintjob p : paintjobs) {
+                        tableviewpaint.getItems().add(p);
+                    }
                 }
 
             } catch (IOException | ClassNotFoundException e) {
@@ -528,8 +603,12 @@ public class Addon {
                     paintjobs.add(paintjob);
                     WritePaintjobs.write(file, paintjobs);
 
-                    for (Paintjob p : paintjobs) {
-                        tableviewpaint.getItems().add(p);
+                    if (tableviewpaint.getItems().isEmpty()) {
+                        for (Paintjob p : paintjobs) {
+                            tableviewpaint.getItems().add(p);
+                        }
+                    } else {
+                        tableviewpaint.getItems().add(paintjobs.get(paintjobs.size()-1));
                     }
 
                 } catch (IOException | ClassNotFoundException e) {
@@ -541,6 +620,7 @@ public class Addon {
             }
         }
     }
+
 
     @FXML
     void WheelInputAction(ActionEvent event) {
@@ -560,8 +640,10 @@ public class Addon {
 
                 ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
 
-                for (Wheel w : wheels) {
-                    tableviewheel.getItems().add(w);
+                if (tableviewheel.getItems().isEmpty()) {
+                    for (Wheel w : wheels) {
+                        tableviewheel.getItems().add(w);
+                    }
                 }
 
             } catch (IOException | ClassNotFoundException e) {
@@ -611,30 +693,28 @@ public class Addon {
             wheels.add(wheel);
             WriteWheels.write(file, wheels);
 
-            for (Wheel w : wheels) {
-                tableviewheel.getItems().add(w);
+            if (tableviewheel.getItems().isEmpty()) {
+                for (Wheel w : wheels) {
+                    tableviewheel.getItems().add(w);
+                }
+            } else {
+                tableviewheel.getItems().add(wheels.get(wheels.size()-1));
             }
-
-            tableviewheel.getItems().add(wheel);
-
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
             } else {}
         }
-
     }
 
 
     @FXML
     void ExtraInputAction(ActionEvent event) {
+        tableviewextra.getItems().clear();
 
         extracol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         extracol2.setCellValueFactory(new PropertyValueFactory<>("description"));
         extracol3.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         if (extratextfield.getText().isEmpty() && extratextfield2.getText().isEmpty() && extratextfield3.getText().isEmpty()) {
 
@@ -643,10 +723,7 @@ public class Addon {
                 ObjectInputStream ois = new ObjectInputStream(is);
 
                 ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
-
-                for (Accessory a : accessories) {
-                    tableviewextra.getItems().add(a);
-                }
+                this.globalaccessories = accessories;
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -660,9 +737,12 @@ public class Addon {
 
             boolean value = true;
 
-            if (extratextfield.getText().isEmpty()) {}
-            if (extratextfield2.getText().isEmpty()) {}
-            if (extratextfield3.getText().isEmpty()) {}
+            if (extratextfield.getText().isEmpty()) {
+            }
+            if (extratextfield2.getText().isEmpty()) {
+            }
+            if (extratextfield3.getText().isEmpty()) {
+            }
 
             if (extratextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 extrapartinput = extratextfield.getText();
@@ -691,21 +771,169 @@ public class Addon {
                     ObjectInputStream ois = new ObjectInputStream(is);
 
                     ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
-
                     accessories.add(extra);
                     WriteAccessories.write(file, accessories);
+
+                    this.globalaccessories = accessories;
 
                     for (Accessory a : accessories) {
                         tableviewextra.getItems().add(a);
                     }
+                   // tableviewextra.getItems().add(this.globalaccessories.get(this.globalaccessories.size() - 1));
 
-                    tableviewextra.getItems().add(extra);
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
-            } else { }
+            } else {
+
+            }
         }
+
+        if (tableviewextra.getItems().isEmpty()) {
+            for (Accessory a : this.globalaccessories) {
+                tableviewextra.getItems().add(a);
+           }
+        }
+
+    }
+
+    @FXML
+    void ExtraChangeAction(ActionEvent event) {
+
+        // Tenker at du velge rad, trykker på "endre valgte rad",
+        // Da dukker verdiene opp i textfield, som du kan endre
+        // Automatisk da så sletter den du har valgt, og lager ny ved å legge til den ny med nye verdier.
+
+        // Dette endrer du ved å trykke "oppdater"
+
+        Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
+
+        extratextfield.setText(a.getName());
+        extratextfield2.setText(a.getDescription());
+        String price = String.valueOf(a.getPrice());
+        extratextfield3.setText(price);
+
+    }
+
+    @FXML
+    void ExtraChangeAction2(ActionEvent event) {
+
+        /*/ Henter fram det jeg skal endre
+        String extrapartinput = extratextfield.getText();
+        String extraparttype = extratextfield2.getText();
+        Integer extraprice = Integer.parseInt(extratextfield3.getText());
+
+         // Henter fra objektet jeg skal endre på
+        Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
+
+        // Endrer på objektet
+        // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
+        // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
+
+        for (int i = 0; i < this.globalaccessories.size(); i++) {
+            if (a.getName() = this.globalaccessories(i).getname()) {
+
+            }
+        }
+
+        // Åpner stream
+        ObjectInputStream ois = new ObjectInputStream(is);
+        ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+        accessories = this.globalaccessories;
+
+        WriteAccessories.write(file, accessories);
+
+/
+         */
+
+    }
+
+
+    @FXML
+    void ExtraDeleteAction(ActionEvent event) {
+
+        File file = new File("accessories.jobj");
+
+        try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+            // Henter fram objekt
+            Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
+
+            // Fjerner objekt fra global variabel
+            this.globalaccessories.remove(a);
+
+            // Åpner stream
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
+            accessories = this.globalaccessories;
+
+            WriteAccessories.write(file, accessories);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // Sletter fra tableview, men ikke fra filen?
+        tableviewextra.getItems().removeAll(tableviewextra.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void ExtraFilterAction(ActionEvent event) {
+        try {
+            ArrayList<Accessory> beforefilter = new ArrayList<Accessory>();
+            ArrayList<Accessory> afterfilter = new ArrayList<Accessory>();
+
+            beforefilter = this.globalaccessories;
+
+            String filtervar = textfieldextrafilter.getText();
+
+            switch (choiceboxextra.getValue()) {
+                case "Navn":
+                        for (Accessory a : beforefilter) {
+                            if (a.getName().equals(filtervar)) {
+                                afterfilter.add(a);
+                            }
+                        }
+
+                    break;
+                case "Type":
+                    for (Accessory a : beforefilter) {
+                        if (a.getDescription().equals(filtervar)) {
+                                    afterfilter.add(a);
+                        }
+                    }
+                    break;
+
+                case "Pris":
+                    Integer price = Integer.parseInt(filtervar);
+                    for(Accessory a : beforefilter) {
+                        if (a.getPrice() == price) {
+                            afterfilter.add(a);
+                        }
+                    }
+                    break;
+            }
+
+            if (!tableviewextra.getItems().isEmpty()){
+                tableviewextra.getItems().clear();
+            }
+
+            for (Accessory a : afterfilter) {
+                tableviewextra.getItems().add(a);
+            }
+
+        } catch (Exception e) {
+           // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+        }
+    }
+
+    private void loadDataExtra(){
+        extrachoiceboxlist.removeAll(extrachoiceboxlist);
+        String a = "Navn";
+        String b = "Type";
+        String c = "Pris";
+        extrachoiceboxlist.addAll(a,b,c);
+        choiceboxextra.getItems().addAll(extrachoiceboxlist);
     }
 
 
@@ -714,22 +942,25 @@ public class Addon {
         if (event.getSource() == engineid) {
             pane1id.toFront();
         }
-        tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     void extraaction(ActionEvent event) {
         if (event.getSource() == extraid) {
             pane5id.toFront();
-            tableviewextra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        }
+        if (tableviewextra.getItems().isEmpty()) {
+            for (Accessory a : this.globalaccessories) {
+                tableviewextra.getItems().add(a);
+            }
         }
     }
+
 
     @FXML
     void gearboxaction(ActionEvent event) {
         if (event.getSource() == gearboxid) {
             pane2id.toFront();
-            tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
     }
 
@@ -738,14 +969,13 @@ public class Addon {
         if (event.getSource() == paintid) {
             pane3id.toFront();
         }
-        tableviewpaint.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     void wheeilsaction(ActionEvent event) {
         if (event.getSource() == wheelsid) {
             pane4id.toFront();
-            tableviewheel.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         }
     }
 
