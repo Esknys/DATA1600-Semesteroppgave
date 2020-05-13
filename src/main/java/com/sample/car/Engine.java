@@ -1,4 +1,4 @@
-Spackage com.sample.car;
+package com.sample.car;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

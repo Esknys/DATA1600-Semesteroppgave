@@ -31,6 +31,18 @@ public class Addon {
     ArrayList<Accessory> globalaccessories = new ArrayList<Accessory>();
     ObservableList extrachoiceboxlist = FXCollections.observableArrayList();
 
+    ArrayList<Wheel> globalwheels = new ArrayList<Wheel>();
+    ObservableList wheelchoiceboxlist = FXCollections.observableArrayList();
+
+    ArrayList<Paintjob> globalpaint = new ArrayList<Paintjob>();
+    ObservableList paintchoiceboxlist = FXCollections.observableArrayList();
+
+    ArrayList<Gearbox> globalgearbox = new ArrayList<Gearbox>();
+    ObservableList gearboxchoiceboxlist = FXCollections.observableArrayList();
+
+    ArrayList<Engine> globalengine = new ArrayList<Engine>();
+    ObservableList enginechoiceboxlist = FXCollections.observableArrayList();
+
 
     @FXML
     private AnchorPane Anch1id;
@@ -46,6 +58,9 @@ public class Addon {
 
     @FXML
     private TextField enginetextfield;
+
+    @FXML
+    private TextField textfieldenginefilter;
 
     @FXML
     private TextField fueltextfield;
@@ -78,10 +93,14 @@ public class Addon {
     @FXML
     private Text enginetitleid;
 
+    @FXML
+    private Button enginefilterid;
+
+    @FXML
+    private Button enginedeleteid;
 
     @FXML
     private TextField motorinput;
-
 
     @FXML
     private Pane pane2id;
@@ -90,7 +109,16 @@ public class Addon {
     private TextField gearboxtextfield;
 
     @FXML
+    private TextField textfieldgearboxfilter;
+
+    @FXML
     private Button gearboxinputid;
+
+    @FXML
+    private Button gearboxfilterid;
+
+    @FXML
+    private Button gearboxdeleteid;
 
     @FXML
     private TableView<Gearbox> tableviewgearbox;
@@ -156,6 +184,14 @@ public class Addon {
     @FXML
     private Text painttitleid;
 
+    @FXML
+    private Button paintfilterid;
+
+    @FXML
+    private Button paintdeleteid;
+
+    @FXML
+    private TextField textfieldpaintfilter;
 
     @FXML
     private Pane pane4id;
@@ -174,6 +210,10 @@ public class Addon {
 
     @FXML
     private Button wheelinputid;
+
+    @FXML
+    private Button wheeldeleteid;
+
 
 
     @FXML
@@ -197,6 +237,11 @@ public class Addon {
     @FXML
     private Text wheeltitleid;
 
+    @FXML
+    private Button wheelfilterid;
+
+    @FXML
+    private TextField textfieldwheelfilter;
 
     @FXML
     private Pane pane5id;
@@ -282,14 +327,94 @@ public class Addon {
     @FXML
     private Button backbuttonid;
 
+    // Ekstrautstyr
+    @FXML
+    private Label label1;
+
+    @FXML
+    private Label label2;
+
+    @FXML
+    private Label label3;
+
+    // Hjul
+    @FXML
+    private Label label4;
+
+    @FXML
+    private Label label5;
+
+    @FXML
+    private Label label6;
+
+    @FXML
+    private Label label7;
+
+    // Maling
+    @FXML
+    private Label label8;
+
+    @FXML
+    private Label label9;
+
+    @FXML
+    private Label label10;
+
+    @FXML
+    private Label label11;
+
+    // Girkasse
+    @FXML
+    private Label label12;
+
+    @FXML
+    private Label label13;
+
+    @FXML
+    private Label label14;
+
+    //Motor
+
+    @FXML
+    private Label label15;
+
+    @FXML
+    private Label label16;
+
+    @FXML
+    private Label label17;
+
+    @FXML
+    private Label label18;
+
+    @FXML
+    private ChoiceBox<String> choiceboxwheel;
+
     @FXML
     private ChoiceBox<String> choiceboxextra;
+
+    @FXML
+    private ChoiceBox<String> choiceboxpaint;
+
+    @FXML
+    private ChoiceBox<String> choiceboxgearbox;
+
+    @FXML
+    private ChoiceBox<String> choiceboxengine;
+
+
+
 
     // Det som dukker opp når man loader FXML filen
     @FXML
     public void initialize() {
 
+        loadDataWheel();
         loadDataExtra();
+        loadDataPaint();
+        loadDataGearbox();
+        loadDataEngine();
+
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableviewgearbox.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableviewpaint.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -299,22 +424,35 @@ public class Addon {
 
         // Extra filopplastning under slik at alle elementene dukker opp ved starten av programmet
         // Under så initaliserer vi filen til globale variabelen.
+        // Usikker på om det under er overflødig kode eller ikke
+
+        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            File filepaint = new File("paintjobs.jobj");
+            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+            this.globalpaint = paintjobs;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            File filewheel = new File("wheels.jobj");
+            ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
+            this.globalwheels = wheels;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
             ObjectInputStream ois = new ObjectInputStream(is);
-            File file = new File("accessories.jobj");
-
+            File fileextra = new File("accessories.jobj");
             ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
             this.globalaccessories =  accessories;
-
-            // Det under funker ikke foreløpig..
-
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
-
         }
     }
-
 
 
     @FXML
@@ -322,8 +460,13 @@ public class Addon {
         App.changeView("secondaryview.fxml");
     }
 
+
+
+
     @FXML
     void EngineInputAction(ActionEvent event) {
+
+        tableviewengine.getItems().clear();
 
         enginecol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         enginecol2.setCellValueFactory(new PropertyValueFactory<>("fuel"));
@@ -341,16 +484,7 @@ public class Addon {
 
                 ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
 
-                // Trykker på knappen og alle feltene er tomme, så oppdaterer fortsatt alle seg.
-                // Men om det allerede er ting i tableviewet, så kan ikke alle
-                // objektene postes på nytt om man oppdaterer, og det ikke er noe
-                // tekst i tekstfeltene likevel.
-
-              if (tableviewengine.getItems().isEmpty()) {
-                  for (Engine e : engines) {
-                      tableviewengine.getItems().add(e);
-                  }
-              }
+                this.globalengine = engines;
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -413,14 +547,7 @@ public class Addon {
                     engines.add(engine);
                     WriteEngines.write(file, engines);
 
-
-                    if (tableviewengine.getItems().isEmpty()) {
-                        for (Engine e : engines) {
-                            tableviewengine.getItems().add(e);
-                        }
-                    } else {
-                        tableviewengine.getItems().add(engines.get(engines.size()-1));
-                    }
+                    this.globalengine = engines;
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -429,11 +556,115 @@ public class Addon {
 
             }
         }
+
+        for (Engine e : this.globalengine) {
+            tableviewengine.getItems().add(e);
+        }
     }
+
+    @FXML
+    void EngineFilterAction(ActionEvent event) {
+
+        try {
+            ArrayList<Engine> beforefilter = new ArrayList<Engine>();
+            ArrayList<Engine> afterfilter = new ArrayList<Engine>();
+
+            beforefilter = this.globalengine;
+
+            String filtervar = textfieldenginefilter.getText();
+
+            switch (choiceboxengine.getValue()) {
+                case "Navn":
+                    for (Engine e : beforefilter) {
+                        if (e.getName().equals(filtervar)) {
+                            afterfilter.add(e);
+                        }
+                    }
+
+                    break;
+                case "Drivstoff":
+                    for (Engine e : beforefilter) {
+                        if (e.getFuel().equals(filtervar)) {
+                            afterfilter.add(e);
+                        }
+                    }
+                    break;
+
+                case "Hestekrefter":
+                    Integer power = Integer.parseInt(filtervar);
+                    for(Engine e: beforefilter) {
+                        if (e.getHorsepower() == power) {
+                            afterfilter.add(e);
+                        }
+                    }
+                    break;
+
+                case "Pris":
+                    Integer price = Integer.parseInt(filtervar);
+                    for(Engine e : beforefilter) {
+                        if (e.getPrice() == price) {
+                            afterfilter.add(e);
+                        }
+                    } break;
+            }
+
+            if (!tableviewengine.getItems().isEmpty()){
+                tableviewengine.getItems().clear();
+            }
+
+            for (Engine e : afterfilter) {
+                tableviewengine.getItems().add(e);
+            }
+
+        } catch (Exception e) {
+            // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+        }
+    }
+
+    @FXML
+    void EngineDeleteAction(ActionEvent event) {
+
+        File file = new File("engines.jobj");
+
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+
+            // Henter fram objekt
+            Engine e = tableviewengine.getSelectionModel().getSelectedItem();
+
+            // Fjerner objekt fra global variabel
+            this.globalengine.remove(e);
+
+            // Åpner stream
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
+            engines = this.globalengine;
+
+            WriteEngines.write(file, engines);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // Sletter fra tableview, men ikke fra filen
+        tableviewengine.getItems().removeAll(tableviewengine.getSelectionModel().getSelectedItem());
+    }
+
+    private void loadDataEngine(){
+        enginechoiceboxlist.removeAll(enginechoiceboxlist);
+        String a = "Navn";
+        String b = "Drivstoff";
+        String c = "Hestekrefter";
+        String d = "Pris";
+        enginechoiceboxlist.addAll(a,b,c,d);
+        choiceboxengine.getItems().addAll(enginechoiceboxlist);
+    }
+
+
 
 
     @FXML
     void GearboxInputAction(ActionEvent event) {
+
+        tableviewgearbox.getItems().clear();
 
         gearboxcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         gearboxcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -449,11 +680,8 @@ public class Addon {
 
                 ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
 
-                if (tableviewgearbox.getItems().isEmpty()) {
-                    for (Gearbox g : gearboxes) {
-                        tableviewgearbox.getItems().add(g);
-                    }
-                }
+                this.globalgearbox = gearboxes;
+
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -503,14 +731,8 @@ public class Addon {
 
                     gearboxes.add(gearbox);
                     WriteGearboxes.write(file, gearboxes);
+                    this.globalgearbox = gearboxes;
 
-                    if (tableviewgearbox.getItems().isEmpty()) {
-                        for (Gearbox g : gearboxes) {
-                            tableviewgearbox.getItems().add(g);
-                        }
-                    } else {
-                        tableviewgearbox.getItems().add(gearboxes.get(gearboxes.size()-1));
-                    }
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -520,10 +742,106 @@ public class Addon {
 
             }
         }
+
+        for (Gearbox g : this.globalgearbox) {
+                tableviewgearbox.getItems().add(g);
+        }
+
     }
 
     @FXML
+    void GearboxDeleteAction(ActionEvent event) {
+
+        File file = new File("gearboxes.jobj");
+
+        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+
+            // Henter fram objekt
+            Gearbox g = tableviewgearbox.getSelectionModel().getSelectedItem();
+
+            // Fjerner objekt fra global variabel
+            this.globalgearbox.remove(g);
+
+            // Åpner stream
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+            gearboxes = this.globalgearbox;
+
+            WriteGearboxes.write(file, gearboxes);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // Sletter fra tableview, men ikke fra filen
+        tableviewgearbox.getItems().removeAll(tableviewgearbox.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void GearboxFilterAction(ActionEvent event) {
+        try {
+            ArrayList<Gearbox> beforefilter = new ArrayList<Gearbox>();
+            ArrayList<Gearbox> afterfilter = new ArrayList<Gearbox>();
+
+            beforefilter = this.globalgearbox;
+
+            String filtervar = textfieldgearboxfilter.getText();
+
+            switch (choiceboxgearbox.getValue()) {
+                case "Navn":
+                    for (Gearbox g : beforefilter) {
+                        if (g.getName().equals(filtervar)) {
+                            afterfilter.add(g);
+                        }
+                    }
+
+                    break;
+                case "Type":
+                    for (Gearbox g : beforefilter) {
+                        if (g.getType().equals(filtervar)) {
+                            afterfilter.add(g);
+                        }
+                    }
+                    break;
+
+                case "Pris":
+                    Integer price = Integer.parseInt(filtervar);
+                    for(Gearbox g : beforefilter) {
+                        if (g.getPrice() == price) {
+                            afterfilter.add(g);
+                        }
+                    }
+                    break;
+            }
+
+            if (!tableviewgearbox.getItems().isEmpty()){
+                tableviewgearbox.getItems().clear();
+            }
+
+            for (Gearbox g : afterfilter) {
+                tableviewgearbox.getItems().add(g);
+            }
+
+        } catch (Exception e) {
+            // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+        }
+    }
+
+    private void loadDataGearbox(){
+        gearboxchoiceboxlist.removeAll(gearboxchoiceboxlist);
+        String a = "Navn";
+        String b = "Type";
+        String c = "Pris";
+        gearboxchoiceboxlist.addAll(a,b,c);
+        choiceboxgearbox.getItems().addAll(gearboxchoiceboxlist);
+    }
+
+
+
+
+    @FXML
     void PaintInputAction(ActionEvent event) {
+
+        tableviewpaint.getItems().clear();
 
         paintcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         paintcol2.setCellValueFactory(new PropertyValueFactory<>("color"));
@@ -540,11 +858,8 @@ public class Addon {
 
                 ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
 
-                if (tableviewpaint.getItems().isEmpty()) {
-                    for (Paintjob p : paintjobs) {
-                        tableviewpaint.getItems().add(p);
-                    }
-                }
+                this.globalpaint = paintjobs;
+
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -603,13 +918,7 @@ public class Addon {
                     paintjobs.add(paintjob);
                     WritePaintjobs.write(file, paintjobs);
 
-                    if (tableviewpaint.getItems().isEmpty()) {
-                        for (Paintjob p : paintjobs) {
-                            tableviewpaint.getItems().add(p);
-                        }
-                    } else {
-                        tableviewpaint.getItems().add(paintjobs.get(paintjobs.size()-1));
-                    }
+                    this.globalpaint = paintjobs;
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -619,11 +928,113 @@ public class Addon {
 
             }
         }
+            for (Paintjob p : this.globalpaint) {
+                tableviewpaint.getItems().add(p);
+            }
     }
+
+    @FXML
+    void PaintDeleteAction(ActionEvent event) {
+
+        File file = new File("paintjobs.jobj");
+
+        try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+
+            // Henter fram objekt
+            Paintjob p = tableviewpaint.getSelectionModel().getSelectedItem();
+
+            // Fjerner objekt fra global variabel
+            this.globalpaint.remove(p);
+
+            // Åpner stream
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
+            paintjobs = this.globalpaint;
+
+            WritePaintjobs.write(file, paintjobs);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // Sletter fra tableview, men ikke fra filen
+        tableviewpaint.getItems().removeAll(tableviewpaint.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void PaintFilterAction(ActionEvent event) {
+        try {
+            ArrayList<Paintjob> beforefilter = new ArrayList<Paintjob>();
+            ArrayList<Paintjob> afterfilter = new ArrayList<Paintjob>();
+
+            beforefilter = this.globalpaint;
+
+            String filtervar = textfieldpaintfilter.getText();
+
+            switch (choiceboxpaint.getValue()) {
+                case "Navn":
+                    for (Paintjob p : beforefilter) {
+                        if (p.getName().equals(filtervar)) {
+                            afterfilter.add(p);
+                        }
+                    }
+
+                    break;
+                case "Type":
+                    for (Paintjob p : beforefilter) {
+                        if (p.getType().equals(filtervar)) {
+                            afterfilter.add(p);
+                        }
+                    }
+                    break;
+
+                case "Farge":
+                    for (Paintjob p : beforefilter) {
+                        if (p.getColor().equals(filtervar)) {
+                            afterfilter.add(p);
+                        }
+                    }
+                    break;
+
+                case "Pris":
+                    Integer price = Integer.parseInt(filtervar);
+                    for(Paintjob p : beforefilter) {
+                        if (p.getPrice() == price) {
+                            afterfilter.add(p);
+                        }
+                    }
+                    break;
+            }
+
+            if (!tableviewpaint.getItems().isEmpty()){
+                tableviewpaint.getItems().clear();
+            }
+
+            for (Paintjob p : afterfilter) {
+                tableviewpaint.getItems().add(p);
+            }
+
+        } catch (Exception e) {
+            // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+        }
+    }
+
+    private void loadDataPaint(){
+        paintchoiceboxlist.removeAll(paintchoiceboxlist);
+        String a = "Navn";
+        String b = "Type";
+        String c = "Farge";
+        String d = "Pris";
+        paintchoiceboxlist.addAll(a,b,c,d);
+        choiceboxpaint.getItems().addAll(paintchoiceboxlist);
+    }
+
+
 
 
     @FXML
     void WheelInputAction(ActionEvent event) {
+
+        tableviewheel.getItems().clear();
 
         wheelcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         wheelcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -640,11 +1051,7 @@ public class Addon {
 
                 ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
 
-                if (tableviewheel.getItems().isEmpty()) {
-                    for (Wheel w : wheels) {
-                        tableviewheel.getItems().add(w);
-                    }
-                }
+                this.globalwheels = wheels;
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
@@ -690,22 +1097,121 @@ public class Addon {
 
             ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
 
+            // Legger til ny
             wheels.add(wheel);
             WriteWheels.write(file, wheels);
 
-            if (tableviewheel.getItems().isEmpty()) {
-                for (Wheel w : wheels) {
-                    tableviewheel.getItems().add(w);
-                }
-            } else {
-                tableviewheel.getItems().add(wheels.get(wheels.size()-1));
-            }
+            this.globalwheels = wheels;
+
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
             } else {}
         }
+
+        for (Wheel w : this.globalwheels) {
+                tableviewheel.getItems().add(w);
+        }
     }
+
+    @FXML
+    void WheelDeleteAction(ActionEvent event) {
+
+        File file = new File("wheels.jobj");
+
+        try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+
+            // Henter fram objekt
+            Wheel w = tableviewheel.getSelectionModel().getSelectedItem();
+
+            // Fjerner objekt fra global variabel
+            this.globalwheels.remove(w);
+
+            // Åpner stream
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
+            wheels = this.globalwheels;
+
+            WriteWheels.write(file, wheels);
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        // Sletter fra tableview, men ikke fra filen?
+        tableviewheel.getItems().removeAll(tableviewheel.getSelectionModel().getSelectedItem());
+    }
+
+    @FXML
+    void WheelFilterAction(ActionEvent event) {
+
+        try {
+            ArrayList<Wheel> beforefilter = new ArrayList<Wheel>();
+            ArrayList<Wheel> afterfilter = new ArrayList<Wheel>();
+
+            beforefilter = this.globalwheels;
+
+            String filtervar = textfieldwheelfilter.getText();
+
+            switch (choiceboxwheel.getValue()) {
+                case "Navn":
+                    for (Wheel w : beforefilter) {
+                        if (w.getName().equals(filtervar)) {
+                            afterfilter.add(w);
+                        }
+                    }
+
+                    break;
+                case "Type":
+                    for (Wheel w : beforefilter) {
+                        if (w.getType().equals(filtervar)) {
+                            afterfilter.add(w);
+                        }
+                    }
+                    break;
+
+                case "Størrelse":
+                    Integer size = Integer.parseInt(filtervar);
+                    for(Wheel w : beforefilter) {
+                        if (w.getSize() == size) {
+                            afterfilter.add(w);
+                        }
+                    }
+                    break;
+
+                case "Pris":
+                    Integer price = Integer.parseInt(filtervar);
+                    for(Wheel w : beforefilter) {
+                        if (w.getPrice() == price) {
+                            afterfilter.add(w);
+                        }
+                    } break;
+            }
+
+            if (!tableviewheel.getItems().isEmpty()){
+                tableviewheel.getItems().clear();
+            }
+
+            for (Wheel w : afterfilter) {
+                tableviewheel.getItems().add(w);
+            }
+
+        } catch (Exception e) {
+            // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+        }
+    }
+
+    private void loadDataWheel(){
+        wheelchoiceboxlist.removeAll(wheelchoiceboxlist);
+        String a = "Navn";
+        String b = "Type";
+        String c = "Størrelse";
+        String d = "Pris";
+        wheelchoiceboxlist.addAll(a,b,c,d);
+        choiceboxwheel.getItems().addAll(wheelchoiceboxlist);
+    }
+
+
+
 
 
     @FXML
@@ -776,12 +1282,6 @@ public class Addon {
 
                     this.globalaccessories = accessories;
 
-                    for (Accessory a : accessories) {
-                        tableviewextra.getItems().add(a);
-                    }
-                   // tableviewextra.getItems().add(this.globalaccessories.get(this.globalaccessories.size() - 1));
-
-
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
@@ -790,10 +1290,8 @@ public class Addon {
             }
         }
 
-        if (tableviewextra.getItems().isEmpty()) {
-            for (Accessory a : this.globalaccessories) {
+        for (Accessory a : this.globalaccessories) {
                 tableviewextra.getItems().add(a);
-           }
         }
 
     }
@@ -848,7 +1346,6 @@ public class Addon {
          */
 
     }
-
 
     @FXML
     void ExtraDeleteAction(ActionEvent event) {
@@ -937,25 +1434,17 @@ public class Addon {
     }
 
 
+
+
+
+
+
     @FXML
     void engineaction(ActionEvent event) {
         if (event.getSource() == engineid) {
             pane1id.toFront();
         }
     }
-
-    @FXML
-    void extraaction(ActionEvent event) {
-        if (event.getSource() == extraid) {
-            pane5id.toFront();
-        }
-        if (tableviewextra.getItems().isEmpty()) {
-            for (Accessory a : this.globalaccessories) {
-                tableviewextra.getItems().add(a);
-            }
-        }
-    }
-
 
     @FXML
     void gearboxaction(ActionEvent event) {
@@ -975,7 +1464,13 @@ public class Addon {
     void wheeilsaction(ActionEvent event) {
         if (event.getSource() == wheelsid) {
             pane4id.toFront();
+        }
+    }
 
+    @FXML
+    void extraaction(ActionEvent event) {
+        if (event.getSource() == extraid) {
+            pane5id.toFront();
         }
     }
 
