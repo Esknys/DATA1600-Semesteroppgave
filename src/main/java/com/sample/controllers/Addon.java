@@ -17,7 +17,6 @@ import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -403,7 +402,6 @@ public class Addon {
     @FXML
     private ChoiceBox<String> choiceboxengine;
 
-    private OpenWithThread task;
 
 
 
@@ -503,35 +501,39 @@ public class Addon {
             boolean valid = true;
 
             if (enginetextfield.getText().isEmpty()) {
-
+                label15.setText("Feltet er tomt");
             }
             if (fueltextfield.getText().isEmpty()) {
-
+                label16.setText("Feltet er tomt");
             }
             if (horsepowertextfield.getText().isEmpty()) {
-
+                label17.setText("Feltet er tomt");
             }
             if (pricetextfield.getText().isEmpty()) {
-
+                label18.setText("Feltet er tomt");
             }
 
-            if (enginetextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (enginetextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 engineinput = enginetextfield.getText();
-            } else { valid = false; }
-            if (fueltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else { valid = false;
+            label15.setText("Feil format. Bruk bokstaver uten mellomrom.");}
+            if (fueltextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 fuelinput = fueltextfield.getText();
             } else {
                 valid = false;
+                label16.setText("Feil format. Bruk bokstaver uten mellomrom.");
             }
             if (horsepowertextfield.getText().matches("[0-9]*")) {
                 hp = Integer.parseInt(horsepowertextfield.getText());
             } else {
                 valid = false;
+                label17.setText("Feil format. Bruk siffer.");
             }
             if (pricetextfield.getText().matches("[0-9]*")) {
                 price = Integer.parseInt(pricetextfield.getText());
             } else {
                 valid = false;
+                label18.setText("Feil format. Bruk siffer");
             }
 
             if (valid) {
@@ -697,26 +699,35 @@ public class Addon {
 
             boolean valid = true;
 
-            if (gearboxtextfield.getText().isEmpty()) {}
+            if (gearboxtextfield.getText().isEmpty()) {
+                label12.setText("Feltet er tomt");
+            }
 
-            if (gearboxtextfield2.getText().isEmpty()) {}
+            if (gearboxtextfield2.getText().isEmpty()) {
+                label13.setText("Feltet er tomt");
+            }
 
-            if (gearboxtextfield3.getText().isEmpty()) {}
+            if (gearboxtextfield3.getText().isEmpty()) {
+                label14.setText("Feltet er tomt");
+            }
 
-            if (gearboxtextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (gearboxtextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 gearboxinput = gearboxtextfield.getText();
             } else {
                 valid = false;
+                label12.setText("Feil format. Bruk bokstaver uten mellomrom.");
             }
-            if (gearboxtextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (gearboxtextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 typeinput = gearboxtextfield2.getText();
             } else {
                 valid = false;
+                label13.setText("Feil format. Bruk bokstaver uten mellomrom.");
             }
             if (gearboxtextfield3.getText().matches("[0-9]*")) {
                 price = Integer.parseInt(gearboxtextfield3.getText());
             } else {
                 valid = false;
+                label14.setText("Feil format. Bruk siffer uten mellomrom.");
             }
 
             if (valid) {
@@ -876,33 +887,45 @@ public class Addon {
 
             boolean valid = true;
 
-            if (painttextfield.getText().isEmpty()) {}
+            if (painttextfield.getText().isEmpty()) {
+                label8.setText("Feltet er tomt.");
+            }
 
-            if (painttextfield2.getText().isEmpty()) {}
+            if (painttextfield2.getText().isEmpty()) {
+                label9.setText("Feltet er tomt");
+            }
 
-            if (painttextfield3.getText().isEmpty()) {}
+            if (painttextfield3.getText().isEmpty()) {
+                label10.setText("Feltet er tomt");
+            }
 
-            if (painttextfield4.getText().isEmpty()) {}
+            if (painttextfield4.getText().isEmpty()) {
+                label11.setText("Feltet er tomt");
+            }
 
-            if (painttextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 paintinput = painttextfield.getText();
             } else {
                 valid = false;
+                label8.setText("Feil input. Bruk bokstaver uten mellomrom.");
             }
-            if (painttextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 paintcolor = painttextfield2.getText();
             } else {
                 valid = false;
+                label9.setText("Feil input. Bruk bokstaver uten mellomrom.");
             }
-            if (painttextfield3.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (painttextfield3.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 painttype = painttextfield3.getText();
             } else {
                 valid = false;
+                label10.setText("Feil input. Bruk bokstaver uten mellomrom.");
             }
             if (painttextfield4.getText().matches("[0-9]*")) {
                 price = Integer.parseInt(painttextfield4.getText());
             } else {
                 valid = false;
+                label11.setText("Feil input. Bruk nummer uten mellomrom.");
             }
 
             if (valid) {
@@ -1068,23 +1091,35 @@ public class Addon {
 
             boolean value = true;
 
-            if (wheeltextfield.getText().isEmpty()) {}
-            if (wheeltextfield2.getText().isEmpty()) {}
-            if (wheeltextfield3.getText().isEmpty()) {}
-            if (wheeltextfield4.getText().isEmpty()) {}
+            if (wheeltextfield.getText().isEmpty()) {
+                label4.setText("Feltet er tomt.");
+            }
+            if (wheeltextfield2.getText().isEmpty()) {
+                label5.setText("Feltet er tomt.");
+            }
+            if (wheeltextfield3.getText().isEmpty()) {
+                label6.setText("Feltet er tomt.");
+            }
+            if (wheeltextfield4.getText().isEmpty()) {
+                label7.setText("Feltet er tomt.");
+            }
 
-            if (wheeltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (wheeltextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 wheelpartinput = wheeltextfield.getText();
-            } else {value = false;}
-            if (wheeltextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            } else {value = false;
+            label4.setText("Feil input. Bruk bokstaver uten mellomrom.");}
+            if (wheeltextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 wheeltype = wheeltextfield2.getText();
-            } else {value = false;}
+            } else {value = false;
+            label5.setText("Feil input. Bruk bokstaver uten mellomrom.");}
             if (wheeltextfield3.getText().matches("[0-9]*")) {
                 ws = Integer.parseInt(wheeltextfield3.getText());
-            } else {value = false;}
+            } else {value = false;
+            label6.setText("Feil input. Bruk bokstaver uten mellomrom.");}
             if (wheeltextfield4.getText().matches("[0-9]*")) {
                 wp = Integer.parseInt(wheeltextfield4.getText());
-            } else {value = false;}
+            } else {value = false;
+            label7.setText("Feil input. Bruk bokstaver uten mellomrom.");}
 
             if (value) {
 
@@ -1215,6 +1250,7 @@ public class Addon {
 
 
 
+
     @FXML
     void ExtraInputAction(ActionEvent event) {
         tableviewextra.getItems().clear();
@@ -1245,26 +1281,32 @@ public class Addon {
             boolean value = true;
 
             if (extratextfield.getText().isEmpty()) {
+                label1.setText("Feltet er tomt.");
             }
             if (extratextfield2.getText().isEmpty()) {
+                label2.setText("Feltet er tomt.");
             }
             if (extratextfield3.getText().isEmpty()) {
+                label3.setText("Feltet er tomt.");
             }
 
-            if (extratextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 extrapartinput = extratextfield.getText();
             } else {
                 value = false;
+                label1.setText("Feil input. Bruk bokstaver uten mellomrom.");
             }
-            if (extratextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
+            if (extratextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
                 extraparttype = extratextfield2.getText();
             } else {
                 value = false;
+                label2.setText("Feil input. Bruk bokstaver uten mellomrom.");
             }
             if (extratextfield3.getText().matches("[0-9]*")) {
                 price = Integer.parseInt(extratextfield3.getText());
             } else {
                 value = false;
+                label3.setText("Feil input. Bruk siffer uten mellomrom.");
             }
 
             if (value) {
@@ -1279,18 +1321,9 @@ public class Addon {
 
                     ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
                     accessories.add(extra);
-
-                    task = new OpenWithThread("Accessory", file, accessories);
-                    task.setOnSucceeded(this::ThreadOpenDone);
-                    task.setOnFailed(this::ThreadOpenFailed);
-                    Thread th = new Thread(task);
-                    th.setDaemon(true);
-                    DisableAll();
-                    th.start();
+                    WriteAccessories.write(file, accessories);
 
                     this.globalaccessories = accessories;
-
-
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -1484,28 +1517,6 @@ public class Addon {
         }
     }
 
-
-
-    private void ThreadOpenDone(Event e) {
-        OpenAll();
-    }
-
-    private void ThreadOpenFailed(Event e) {
-        OpenAll();
-    }
-
-    private void OpenAll() {
-
-        extrafilterid.setDisable(false);
-        extrainputid.setDisable(false);
-    }
-
-    private void DisableAll() {
-
-        extrafilterid.setDisable(true);
-        extrainputid.setDisable(true);
-
-    }
 
 
 }
