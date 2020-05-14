@@ -1398,6 +1398,7 @@ public class Addon {
 
     }
 
+
     @FXML
     void ExtraChangeAction(ActionEvent event) {
 
@@ -1419,40 +1420,89 @@ public class Addon {
     @FXML
     void ExtraChangeActionUpdate(ActionEvent event) {
 
-    }
+        //Henter fram det jeg skal endre
 
-    @FXML
-    void ExtraChangeAction2(ActionEvent event) {
-
-        /*/ Henter fram det jeg skal endre
-        String extrapartinput = extratextfield.getText();
-        String extraparttype = extratextfield2.getText();
-        Integer extraprice = Integer.parseInt(extratextfield3.getText());
-
-         // Henter fra objektet jeg skal endre på
-        Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
-
-        // Endrer på objektet
-        // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
-        // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
-
-        for (int i = 0; i < this.globalaccessories.size(); i++) {
-            if (a.getName() = this.globalaccessories(i).getname()) {
-
-            }
+        if (extratextfield.getText().isEmpty()) {
+            label1.setText("Feltet er tomt");
+        }
+        if (extratextfield2.getText().isEmpty()) {
+            label2.setText("Feltet er tomt");
+        }
+        if (extratextfield3.getText().isEmpty()) {
+            label3.setText("Feltet er tomt");
         }
 
-        // Åpner stream
-        ObjectInputStream ois = new ObjectInputStream(is);
-        ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
-        accessories = this.globalaccessories;
+        boolean valid = true;
 
-        WriteAccessories.write(file, accessories);
+        String extrapartinput = "";
+        String extraparttype = "";
+        Integer extraprice = 0;
 
-/
-         */
+        if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            extrapartinput = extratextfield.getText();
+        } else {
+            label1.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            extraparttype = extratextfield2.getText();
+        } else {
+            label2.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield3.getText().matches("[0-9]*")) {
+            extraprice = Integer.parseInt(extratextfield3.getText());
+        } else {
+            label3.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+
+        if (valid) {
+
+            // Henter fra objektet jeg skal endre på
+            Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
+
+
+            // Endrer på objektet
+            // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
+            // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
+
+            for (Accessory accessory : this.globalaccessories) {
+                if (a.getUUIDString() == accessory.getUUIDString()) {
+                    accessory.setName(extrapartinput);
+                    accessory.setDescription(extraparttype);
+                    accessory.setPrice(extraprice);
+
+                }
+            }
+
+
+            File file = new File("accessories.jobj");
+
+            try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+                ObjectInputStream ois = new ObjectInputStream(is);
+
+                ArrayList<Accessory> accessories = this.globalaccessories;
+
+                task = new OpenWithThread("Accessory", file, accessories);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+
+        } else {}
 
     }
+
 
     @FXML
     void ExtraDeleteAction(ActionEvent event) {
