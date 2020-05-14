@@ -873,8 +873,6 @@ public class Addon {
     }
 
 
-
-
     @FXML
     void PaintInputAction(ActionEvent event) {
 
@@ -1589,11 +1587,6 @@ public class Addon {
         extrachoiceboxlist.addAll(a,b,c);
         choiceboxextra.getItems().addAll(extrachoiceboxlist);
     }
-
-
-
-
-
 
 
     @FXML
