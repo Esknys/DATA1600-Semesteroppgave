@@ -1,6 +1,7 @@
 package com.sample.controllers;
 
 import java.io.*;
+import javafx.concurrent.WorkerStateEvent;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -16,7 +17,9 @@ import com.sample.exeptions.InputException;
 import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -215,7 +218,6 @@ public class Addon {
     private Button wheeldeleteid;
 
 
-
     @FXML
     private TableView<Wheel> tableviewheel;
 
@@ -403,6 +405,7 @@ public class Addon {
     private ChoiceBox<String> choiceboxengine;
 
 
+    private OpenWithThread task;
 
 
     // Det som dukker opp når man loader FXML filen
@@ -448,7 +451,7 @@ public class Addon {
             ObjectInputStream ois = new ObjectInputStream(is);
             File fileextra = new File("accessories.jobj");
             ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
-            this.globalaccessories =  accessories;
+            this.globalaccessories = accessories;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -459,8 +462,6 @@ public class Addon {
     void BackActionButton(ActionEvent event) throws IOException {
         App.changeView("secondaryview.fxml");
     }
-
-
 
 
     @FXML
@@ -515,7 +516,9 @@ public class Addon {
 
             if (enginetextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 engineinput = enginetextfield.getText();
-            } else { valid = false; }
+            } else {
+                valid = false;
+            }
             if (fueltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 fuelinput = fueltextfield.getText();
             } else {
@@ -592,7 +595,7 @@ public class Addon {
 
                 case "Hestekrefter":
                     Integer power = Integer.parseInt(filtervar);
-                    for(Engine e: beforefilter) {
+                    for (Engine e : beforefilter) {
                         if (e.getHorsepower() == power) {
                             afterfilter.add(e);
                         }
@@ -601,14 +604,15 @@ public class Addon {
 
                 case "Pris":
                     Integer price = Integer.parseInt(filtervar);
-                    for(Engine e : beforefilter) {
+                    for (Engine e : beforefilter) {
                         if (e.getPrice() == price) {
                             afterfilter.add(e);
                         }
-                    } break;
+                    }
+                    break;
             }
 
-            if (!tableviewengine.getItems().isEmpty()){
+            if (!tableviewengine.getItems().isEmpty()) {
                 tableviewengine.getItems().clear();
             }
 
@@ -648,17 +652,15 @@ public class Addon {
         tableviewengine.getItems().removeAll(tableviewengine.getSelectionModel().getSelectedItem());
     }
 
-    private void loadDataEngine(){
+    private void loadDataEngine() {
         enginechoiceboxlist.removeAll(enginechoiceboxlist);
         String a = "Navn";
         String b = "Drivstoff";
         String c = "Hestekrefter";
         String d = "Pris";
-        enginechoiceboxlist.addAll(a,b,c,d);
+        enginechoiceboxlist.addAll(a, b, c, d);
         choiceboxengine.getItems().addAll(enginechoiceboxlist);
     }
-
-
 
 
     @FXML
@@ -695,11 +697,14 @@ public class Addon {
 
             boolean valid = true;
 
-            if (gearboxtextfield.getText().isEmpty()) {}
+            if (gearboxtextfield.getText().isEmpty()) {
+            }
 
-            if (gearboxtextfield2.getText().isEmpty()) {}
+            if (gearboxtextfield2.getText().isEmpty()) {
+            }
 
-            if (gearboxtextfield3.getText().isEmpty()) {}
+            if (gearboxtextfield3.getText().isEmpty()) {
+            }
 
             if (gearboxtextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 gearboxinput = gearboxtextfield.getText();
@@ -731,6 +736,7 @@ public class Addon {
 
                     gearboxes.add(gearbox);
                     WriteGearboxes.write(file, gearboxes);
+
                     this.globalgearbox = gearboxes;
 
 
@@ -744,7 +750,7 @@ public class Addon {
         }
 
         for (Gearbox g : this.globalgearbox) {
-                tableviewgearbox.getItems().add(g);
+            tableviewgearbox.getItems().add(g);
         }
 
     }
@@ -805,7 +811,7 @@ public class Addon {
 
                 case "Pris":
                     Integer price = Integer.parseInt(filtervar);
-                    for(Gearbox g : beforefilter) {
+                    for (Gearbox g : beforefilter) {
                         if (g.getPrice() == price) {
                             afterfilter.add(g);
                         }
@@ -813,7 +819,7 @@ public class Addon {
                     break;
             }
 
-            if (!tableviewgearbox.getItems().isEmpty()){
+            if (!tableviewgearbox.getItems().isEmpty()) {
                 tableviewgearbox.getItems().clear();
             }
 
@@ -826,16 +832,14 @@ public class Addon {
         }
     }
 
-    private void loadDataGearbox(){
+    private void loadDataGearbox() {
         gearboxchoiceboxlist.removeAll(gearboxchoiceboxlist);
         String a = "Navn";
         String b = "Type";
         String c = "Pris";
-        gearboxchoiceboxlist.addAll(a,b,c);
+        gearboxchoiceboxlist.addAll(a, b, c);
         choiceboxgearbox.getItems().addAll(gearboxchoiceboxlist);
     }
-
-
 
 
     @FXML
@@ -874,13 +878,17 @@ public class Addon {
 
             boolean valid = true;
 
-            if (painttextfield.getText().isEmpty()) {}
+            if (painttextfield.getText().isEmpty()) {
+            }
 
-            if (painttextfield2.getText().isEmpty()) {}
+            if (painttextfield2.getText().isEmpty()) {
+            }
 
-            if (painttextfield3.getText().isEmpty()) {}
+            if (painttextfield3.getText().isEmpty()) {
+            }
 
-            if (painttextfield4.getText().isEmpty()) {}
+            if (painttextfield4.getText().isEmpty()) {
+            }
 
             if (painttextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 paintinput = painttextfield.getText();
@@ -928,9 +936,9 @@ public class Addon {
 
             }
         }
-            for (Paintjob p : this.globalpaint) {
-                tableviewpaint.getItems().add(p);
-            }
+        for (Paintjob p : this.globalpaint) {
+            tableviewpaint.getItems().add(p);
+        }
     }
 
     @FXML
@@ -997,7 +1005,7 @@ public class Addon {
 
                 case "Pris":
                     Integer price = Integer.parseInt(filtervar);
-                    for(Paintjob p : beforefilter) {
+                    for (Paintjob p : beforefilter) {
                         if (p.getPrice() == price) {
                             afterfilter.add(p);
                         }
@@ -1005,7 +1013,7 @@ public class Addon {
                     break;
             }
 
-            if (!tableviewpaint.getItems().isEmpty()){
+            if (!tableviewpaint.getItems().isEmpty()) {
                 tableviewpaint.getItems().clear();
             }
 
@@ -1018,17 +1026,15 @@ public class Addon {
         }
     }
 
-    private void loadDataPaint(){
+    private void loadDataPaint() {
         paintchoiceboxlist.removeAll(paintchoiceboxlist);
         String a = "Navn";
         String b = "Type";
         String c = "Farge";
         String d = "Pris";
-        paintchoiceboxlist.addAll(a,b,c,d);
+        paintchoiceboxlist.addAll(a, b, c, d);
         choiceboxpaint.getItems().addAll(paintchoiceboxlist);
     }
-
-
 
 
     @FXML
@@ -1066,51 +1072,64 @@ public class Addon {
 
             boolean value = true;
 
-            if (wheeltextfield.getText().isEmpty()) {}
-            if (wheeltextfield2.getText().isEmpty()) {}
-            if (wheeltextfield3.getText().isEmpty()) {}
-            if (wheeltextfield4.getText().isEmpty()) {}
+            if (wheeltextfield.getText().isEmpty()) {
+            }
+            if (wheeltextfield2.getText().isEmpty()) {
+            }
+            if (wheeltextfield3.getText().isEmpty()) {
+            }
+            if (wheeltextfield4.getText().isEmpty()) {
+            }
 
             if (wheeltextfield.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 wheelpartinput = wheeltextfield.getText();
-            } else {value = false;}
+            } else {
+                value = false;
+            }
             if (wheeltextfield2.getText().matches("[A-ZÆØÅ][a-zæøå]*")) {
                 wheeltype = wheeltextfield2.getText();
-            } else {value = false;}
+            } else {
+                value = false;
+            }
             if (wheeltextfield3.getText().matches("[0-9]*")) {
                 ws = Integer.parseInt(wheeltextfield3.getText());
-            } else {value = false;}
+            } else {
+                value = false;
+            }
             if (wheeltextfield4.getText().matches("[0-9]*")) {
                 wp = Integer.parseInt(wheeltextfield4.getText());
-            } else {value = false;}
+            } else {
+                value = false;
+            }
 
             if (value) {
 
-        Wheel wheel = new Wheel(wheelpartinput, wheeltype, ws, wp);
+                Wheel wheel = new Wheel(wheelpartinput, wheeltype, ws, wp);
 
-        File file = new File("wheels.jobj");
+                File file = new File("wheels.jobj");
 
 
-        try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+                try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
 
-            ObjectInputStream ois = new ObjectInputStream(is);
+                    ObjectInputStream ois = new ObjectInputStream(is);
 
-            ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
+                    ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
 
-            // Legger til ny
-            wheels.add(wheel);
-            WriteWheels.write(file, wheels);
+                    // Legger til ny
+                    wheels.add(wheel);
+                    WriteWheels.write(file, wheels);
 
-            this.globalwheels = wheels;
+                    this.globalwheels = wheels;
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-            } else {}
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+            }
         }
 
         for (Wheel w : this.globalwheels) {
-                tableviewheel.getItems().add(w);
+            tableviewheel.getItems().add(w);
         }
     }
 
@@ -1171,7 +1190,7 @@ public class Addon {
 
                 case "Størrelse":
                     Integer size = Integer.parseInt(filtervar);
-                    for(Wheel w : beforefilter) {
+                    for (Wheel w : beforefilter) {
                         if (w.getSize() == size) {
                             afterfilter.add(w);
                         }
@@ -1180,14 +1199,15 @@ public class Addon {
 
                 case "Pris":
                     Integer price = Integer.parseInt(filtervar);
-                    for(Wheel w : beforefilter) {
+                    for (Wheel w : beforefilter) {
                         if (w.getPrice() == price) {
                             afterfilter.add(w);
                         }
-                    } break;
+                    }
+                    break;
             }
 
-            if (!tableviewheel.getItems().isEmpty()){
+            if (!tableviewheel.getItems().isEmpty()) {
                 tableviewheel.getItems().clear();
             }
 
@@ -1200,22 +1220,20 @@ public class Addon {
         }
     }
 
-    private void loadDataWheel(){
+    private void loadDataWheel() {
         wheelchoiceboxlist.removeAll(wheelchoiceboxlist);
         String a = "Navn";
         String b = "Type";
         String c = "Størrelse";
         String d = "Pris";
-        wheelchoiceboxlist.addAll(a,b,c,d);
+        wheelchoiceboxlist.addAll(a, b, c, d);
         choiceboxwheel.getItems().addAll(wheelchoiceboxlist);
     }
 
 
-
-
-
     @FXML
     void ExtraInputAction(ActionEvent event) {
+
         tableviewextra.getItems().clear();
 
         extracol1.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -1270,6 +1288,9 @@ public class Addon {
 
                 Accessory extra = new Accessory(extrapartinput, extraparttype, price);
 
+                // Prøver på et eller annet under her.
+                //  task = new OpenAccessoryWithThread(extrapartinput, extraparttype, price);
+
                 File file = new File("accessories.jobj");
 
                 try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
@@ -1278,7 +1299,14 @@ public class Addon {
 
                     ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
                     accessories.add(extra);
-                    WriteAccessories.write(file, accessories);
+
+                    task = new OpenWithThread("Accessory", file, accessories);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
 
                     this.globalaccessories = accessories;
 
@@ -1291,10 +1319,11 @@ public class Addon {
         }
 
         for (Accessory a : this.globalaccessories) {
-                tableviewextra.getItems().add(a);
+            tableviewextra.getItems().add(a);
         }
 
     }
+
 
     @FXML
     void ExtraChangeAction(ActionEvent event) {
@@ -1386,24 +1415,24 @@ public class Addon {
 
             switch (choiceboxextra.getValue()) {
                 case "Navn":
-                        for (Accessory a : beforefilter) {
-                            if (a.getName().equals(filtervar)) {
-                                afterfilter.add(a);
-                            }
+                    for (Accessory a : beforefilter) {
+                        if (a.getName().equals(filtervar)) {
+                            afterfilter.add(a);
                         }
+                    }
 
                     break;
                 case "Type":
                     for (Accessory a : beforefilter) {
                         if (a.getDescription().equals(filtervar)) {
-                                    afterfilter.add(a);
+                            afterfilter.add(a);
                         }
                     }
                     break;
 
                 case "Pris":
                     Integer price = Integer.parseInt(filtervar);
-                    for(Accessory a : beforefilter) {
+                    for (Accessory a : beforefilter) {
                         if (a.getPrice() == price) {
                             afterfilter.add(a);
                         }
@@ -1411,7 +1440,7 @@ public class Addon {
                     break;
             }
 
-            if (!tableviewextra.getItems().isEmpty()){
+            if (!tableviewextra.getItems().isEmpty()) {
                 tableviewextra.getItems().clear();
             }
 
@@ -1420,24 +1449,18 @@ public class Addon {
             }
 
         } catch (Exception e) {
-           // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
+            // txtTelefonnummer.setText("Noe gikk feil: " + ioe.getMessage());
         }
     }
 
-    private void loadDataExtra(){
+    private void loadDataExtra() {
         extrachoiceboxlist.removeAll(extrachoiceboxlist);
         String a = "Navn";
         String b = "Type";
         String c = "Pris";
-        extrachoiceboxlist.addAll(a,b,c);
+        extrachoiceboxlist.addAll(a, b, c);
         choiceboxextra.getItems().addAll(extrachoiceboxlist);
     }
-
-
-
-
-
-
 
     @FXML
     void engineaction(ActionEvent event) {
@@ -1476,4 +1499,28 @@ public class Addon {
 
 
 
+    private void ThreadOpenDone(Event e) {
+        OpenAll();
+    }
+
+    private void ThreadOpenFailed(Event e) {
+        OpenAll();
+    }
+
+    private void OpenAll() {
+
+        extrafilterid.setDisable(false);
+        extrainputid.setDisable(false);
+    }
+
+    private void DisableAll() {
+
+        extrafilterid.setDisable(true);
+        extrainputid.setDisable(true);
+
+    }
+
 }
+
+
+
