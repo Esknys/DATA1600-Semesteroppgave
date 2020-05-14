@@ -215,8 +215,6 @@ public class Addon {
     @FXML
     private Button wheeldeleteid;
 
-
-
     @FXML
     private TableView<Wheel> tableviewheel;
 
@@ -281,12 +279,6 @@ public class Addon {
     private Button extradeletid;
 
     @FXML
-    private Button extrachangeid;
-
-    @FXML
-    private Button extrachangeid2;
-
-    @FXML
     private TextFlow txtflow5;
 
     @FXML
@@ -328,7 +320,6 @@ public class Addon {
     @FXML
     private Button backbuttonid;
 
-    // Ekstrautstyr
     @FXML
     private Label label1;
 
@@ -338,7 +329,6 @@ public class Addon {
     @FXML
     private Label label3;
 
-    // Hjul
     @FXML
     private Label label4;
 
@@ -351,7 +341,6 @@ public class Addon {
     @FXML
     private Label label7;
 
-    // Maling
     @FXML
     private Label label8;
 
@@ -364,7 +353,6 @@ public class Addon {
     @FXML
     private Label label11;
 
-    // Girkasse
     @FXML
     private Label label12;
 
@@ -373,8 +361,6 @@ public class Addon {
 
     @FXML
     private Label label14;
-
-    //Motor
 
     @FXML
     private Label label15;
@@ -406,6 +392,35 @@ public class Addon {
 
     private OpenWithThread task;
 
+    @FXML
+    private Button enginechangeid1;
+
+    @FXML
+    private Button enginechangeid2;
+
+    @FXML
+    private Button gearboxchangeid1;
+
+    @FXML
+    private Button gearboxchangeid2;
+
+    @FXML
+    private Button paintchangeid1;
+
+    @FXML
+    private Button paintchangeid2;
+
+    @FXML
+    private Button wheelchangeid1;
+
+    @FXML
+    private Button wheelchangeid2;
+
+    @FXML
+    private Button extrachangeid1;
+
+    @FXML
+    private Button extrachangeid2;
 
     // Det som dukker opp når man loader FXML filen
     @FXML
@@ -427,6 +442,24 @@ public class Addon {
         // Extra filopplastning under slik at alle elementene dukker opp ved starten av programmet
         // Under så initaliserer vi filen til globale variabelen.
         // Usikker på om det under er overflødig kode eller ikke
+
+        try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            File fileengine= new File("engines.jobj");
+            ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
+            this.globalengine = engines;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+            ObjectInputStream ois = new ObjectInputStream(is);
+            File filegearbox= new File("paintjobs.jobj");
+            ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
+            this.globalgearbox = gearboxes;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
             ObjectInputStream ois = new ObjectInputStream(is);
@@ -578,6 +611,107 @@ public class Addon {
             tableviewengine.getItems().add(e);
         }
     }
+
+    @FXML
+    void EngineChangeAction(ActionEvent event) {
+        Engine e = tableviewengine.getSelectionModel().getSelectedItem();
+        enginetextfield.setText(e.getName());
+
+        String horsepower = String.valueOf(e.getHorsepower());
+        horsepowertextfield.setText(horsepower);
+
+        fueltextfield.setText(e.getFuel());
+
+        String price = String.valueOf(e.getPrice());
+        pricetextfield.setText(price);
+    }
+
+    @FXML
+    void EngineChangeActionUpdate(ActionEvent event) {
+        if (enginetextfield.getText().isEmpty()) {
+            label8.setText("Feltet er tomt");
+        }
+        if (horsepowertextfield.getText().isEmpty()) {
+            label9.setText("Feltet er tomt");
+        }
+        if (fueltextfield.getText().isEmpty()) {
+            label10.setText("Feltet er tomt");
+        }
+        if (pricetextfield.getText().isEmpty()) {
+            label11.setText("Feltet er tomt");
+        }
+        boolean valid = true;
+        String enginenameinput = "";
+
+        Integer horsepowerinput = 0;
+
+        String fuelinput = "";
+
+        Integer priceinput = 0;
+
+        Integer paintprice = 0;
+        if (enginetextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            enginenameinput = enginetextfield.getText();
+        } else {
+            label15.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (horsepowertextfield.getText().matches("[0-9]*")) {
+            horsepowerinput =  Integer.parseInt(horsepowertextfield.getText());
+        } else {
+            label16.setText("Feil input. Bruke siffer uten mellomrom.");
+            valid = false;
+        }
+        if (fueltextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            fuelinput = painttextfield3.getText();
+        } else {
+            label17.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+        if (pricetextfield.getText().matches("[0-9]*")) {
+            priceinput = Integer.parseInt(painttextfield4.getText());
+        } else {
+            label18.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+
+        if (valid) {
+            Engine eng = tableviewengine.getSelectionModel().getSelectedItem();
+            for (Engine engine : this.globalengine) {
+                if (eng.getUUIDString() == engine.getUUIDString()) {
+                    engine.setName(enginenameinput);
+                    engine.setHorsepower(horsepowerinput);
+                    engine.setFuel(fuelinput);
+                    engine.setPrice(paintprice);
+                }
+            }
+            File file = new File("engines.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
+                ObjectInputStream ois = new ObjectInputStream(is);
+                ArrayList<Engine> engines = new ArrayList<Engine>();
+                engines = this.globalengine;
+                task = new OpenWithThread("Engine", file, engines);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {}
+        enginetextfield.clear();
+        horsepowertextfield.clear();
+        fueltextfield.clear();
+        pricetextfield.clear();
+        tableviewengine.getItems().clear();
+        for (Engine e : this.globalengine) {
+            tableviewengine.getItems().add(e);
+        }
+
+    }
+
 
     @FXML
     void EngineFilterAction(ActionEvent event) {
@@ -782,6 +916,87 @@ public class Addon {
 
         for (Gearbox g : this.globalgearbox) {
                 tableviewgearbox.getItems().add(g);
+        }
+
+    }
+
+    @FXML
+    void GearboxChangeAction(ActionEvent event) {
+        Gearbox g = tableviewgearbox.getSelectionModel().getSelectedItem();
+        gearboxtextfield.setText(g.getName());
+        gearboxtextfield2.setText(g.getType());
+        String price = String.valueOf(g.getPrice());
+        gearboxtextfield3.setText(price);
+    }
+
+    @FXML
+    void GearboxChangeActionUpdate(ActionEvent event) {
+        if (gearboxtextfield.getText().isEmpty()) {
+            label12.setText("Feltet er tomt");
+        }
+        if (gearboxtextfield2.getText().isEmpty()) {
+            label13.setText("Feltet er tomt");
+        }
+        if (gearboxtextfield3.getText().isEmpty()) {
+            label14.setText("Feltet er tomt");
+        }
+        boolean valid = true;
+        String gearboxname = "";
+        String gearboxtype = "";
+        Integer gearboxprice = 0;
+        if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            gearboxname = gearboxtextfield.getText();
+        } else {
+            label12.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            gearboxtype = gearboxtextfield2.getText();
+        } else {
+            label13.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield3.getText().matches("[0-9]*")) {
+            gearboxprice = Integer.parseInt(extratextfield3.getText());
+        } else {
+            label14.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+        if (valid) {
+            Gearbox a = tableviewgearbox.getSelectionModel().getSelectedItem();
+            for (Gearbox gearbox : this.globalgearbox) {
+                if (gearbox.getUUIDString() == gearbox.getUUIDString()) {
+                    gearbox.setName(gearboxname);
+                    gearbox.setType(gearboxtype);
+                    gearbox.setPrice(gearboxprice);
+                }
+            }
+
+
+            File file = new File("gearbooxes.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
+                ObjectInputStream ois = new ObjectInputStream(is);
+                ArrayList<Gearbox> gearboxes = new ArrayList<Gearbox>();
+                gearboxes = this.globalgearbox;
+                task = new OpenWithThread("Gearbox", file, gearboxes);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {}
+
+        gearboxtextfield.clear();
+        gearboxtextfield2.clear();
+        gearboxtextfield3.clear();
+
+        tableviewgearbox.getItems().clear();
+        for (Gearbox g : this.globalgearbox) {
+            tableviewgearbox.getItems().add(g);
         }
 
     }
@@ -994,6 +1209,97 @@ public class Addon {
     }
 
     @FXML
+    void PaintChangeAction(ActionEvent event) {
+        Paintjob p = tableviewpaint.getSelectionModel().getSelectedItem();
+        painttextfield.setText(p.getName());
+        painttextfield2.setText(p.getColor());
+        painttextfield3.setText(p.getType());
+        String price = String.valueOf(p.getPrice());
+        painttextfield4.setText(price);
+    }
+
+    @FXML
+    void PaintChangeActionUpdate(ActionEvent event) {
+        if (painttextfield.getText().isEmpty()) {
+            label8.setText("Feltet er tomt");
+        }
+        if (painttextfield2.getText().isEmpty()) {
+            label9.setText("Feltet er tomt");
+        }
+        if (painttextfield3.getText().isEmpty()) {
+            label10.setText("Feltet er tomt");
+        }
+        if (painttextfield4.getText().isEmpty()) {
+            label11.setText("Feltet er tomt");
+        }
+        boolean valid = true;
+        String paintnameinput = "";
+        String paintcolorinput = "";
+        String painttypeinput = "";
+        Integer paintprice = 0;
+        if (painttextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            paintnameinput = painttextfield.getText();
+        } else {
+            label8.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (painttextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            paintcolorinput = painttextfield2.getText();
+        } else {
+            label5.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (painttextfield3.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            painttypeinput = painttextfield3.getText();
+        } else {
+            label6.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+        if (painttextfield4.getText().matches("[0-9]*")) {
+            paintprice = Integer.parseInt(painttextfield4.getText());
+        } else {
+            label7.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+
+        if (valid) {
+            Paintjob p = tableviewpaint.getSelectionModel().getSelectedItem();
+            for (Paintjob paint : this.globalpaint) {
+                if (p.getUUIDString() == paint.getUUIDString()) {
+                    paint.setName(paintnameinput);
+                    paint.setColor(paintcolorinput);
+                    paint.setType(painttypeinput);
+                    paint.setPrice(paintprice);
+                }
+            }
+            File file = new File("paintjobs.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("paintjobs.jobj"), StandardOpenOption.READ);) {
+                ObjectInputStream ois = new ObjectInputStream(is);
+                ArrayList<Paintjob> paintjobs = new ArrayList<Paintjob>();
+                paintjobs = this.globalpaint;
+                task = new OpenWithThread("Paintjob", file, paintjobs);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {}
+        painttextfield.clear();
+        painttextfield2.clear();
+        painttextfield3.clear();
+        painttextfield4.clear();
+        tableviewpaint.getItems().clear();
+        for (Paintjob p : this.globalpaint) {
+            tableviewpaint.getItems().add(p);
+        }
+
+    }
+
+    @FXML
     void PaintDeleteAction(ActionEvent event) {
 
         File file = new File("paintjobs.jobj");
@@ -1199,6 +1505,98 @@ public class Addon {
     }
 
     @FXML
+    void WheelChangeAction(ActionEvent event) {
+        Wheel w = tableviewheel.getSelectionModel().getSelectedItem();
+        wheeltextfield.setText(w.getName());
+        wheeltextfield2.setText(w.getType());
+        String size = String.valueOf(w.getSize());
+        wheeltextfield3.setText(size);
+        String price = String.valueOf(w.getPrice());
+        wheeltextfield4.setText(price);
+    }
+
+    @FXML
+    void WheelChangeActionUpdate(ActionEvent event) {
+        if (wheeltextfield.getText().isEmpty()) {
+            label4.setText("Feltet er tomt");
+        }
+        if (wheeltextfield2.getText().isEmpty()) {
+            label5.setText("Feltet er tomt");
+        }
+        if (wheeltextfield3.getText().isEmpty()) {
+            label6.setText("Feltet er tomt");
+        }
+        if (wheeltextfield4.getText().isEmpty()) {
+            label7.setText("Feltet er tomt");
+        }
+        boolean valid = true;
+        String wheelnameinput = "";
+        String wheelparttype = "";
+        Integer wheelsize = 0;
+        Integer wheelprice = 0;
+        if (wheeltextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            wheelnameinput = wheeltextfield.getText();
+        } else {
+            label4.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (wheeltextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            wheelparttype = wheeltextfield2.getText();
+        } else {
+            label5.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (wheeltextfield3.getText().matches("[0-9]*")) {
+            wheelsize = Integer.parseInt(extratextfield3.getText());
+        } else {
+            label6.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+        if (wheeltextfield4.getText().matches("[0-9]*")) {
+            wheelprice = Integer.parseInt(extratextfield3.getText());
+        } else {
+            label7.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+
+        if (valid) {
+            Wheel w = tableviewheel.getSelectionModel().getSelectedItem();
+            for (Wheel wheel : this.globalwheels) {
+                if (w.getUUIDString() == wheel.getUUIDString()) {
+                    wheel.setName(wheelnameinput);
+                    wheel.setType(wheelparttype);
+                    wheel.setSize(wheelsize);
+                    wheel.setPrice(wheelprice);
+                }
+            }
+
+            File file = new File("wheels.jobj");
+            try (InputStream is = Files.newInputStream(Paths.get("wheels.jobj"), StandardOpenOption.READ);) {
+                ObjectInputStream ois = new ObjectInputStream(is);
+                ArrayList<Wheel> wheels = new ArrayList<Wheel>();
+                wheels = this.globalwheels;
+                task = new OpenWithThread("Wheel", file, wheels);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {}
+        wheeltextfield.clear();
+        wheeltextfield2.clear();
+        wheeltextfield3.clear();
+        wheeltextfield4.clear();
+        tableviewheel.getItems().clear();
+        for (Wheel w : this.globalwheels) {
+            tableviewheel.getItems().add(w);
+        }
+    }
+
+    @FXML
     void WheelDeleteAction(ActionEvent event) {
 
         File file = new File("wheels.jobj");
@@ -1398,30 +1796,17 @@ public class Addon {
 
     }
 
-
     @FXML
     void ExtraChangeAction(ActionEvent event) {
-
-        // Tenker at du velge rad, trykker på "endre valgte rad",
-        // Da dukker verdiene opp i textfield, som du kan endre
-        // Automatisk da så sletter den du har valgt, og lager ny ved å legge til den ny med nye verdier.
-
-        // Dette endrer du ved å trykke "oppdater"
-
         Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
-
         extratextfield.setText(a.getName());
         extratextfield2.setText(a.getDescription());
         String price = String.valueOf(a.getPrice());
         extratextfield3.setText(price);
-
     }
 
     @FXML
     void ExtraChangeActionUpdate(ActionEvent event) {
-
-        //Henter fram det jeg skal endre
-
         if (extratextfield.getText().isEmpty()) {
             label1.setText("Feltet er tomt");
         }
@@ -1431,13 +1816,10 @@ public class Addon {
         if (extratextfield3.getText().isEmpty()) {
             label3.setText("Feltet er tomt");
         }
-
         boolean valid = true;
-
         String extrapartinput = "";
         String extraparttype = "";
         Integer extraprice = 0;
-
         if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
             extrapartinput = extratextfield.getText();
         } else {
@@ -1456,35 +1838,20 @@ public class Addon {
             label3.setText("Feil input. Bruk siffer uten mellomrom.");
             valid = false;
         }
-
         if (valid) {
-
-            // Henter fra objektet jeg skal endre på
             Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
-
-
-            // Endrer på objektet
-            // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
-            // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
-
             for (Accessory accessory : this.globalaccessories) {
                 if (a.getUUIDString() == accessory.getUUIDString()) {
                     accessory.setName(extrapartinput);
                     accessory.setDescription(extraparttype);
                     accessory.setPrice(extraprice);
-
                 }
             }
-
-
             File file = new File("accessories.jobj");
-
             try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
-
                 ObjectInputStream ois = new ObjectInputStream(is);
-
-                ArrayList<Accessory> accessories = this.globalaccessories;
-
+                ArrayList<Accessory> accessories = new ArrayList<Accessory>();
+                accessories = this.globalaccessories;
                 task = new OpenWithThread("Accessory", file, accessories);
                 task.setOnSucceeded(this::ThreadOpenDone);
                 task.setOnFailed(this::ThreadOpenFailed);
@@ -1492,17 +1859,19 @@ public class Addon {
                 th.setDaemon(true);
                 DisableAll();
                 th.start();
-
-
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-
-
         } else {}
+        extratextfield.clear();
+        extratextfield2.clear();
+        extratextfield3.clear();
+        tableviewextra.getItems().clear();
+        for (Accessory a : this.globalaccessories) {
+            tableviewextra.getItems().add(a);
+        }
 
     }
-
 
     @FXML
     void ExtraDeleteAction(ActionEvent event) {
@@ -1642,52 +2011,39 @@ public class Addon {
     }
 
     private void OpenAll() {
-
         engineinputid.setDisable(false);
-        //  enginechangeid.setDisable(false);
-        //  enginechangeid2.setDisable(false);
-
-
+        enginechangeid1.setDisable(false);
+        enginechangeid2.setDisable(false);
         gearboxinputid.setDisable(false);
-        //  gearboxchangeid.setDisable(false);
-        //  gearboxchangeid2.setDisable(false);
-
+        gearboxchangeid1.setDisable(false);
+        gearboxchangeid2.setDisable(false);
         paintinputid.setDisable(false);
-        //  paintchangeid.setDisable(false);
-        //  paintchangeid2.setDisable(false);
-
+        paintchangeid1.setDisable(false);
+        paintchangeid2.setDisable(false);
         wheelinputid.setDisable(false);
-        //  wheelchangeid.setDisable(false);
-       //  wheelchangeid2.setDisable(false);
-
+        wheelchangeid1.setDisable(false);
+        wheelchangeid2.setDisable(false);
         extrainputid.setDisable(false);
-        extrachangeid.setDisable(false);
+        extrachangeid1.setDisable(false);
         extrachangeid2.setDisable(false);
     }
 
     private void DisableAll() {
-
         engineinputid.setDisable(true);
-        //  enginechangeid.setDisable(true);
-        //  enginechangeid2.setDisable(true);
-
+        enginechangeid1.setDisable(true);
+        enginechangeid2.setDisable(true);
         gearboxinputid.setDisable(true);
-        //  gearboxchangeid.setDisable(true);
-        //  gearboxchangeid2.setDisable(true);
-
+        gearboxchangeid1.setDisable(true);
+        gearboxchangeid2.setDisable(true);
         paintinputid.setDisable(true);
-        //  paintchangeid.setDisable(true);
-        //  paintchangeid2.setDisable(true);
-
+         paintchangeid1.setDisable(true);
+         paintchangeid2.setDisable(true);
         wheelinputid.setDisable(true);
-      //  wheelchangeid.setDisable(true);
-      //  wheelchangeid2.setDisable(true);
-
+        wheelchangeid1.setDisable(true);
+        wheelchangeid2.setDisable(true);
         extrainputid.setDisable(true);
-        extrachangeid.setDisable(true);
+        extrachangeid1.setDisable(true);
         extrachangeid2.setDisable(true);
-
-
     }
 
 
