@@ -43,7 +43,7 @@
                   <Label fx:id="label16" layoutX="73.0" layoutY="230.0" prefHeight="28.0" prefWidth="240.0" textFill="#5e1914" />
                   <Label fx:id="label18" layoutX="360.0" layoutY="232.0" prefHeight="24.0" prefWidth="295.0" textFill="#5e1914" />
                   <Label fx:id="label17" layoutX="358.0" layoutY="144.0" prefHeight="24.0" prefWidth="272.0" textFill="#5e1914" />
-                  <TableView fx:id="tableviewengine" editable="true" layoutX="31.0" layoutY="340.0" prefHeight="215.0" prefWidth="586.0">
+                  <TableView fx:id="tableviewengine" editable="true" layoutX="84.0" layoutY="359.0" prefHeight="222.0" prefWidth="555.0">
                      <columns>
                         <TableColumn fx:id="enginecol1" prefWidth="75.0" text="Navn" />
                         <TableColumn fx:id="enginecol2" prefWidth="75.0" text="Drivstoff" />
@@ -55,6 +55,8 @@
                   <ChoiceBox fx:id="choiceboxengine" layoutX="439.0" layoutY="298.0" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #BBD9EE;" />
                   <TextField fx:id="textfieldenginefilter" layoutX="545.0" layoutY="298.0" prefHeight="28.0" prefWidth="81.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
                   <Button fx:id="enginedeleteid" layoutX="146.0" layoutY="294.0" mnemonicParsing="false" onAction="#EngineDeleteAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
+                  <Button fx:id="enginechangeid1" layoutX="14.0" layoutY="262.0" mnemonicParsing="false" onAction="#EngineChangeAction" prefHeight="34.0" prefWidth="119.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
+                  <Button fx:id="enginechangeid2" layoutX="14.0" layoutY="306.0" mnemonicParsing="false" onAction="#EngineChangeActionUpdate" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
                </children></Pane>
             <Pane fx:id="pane2id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #379683;">
                <children>
@@ -75,7 +77,7 @@
                   <TextField fx:id="gearboxtextfield" layoutX="201.0" layoutY="107.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn navnet her" />
                   <TextField fx:id="gearboxtextfield2" layoutX="202.0" layoutY="167.0" prefHeight="41.0" prefWidth="260.0" promptText="Skriv inn type her" />
                   <TextField fx:id="gearboxtextfield3" layoutX="202.0" layoutY="225.0" prefHeight="48.0" prefWidth="260.0" promptText="Skriv inn pris her" />
-                  <TableView fx:id="tableviewgearbox" layoutX="32.0" layoutY="335.0" prefHeight="222.0" prefWidth="586.0">
+                  <TableView fx:id="tableviewgearbox" layoutX="77.0" layoutY="358.0" prefHeight="222.0" prefWidth="565.0">
                     <columns>
                       <TableColumn fx:id="gearboxcol1" prefWidth="75.0" text="Navn" />
                       <TableColumn fx:id="gearboxcol2" prefWidth="75.0" text="Type" />
@@ -83,12 +85,14 @@
                     </columns>
                   </TableView>
                   <Button fx:id="gearboxfilterid" layoutX="631.0" layoutY="295.0" minWidth="47.0" mnemonicParsing="false" onAction="#GearboxFilterAction" prefHeight="34.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
-                  <TextField fx:id="textfieldgearboxfilter" layoutX="541.0" layoutY="298.0" prefHeight="28.0" prefWidth="87.0" style="-fx-background-color: #FFFFFF;" />
+                  <TextField fx:id="textfieldgearboxfilter" layoutX="541.0" layoutY="298.0" prefHeight="28.0" prefWidth="87.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
                   <ChoiceBox fx:id="choiceboxgearbox" layoutX="449.0" layoutY="296.0" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #BBD9EE #BBD9EE #BBD9EE #BBD9EE;" />
+                  <Button fx:id="gearboxchangeid1" layoutX="14.0" layoutY="262.0" mnemonicParsing="false" onAction="#GearboxChangeAction" prefHeight="34.0" prefWidth="119.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
+                  <Button fx:id="gearboxchangeid2" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onAction="#GearboxChangeActionUpdate" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
                </children></Pane>
             <Pane fx:id="pane3id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #8D8741;">
                <children>
-                  <Button fx:id="paintdeleteid" layoutX="147.0" layoutY="296.0" mnemonicParsing="false" onAction="#PaintDeleteAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slegg valgte rad" textFill="WHITE" />
+                  <Button fx:id="paintdeleteid" layoutX="147.0" layoutY="296.0" mnemonicParsing="false" onAction="#PaintDeleteAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
                   <Button fx:id="paintinputid" layoutX="294.0" layoutY="295.0" mnemonicParsing="false" onAction="#PaintInputAction" prefHeight="34.0" prefWidth="133.0" style="-fx-background-color: #206ba4;" text="Oppdater/Legg til" textFill="WHITE" />
                   <TextFlow fx:id="txtflow3" prefHeight="154.0" prefWidth="516.0">
                      <children>
@@ -107,7 +111,7 @@
                   <Label fx:id="label9" layoutX="71.0" layoutY="222.0" prefHeight="28.0" prefWidth="229.0" textFill="#5e1914" />
                   <Label fx:id="label10" layoutX="413.0" layoutY="138.0" prefHeight="34.0" prefWidth="250.0" textFill="#5e1914" />
                   <Label fx:id="label11" layoutX="403.0" layoutY="217.0" prefHeight="28.0" prefWidth="260.0" textFill="#5e1914" />
-                  <TableView fx:id="tableviewpaint" layoutX="35.0" layoutY="336.0" prefHeight="222.0" prefWidth="578.0">
+                  <TableView fx:id="tableviewpaint" layoutX="84.0" layoutY="358.0" prefHeight="222.0" prefWidth="555.0">
                     <columns>
                       <TableColumn fx:id="paintcol1" prefWidth="75.0" text="Navn" />
                       <TableColumn fx:id="paintcol2" prefWidth="75.0" text="Farge" />
@@ -118,12 +122,14 @@
                   <Button fx:id="paintfilterid" layoutX="632.0" layoutY="294.0" mnemonicParsing="false" onAction="#PaintFilterAction" prefHeight="34.0" prefWidth="62.0" style="-fx-background-color: #BBD9EE;" text="Filtrer" />
                   <TextField fx:id="textfieldpaintfilter" layoutX="538.0" layoutY="294.0" prefHeight="32.0" prefWidth="87.0" promptText="Filter" style="-fx-background-color: #FFFFFF;" />
                   <ChoiceBox fx:id="choiceboxpaint" layoutX="449.0" layoutY="294.0" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #BBD9EE;" />
+                  <Button fx:id="paintchangeid1" layoutX="14.0" layoutY="264.0" mnemonicParsing="false" onAction="#PaintChangeAction" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
+                  <Button fx:id="paintchangeid2" layoutX="14.0" layoutY="310.0" mnemonicParsing="false" onAction="#PaintChangeActionUpdate" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
                </children></Pane>
-            <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #5579A5;">
+            <Pane fx:id="pane4id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #90AFC5;">
                <children>
-                  <ChoiceBox fx:id="choiceboxwheel" layoutX="451.0" layoutY="295.0" prefHeight="34.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE;" />
+                  <ChoiceBox fx:id="choiceboxwheel" layoutX="451.0" layoutY="295.0" prefHeight="34.0" prefWidth="81.0" style="-fx-background-color: #BBD9EE; -fx-border-color: #000000;" />
                   <TextField fx:id="textfieldwheelfilter" layoutX="539.0" layoutY="292.0" prefHeight="32.0" prefWidth="87.0" />
-                  <Button fx:id="wheelfilterid" layoutX="630.0" layoutY="289.0" mnemonicParsing="false" onAction="#WheelFilterAction" prefHeight="41.0" prefWidth="70.0" style="-fx-background-color: #BBD9EE;" text="Filter" />
+                  <Button fx:id="wheelfilterid" layoutX="630.0" layoutY="289.0" mnemonicParsing="false" onAction="#WheelFilterAction" prefHeight="41.0" prefWidth="70.0" style="-fx-background-color: #BBD9EE; -fx-border-color: #000000;" text="Filtrer" />
                   <TextFlow fx:id="txtflow4" prefHeight="138.0" prefWidth="462.0">
                      <children>
                         <Text fx:id="wheeltitleid" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="HJUL">
@@ -155,6 +161,8 @@
                     </columns>
                   </TableView>
                   <Button fx:id="wheeldeleteid" layoutX="144.0" layoutY="297.0" mnemonicParsing="false" onAction="#WheelDeleteAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #206ba4;" text="Slett valgte rad" textFill="WHITE" />
+                  <Button fx:id="wheelchangeid2" layoutX="13.0" layoutY="308.0" mnemonicParsing="false" onAction="#WheelChangeActionUpdate" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
+                  <Button fx:id="wheelchangeid1" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#WheelChangeAction" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
                </children></Pane>
             <Pane fx:id="pane5id" prefHeight="610.0" prefWidth="740.0" style="-fx-background-color: #B1A296;">
                <children>
@@ -189,7 +197,7 @@
                         <Blend />
                      </effect>
                   </Button>
-                  <Button fx:id="extrachangeid" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#ExtraChangeAction" prefHeight="32.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
+                  <Button fx:id="extrachangeid1" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#ExtraChangeAction" prefHeight="32.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Endre valgte rad" textFill="WHITE" />
                   <Button fx:id="extrachangeid2" layoutX="14.0" layoutY="308.0" mnemonicParsing="false" onAction="#ExtraChangeActionUpdate" prefHeight="32.0" prefWidth="113.0" style="-fx-background-color: #206ba4;" text="Oppdater endring" textFill="WHITE" />
                </children>
             </Pane>
