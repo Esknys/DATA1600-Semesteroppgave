@@ -36,30 +36,31 @@ public class OpenWithThread extends Task {
 
             Thread.sleep(3000);
 
+            switch (tag) {
+                case "Engine":
+                    WriteEngines.write(this.file, (ArrayList)this.listOfObjects);
+                    break;
+                case "Gearbox":
+                    WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
+                    break;
+                case "Paintjob":
+                    WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
+                    break;
+                case "Wheel":
+                    WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
+                    break;
+                case "Accessory":
+                    WriteAccessories.write(this.file, (ArrayList)this.listOfObjects);
+                    break;
+                default:
+                    throw new IOException();
+            }
+
         } catch (InterruptedException e) {
 
         }
 
 
-        switch (tag) {
-            case "Engine":
-                WriteEngines.write(this.file, (ArrayList)this.listOfObjects);
-                break;
-            case "Gearbox":
-                WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
-                break;
-            case "Paintjob":
-                WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
-                break;
-            case "Wheel":
-                WriteGearboxes.write(this.file, (ArrayList)this.listOfObjects);
-                break;
-            case "Accessory":
-                WriteAccessories.write(this.file, (ArrayList)this.listOfObjects);
-                break;
-            default:
-                throw new IOException();
-        }
 
         return "Yes";
     }

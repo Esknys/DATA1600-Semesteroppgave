@@ -17,6 +17,7 @@ import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -402,6 +403,7 @@ public class Addon {
     @FXML
     private ChoiceBox<String> choiceboxengine;
 
+    private OpenWithThread task;
 
 
 
@@ -1213,7 +1215,6 @@ public class Addon {
 
 
 
-
     @FXML
     void ExtraInputAction(ActionEvent event) {
         tableviewextra.getItems().clear();
@@ -1278,9 +1279,18 @@ public class Addon {
 
                     ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
                     accessories.add(extra);
-                    WriteAccessories.write(file, accessories);
+
+                    task = new OpenWithThread("Accessory", file, accessories);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
 
                     this.globalaccessories = accessories;
+
+
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -1474,6 +1484,28 @@ public class Addon {
         }
     }
 
+
+
+    private void ThreadOpenDone(Event e) {
+        OpenAll();
+    }
+
+    private void ThreadOpenFailed(Event e) {
+        OpenAll();
+    }
+
+    private void OpenAll() {
+
+        extrafilterid.setDisable(false);
+        extrainputid.setDisable(false);
+    }
+
+    private void DisableAll() {
+
+        extrafilterid.setDisable(true);
+        extrainputid.setDisable(true);
+
+    }
 
 
 }
