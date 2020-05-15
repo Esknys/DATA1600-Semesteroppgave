@@ -26,7 +26,7 @@
          <font>
             <Font size="17.0" />
          </font></Text>
-      <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adminsiden" wrappingWidth="179.0648193359375">
+      <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adminside" wrappingWidth="179.0648193359375">
          <effect>
             <Glow level="0.76" />
          </effect>
@@ -35,5 +35,10 @@
          </font></Text>
       <Button fx:id="logginnansattid" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" onAction="#logginnansattaction" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #687864; -fx-font-weight: bold;" text="Logg inn" textFill="#e9e1de" />
       <PasswordField fx:id="passwordfieldid" layoutX="458.0" layoutY="256.0" prefHeight="26.0" prefWidth="166.0" />
+      <Label fx:id="labelwronginput" layoutX="358.0" layoutY="397.0" prefHeight="63.0" prefWidth="278.0" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

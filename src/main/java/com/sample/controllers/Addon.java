@@ -987,7 +987,7 @@ public class Addon {
                     }
 
 
-                    File file = new File("gearbooxes.jobj");
+                    File file = new File("gearboxes.jobj");
                     try (InputStream is = Files.newInputStream(Paths.get("gearboxes.jobj"), StandardOpenOption.READ);) {
                         ObjectInputStream ois = new ObjectInputStream(is);
                         ArrayList<Gearbox> gearboxes = new ArrayList<Gearbox>();

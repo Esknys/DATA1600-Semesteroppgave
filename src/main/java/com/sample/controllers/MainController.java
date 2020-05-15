@@ -71,7 +71,7 @@ public class MainController {
         String brukernavn = txtBrukernavn.getText();
         String passord = Pasfieldid.getText();
 
-        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
+        if (brukernavn.equals("brukernavn") && passord.equals("passord")) {
             App.changeView("sluttbruker.fxml");
 
     } else {

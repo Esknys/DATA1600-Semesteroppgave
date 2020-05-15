@@ -40,6 +40,9 @@ public class SecondaryController {
     private Button logginnansattid;
 
     @FXML
+    private Label labelwronginput;
+
+    @FXML
     private void changeToMainView() throws IOException {
         App.changeView("mainview.fxml");
     }
@@ -53,7 +56,7 @@ public class SecondaryController {
         if (brukernavn.equals("superbruker") && passord.equals("superpassord")) {
             App.changeView("addon.fxml");
         } else {
-            System.out.println("Feil brukernavn eller passord");
+            labelwronginput.setText("Feil brukernavn og/eller passord");
             }
     }
 
