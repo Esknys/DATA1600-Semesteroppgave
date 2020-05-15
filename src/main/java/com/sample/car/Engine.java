@@ -38,7 +38,7 @@ public class Engine extends Part implements Serializable {
     public String toStringFormatted() {
         return "Navn: " + getName() + "\n" +
                 "Pris: " + getPriceFormatted() + "\n" +
-                "Drivstoff: " + getName() + "\n" +
+                "Drivstoff: " + getFuel() + "\n" +
                 "Hestekrefter: " + getHorsepower() +  " HK ";
     }
 

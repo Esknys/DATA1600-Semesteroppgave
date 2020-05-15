@@ -1,7 +1,6 @@
 package com.sample.controllers;
 
 import com.sample.App;
-import com.sample.binaryfile.*;
 import com.sample.car.*;
 import com.sample.textfile.CarFormatter;
 import com.sample.textfile.FileReader;
@@ -9,7 +8,6 @@ import com.sample.textfile.FileSaver;
 import com.sample.textfile.InvalidCarFormatException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -25,34 +23,20 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
+import static javafx.scene.paint.Color.*;
+
 public class SluttbrukerController {
 
-    //konstruerer deler pga mangel av innlastning fra fil
-    private Engine electric = new Engine("Electroman", "Electric", 500, 200000);
-    private Engine diesel = new Engine("Diesel 200x","Diesel", 200, 150000);
-
-    private Gearbox manual = new Gearbox("Oldschool",30000, "Manual transmission");
-    private Gearbox automatic = new Gearbox("Super auto shifter", 40000, "Automatic transmission");
-
-    private Paintjob paint1 = new Paintjob("White cream", 10000, "White", "Metallic");
-    private Paintjob paint2 = new Paintjob("Night black", 15000, "Black", "Metallic");
-
-    private Wheel wheel1 = new Wheel("Sport", "Lettmetall", 20, 20000);
-    private Wheel wheel2 = new Wheel("Offroad", "Metall", 22, 23000);
-
-    private Accessory accessory1 = new Accessory("GPS 2.0", "Beste gps som finnes på markedet!", 10000);
-    private Accessory accessory2 = new Accessory("Skinnseter", "Oppgraderte seter i ekte skinn", 20000);
+    private Engine standardEngine = new Engine("Standard Motor", "Elektrisk", 500, 200000);
+    private Gearbox standardGearbox = new Gearbox("Standard Girboks",30000, "Manuell");
+    private Paintjob standardPaint = new Paintjob("Standard Maling", 10000, "Hvit", "Metallic");
+    private Wheel standardWheel = new Wheel("Standard Hjul", "Lettmetall", 20, 20000);
 
     private ArrayList<Engine> engineArrayList = new ArrayList<>();
     private ArrayList<Gearbox> gearboxArrayList = new ArrayList<>();
     private ArrayList<Paintjob> paintjobArrayList = new ArrayList<>();
     private ArrayList<Wheel> wheelArrayList = new ArrayList<>();
     private ArrayList<Accessory> accessoryArrayList = new ArrayList<>();
-
-    Car testCar1 = new Car(diesel, manual, paint1, wheel1);
-    Car testCar2 = new Car(electric, automatic, paint2, wheel2);
-
-
 
     private ArrayList<Car> carArrayList = new ArrayList<>();
 
@@ -72,7 +56,11 @@ public class SluttbrukerController {
     ToggleGroup partToggleGroup = new ToggleGroup();
     ToggleGroup carToggleGroup = new ToggleGroup();
 
-    Car currentConfiguringCar = new Car(electric, manual, paint1, wheel2);
+    Car standardCar = new Car(standardEngine, standardGearbox, standardPaint, standardWheel);
+    Car lastSelectedCar;
+    Car currentConfiguringCar;
+
+    int currentConfiguringCarIndex;
 
     @FXML
     private BorderPane mainBorderPane;
@@ -114,10 +102,46 @@ public class SluttbrukerController {
     private Label lblPartInfo;
 
     @FXML
+    private Label lblErrorMessage;
+
+    @FXML
     private TilePane PartSelectorTilePane;
 
     @FXML
     private Button btnAddToConfiguration;
+
+    @FXML
+    private Label lblCurrentConfigCar;
+
+    @FXML
+    private Label lblCurrentConfigCarTitle;
+
+    @FXML
+    private Label lblCurrentConfigEngineTitle;
+
+    @FXML
+    private Label lblCurrentConfigEngine;
+
+    @FXML
+    private Label lblCurrentConfigGearboxTitle;
+
+    @FXML
+    private Label lblCurrentConfigGearbox;
+
+    @FXML
+    private Label lblCurrentConfigPaintjobTitle;
+
+    @FXML
+    private Label lblCurrentConfigPaintjob;
+
+    @FXML
+    private Label lblCurrentConfigWheelTitle;
+
+    @FXML
+    private Label lblCurrentConfigWheel;
+
+    @FXML
+    private Label lblCurrentConfigAccessoriesTitle;
 
     @FXML
     private Label lblCurrentConfiguration;
@@ -134,6 +158,7 @@ public class SluttbrukerController {
     @FXML
     public void initialize() {
 
+        //Innlastning av deler fra serialisert fil
 
         try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
 
@@ -186,6 +211,14 @@ public class SluttbrukerController {
             System.out.println(e.getMessage());
         }
 
+        //setter standardbilen til første mulige komponent
+        standardCar.setEngine(standardEngine);
+        standardCar.setGearbox(standardGearbox);
+        standardCar.setPaintjob(standardPaint);
+        standardCar.setWheel(standardWheel);
+
+        //Innlastning av bil-konfigurasjoner fra fil
+
         FileReader fileReader = new FileReader();
 
         File file = new File("carregister.txt");
@@ -204,7 +237,7 @@ public class SluttbrukerController {
         //carArrayList.add(testCar2);
 
 
-        //Legger til funksjonen updateCurretPartInfo som Listner til togglegroupen, så info om delene oppdateres
+        //Legger til funksjonen updateCurretPartInfo som Listener til endringer i togglegroupen, så info om delene oppdateres
         partToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 
@@ -214,6 +247,9 @@ public class SluttbrukerController {
 
             }
         });
+
+        //Legger til funksjonen updateCurrentCarInfo som Listener til endringer i togglegroupen, så info om delene oppdateres
+
 
         carToggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
@@ -234,7 +270,11 @@ public class SluttbrukerController {
 
     @FXML
     void AddSelectedPart(ActionEvent event) {
-        if (partToggleGroup.getSelectedToggle() != null) {
+        if (currentConfiguringCar == null) {
+            lblErrorMessage.setText("Ingen bil er valgt");
+        } else if (partToggleGroup.getSelectedToggle() == null) {
+            lblErrorMessage.setText("Ingen del er valgt");
+        } else {
             String selectedPartUUID = (String) partToggleGroup.getSelectedToggle().getUserData();
             Part selectedPart = findPartInPartArrayLists(selectedPartUUID);
 
@@ -270,36 +310,92 @@ public class SluttbrukerController {
 
     @FXML
     void newCar(ActionEvent event) {
-
+        //Legger til en ny bil med standard Konfigurasjon
+        carArrayList.add(standardCar);
+        //Oppdaterer radio-buttons
+        clearRadioButtonTilePane();
+        fillRadioButtonTilePaneWithCarConfigurations(carArrayList);
     }
 
     @FXML
     void selectCar(ActionEvent event) {
-        currentConfiguringCar = findCarInCarArrayList(carToggleGroup.getSelectedToggle().getUserData().toString());
+        currentConfiguringCar = findCarInCarArrayListAndUpdateIndex(carToggleGroup.getSelectedToggle().getUserData().toString());
+        lastSelectedCar = findCarInCarArrayListAndUpdateIndex(carToggleGroup.getSelectedToggle().getUserData().toString());
         updateCurrentConfiguration();
     }
 
     @FXML
-    void saveConfiguration(ActionEvent event) throws IOException {
+    void deleteSelectedCar(ActionEvent event) throws InvalidCarFormatException {
+        Car selectedCar;
+        selectedCar = findCarInCarArrayListAndUpdateIndex(carToggleGroup.getSelectedToggle().getUserData().toString());
+        carArrayList.remove(selectedCar);
+
+        //lagrer til fil og laster inn igjen
 
         FileReader fileReader = new FileReader();
         File file = new File("carregister.txt");
 
-       try {
+        try {
 
-           String formatted = CarFormatter.formatCar(currentConfiguringCar);
-           FileSaver.save(formatted, file);
-           ArrayList<Car> cars = fileReader.readCars(file);
-           carArrayList = cars;
+            //formaterer hele listen med biler
+            String formatted = CarFormatter.formatCarArrayList(carArrayList);
+            //lagrer hele listen til fil
+            FileSaver.save(formatted, file);
+            //henter opp igjen listen fra fil
+            ArrayList<Car> cars = fileReader.readCars(file);
+            carArrayList = cars;
 
-       } catch(IOException ioe) {
-           throw new InvalidCarFormatException("Feil bilformat");
-       }
+        } catch(IOException ioe) {
+            throw new InvalidCarFormatException("Feil bilformat");
+        }
+
+        //Oppdaterer radiobuttons
+        clearRadioButtonTilePane();
+        fillRadioButtonTilePaneWithCarConfigurations(carArrayList);
+
+
+    }
+
+    @FXML
+    void saveConfiguration(ActionEvent event) throws IOException {
+        //Sjekker om bil er valgt før det evt. lagres
+        if (currentConfiguringCar == null) {
+            lblErrorMessage.setText("Ingen bil er valgt");
+        } else {
+            FileReader fileReader = new FileReader();
+            File file = new File("carregister.txt");
+            //legger til konfigurerende bil til listen
+            carArrayList.add(currentConfiguringCar);
+            //Fjerner bilen som har blitt endret
+            carArrayList.remove(lastSelectedCar);
+
+            try {
+
+                //formaterer hele listen med biler
+                String formatted = CarFormatter.formatCarArrayList(carArrayList);
+                //lagrer hele listen til fil
+                FileSaver.save(formatted, file);
+                //henter opp igjen listen fra fil
+                ArrayList<Car> cars = fileReader.readCars(file);
+                carArrayList = cars;
+                lblErrorMessage.setTextFill(BLACK);
+                lblErrorMessage.setText("Bilkonfigurasjon lagret");
+
+            } catch(IOException ioe) {
+                throw new InvalidCarFormatException("Feil bilformat");
+            }
+        }
+
 
     }
 
     public void updateCurrentConfiguration() {
-        lblCurrentConfiguration.setText(currentConfiguringCar.toString());
+        lblCurrentConfigCar.setText("Total pris: " + currentConfiguringCar.getPriceFormatted() + ",-");
+        lblCurrentConfigEngine.setText(currentConfiguringCar.getEngine().toStringFormatted());
+        lblCurrentConfigGearbox.setText(currentConfiguringCar.getGearbox().toStringFormatted());
+        lblCurrentConfigPaintjob.setText(currentConfiguringCar.getPaintjob().toStringFormatted());
+        lblCurrentConfigWheel.setText(currentConfiguringCar.getWheel().toStringFormatted());
+        lblCurrentConfiguration.setText(currentConfiguringCar.formatAccessories());
     }
 
     @FXML
@@ -383,7 +479,7 @@ public class SluttbrukerController {
 
         for (Car c : carArrayList) {
             RadioButton radioButton = new RadioButton();
-            radioButton.setText(c.getPriceFormatted() + ",-" + "\n" + c.getEngine().getName() + "\n" + c.getGearbox().getName() + "\n" + c.getPaintjob().getName());
+            radioButton.setText(c.getPriceFormatted() + ",-" + "\n" + c.getEngine().getName() + "\n" + c.getGearbox().getName() + "\n" + c.getPaintjob().getName() + "\n" + c.getWheel().getName());
             radioButton.setPadding(new Insets(5, 25, 5, 25));
             radioButton.setUserData(c.getUUIDString());
 
@@ -404,7 +500,7 @@ public class SluttbrukerController {
 
     public void updateCurrentCarInfo(String UUID) {
 
-        Car currentCar = findCarInCarArrayList(UUID);
+        Car currentCar = findCarInCarArrayListAndUpdateIndex(UUID);
 
         lblPartInfo.setText(currentCar.toString());
     }
@@ -448,9 +544,11 @@ public class SluttbrukerController {
         return returningPart;
     }
 
-    public Car findCarInCarArrayList(String UUIDString) {
+    public Car findCarInCarArrayListAndUpdateIndex(String UUIDString) {
         Car returningCar = null;
+        currentConfiguringCarIndex = -1;
         for (Car c : carArrayList) {
+            currentConfiguringCarIndex++;
             if (c.getUUIDString() == UUIDString) {
                 returningCar = c;
             }
@@ -473,6 +571,11 @@ public class SluttbrukerController {
         LblTitle.setText(title);
     }
 
+    public void clearErrorMessage() {
+        lblErrorMessage.setText("");
+        lblErrorMessage.setTextFill(RED);
+    }
+
     public void updateTitleAndWidowButtons() {
         switch(currentPartType) {
             case OVERVEIW:
@@ -484,6 +587,7 @@ public class SluttbrukerController {
                 lblSelectPart.setText("Velg bilkonfigurasjon");
                 lblPartInfoTitle.setText("Bil info");
                 btnBarCarConfigs.setVisible(true);
+                clearErrorMessage();
                 break;
 
             case ENGINE:
@@ -494,6 +598,7 @@ public class SluttbrukerController {
                 lblSelectPart.setText("Velg motordel");
                 lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
+                clearErrorMessage();
 
 
                 break;
@@ -506,6 +611,7 @@ public class SluttbrukerController {
                 lblSelectPart.setText("Velg girkasse");
                 lblPartInfoTitle.setText("Del-info");
                 btnBarCarConfigs.setVisible(false);
+                clearErrorMessage();
 
 
                 break;
@@ -518,30 +624,33 @@ public class SluttbrukerController {
                 lblSelectPart.setText("Velg farge");
                 lblPartInfoTitle.setText("Fargeinfo");
                 btnBarCarConfigs.setVisible(false);
+                clearErrorMessage();
 
 
                 break;
 
             case WHEEL:
-                setTitle("Wheels");
+                setTitle("HJUL");
                 enableAllSceneButtons();
                 BtnWheelScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg hjul");
+                lblPartInfoTitle.setText("Hjulinfo");
                 btnBarCarConfigs.setVisible(false);
+                clearErrorMessage();
 
 
                 break;
 
             case ACCESSORY:
-                setTitle("Accessories");
+                setTitle("EKSTRAUTSTYR");
                 enableAllSceneButtons();
                 BtnAccessoryScene.setDisable(true);
                 clearCurrentPartInfo();
-                lblSelectPart.setText("Select part");
-                lblPartInfoTitle.setText("Part info");
+                lblSelectPart.setText("Velg ekstrautstyr");
+                lblPartInfoTitle.setText("Ekstrautstyrinfo");
                 btnBarCarConfigs.setVisible(false);
+                clearErrorMessage();
 
 
                 break;

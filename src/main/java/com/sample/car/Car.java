@@ -109,9 +109,15 @@ public class Car {
     }
 
     public int getPrice() {
-        return engine.getPrice() +
+        int price = 0;
+        price += engine.getPrice() +
                 gearbox.getPrice() +
-                paintjob.getPrice();
+                paintjob.getPrice() +
+                wheel.getPrice();
+        for (Accessory a : accessories) {
+            price += a.getPrice();
+        }
+        return price;
     }
 
     public String getPriceFormatted() {
