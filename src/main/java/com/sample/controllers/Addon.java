@@ -931,41 +931,45 @@ public class Addon {
 
     @FXML
     void GearboxChangeActionUpdate(ActionEvent event) {
+        boolean valid = true;
         if (gearboxtextfield.getText().isEmpty()) {
             label12.setText("Feltet er tomt");
+            valid = false;
         }
         if (gearboxtextfield2.getText().isEmpty()) {
             label13.setText("Feltet er tomt");
+            valid = false;
         }
         if (gearboxtextfield3.getText().isEmpty()) {
             label14.setText("Feltet er tomt");
+            valid = false;
         }
-        boolean valid = true;
+
         String gearboxname = "";
         String gearboxtype = "";
         Integer gearboxprice = 0;
-        if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+        if (gearboxtextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
             gearboxname = gearboxtextfield.getText();
         } else {
             label12.setText("Feil input. Bruk bokstaver uten mellomrom.");
             valid = false;
         }
-        if (extratextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+        if (gearboxtextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
             gearboxtype = gearboxtextfield2.getText();
         } else {
             label13.setText("Feil input. Bruk bokstaver uten mellomrom.");
             valid = false;
         }
-        if (extratextfield3.getText().matches("[0-9]*")) {
-            gearboxprice = Integer.parseInt(extratextfield3.getText());
+        if (gearboxtextfield3.getText().matches("[0-9]*")) {
+            gearboxprice = Integer.parseInt(gearboxtextfield3.getText());
         } else {
             label14.setText("Feil input. Bruk siffer uten mellomrom.");
             valid = false;
         }
         if (valid) {
-            Gearbox a = tableviewgearbox.getSelectionModel().getSelectedItem();
+            Gearbox g = tableviewgearbox.getSelectionModel().getSelectedItem();
             for (Gearbox gearbox : this.globalgearbox) {
-                if (gearbox.getUUIDString() == gearbox.getUUIDString()) {
+                if (gearbox.getUUIDString() == g.getUUIDString()) {
                     gearbox.setName(gearboxname);
                     gearbox.setType(gearboxtype);
                     gearbox.setPrice(gearboxprice);
@@ -1218,19 +1222,24 @@ public class Addon {
 
     @FXML
     void PaintChangeActionUpdate(ActionEvent event) {
+        boolean valid = true;
         if (painttextfield.getText().isEmpty()) {
             label8.setText("Feltet er tomt");
+            valid = false;
         }
         if (painttextfield2.getText().isEmpty()) {
             label9.setText("Feltet er tomt");
+            valid = false;
         }
         if (painttextfield3.getText().isEmpty()) {
             label10.setText("Feltet er tomt");
+            valid = false;
         }
         if (painttextfield4.getText().isEmpty()) {
             label11.setText("Feltet er tomt");
+            valid = false;
         }
-        boolean valid = true;
+
         String paintnameinput = "";
         String paintcolorinput = "";
         String painttypeinput = "";
@@ -1515,19 +1524,25 @@ public class Addon {
 
     @FXML
     void WheelChangeActionUpdate(ActionEvent event) {
+
+        boolean valid = true;
         if (wheeltextfield.getText().isEmpty()) {
             label4.setText("Feltet er tomt");
+            valid = false;
         }
         if (wheeltextfield2.getText().isEmpty()) {
             label5.setText("Feltet er tomt");
+            valid = false;
         }
         if (wheeltextfield3.getText().isEmpty()) {
             label6.setText("Feltet er tomt");
+            valid = false;
         }
         if (wheeltextfield4.getText().isEmpty()) {
             label7.setText("Feltet er tomt");
+            valid = false;
         }
-        boolean valid = true;
+
         String wheelnameinput = "";
         String wheelparttype = "";
         Integer wheelsize = 0;
@@ -1545,13 +1560,13 @@ public class Addon {
             valid = false;
         }
         if (wheeltextfield3.getText().matches("[0-9]*")) {
-            wheelsize = Integer.parseInt(extratextfield3.getText());
+            wheelsize = Integer.parseInt(wheeltextfield3.getText());
         } else {
             label6.setText("Feil input. Bruk siffer uten mellomrom.");
             valid = false;
         }
         if (wheeltextfield4.getText().matches("[0-9]*")) {
-            wheelprice = Integer.parseInt(extratextfield3.getText());
+            wheelprice = Integer.valueOf(wheeltextfield4.getText());
         } else {
             label7.setText("Feil input. Bruk siffer uten mellomrom.");
             valid = false;
