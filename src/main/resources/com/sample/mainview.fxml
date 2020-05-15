@@ -18,7 +18,7 @@
          <font>
             <Font name="Arial" size="56.0" />
          </font></Text>
-      <Text fx:id="data1600id" fill="WHITE" layoutX="303.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppe 12 sin semesteroppgave i DATA1600 programutvikling. " wrappingWidth="425.8727912902833" />
+      <Text fx:id="data1600id" fill="WHITE" layoutX="303.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Semesteroppgave i DATA1600 programutvikling. " wrappingWidth="425.8727912902833" />
       <Text fx:id="kildebildeid" layoutX="503.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kilde til bildet: https://cdn.stocksnap.io/img-thumbs/960w/nature-plants_9Y1TPQW3B6.jpg" wrappingWidth="549.9828281402588">
          <font>
             <Font name="Arial Italic" size="10.0" />

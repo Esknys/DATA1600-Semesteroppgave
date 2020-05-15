@@ -13,7 +13,6 @@ import com.sample.App;
 import com.sample.binaryfile.*;
 import com.sample.car.*;
 import com.sample.exeptions.InputException;
-import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -659,7 +658,6 @@ public class Addon {
 
         Integer priceinput = 0;
 
-        Integer paintprice = 0;
         if (enginetextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
             enginenameinput = enginetextfield.getText();
         } else {
@@ -692,7 +690,7 @@ public class Addon {
                      engine.setName(enginenameinput);
                      engine.setHorsepower(horsepowerinput);
                      engine.setFuel(fuelinput);
-                     engine.setPrice(paintprice);
+                     engine.setPrice(priceinput);
                  }
              }
                     File file = new File("engines.jobj");

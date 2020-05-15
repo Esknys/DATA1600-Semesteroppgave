@@ -3,6 +3,7 @@ package com.sample.controllers;
 import java.io.IOException;
 
 import com.sample.App;
+import com.sample.exeptions.InputException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -49,12 +50,11 @@ public class SecondaryController {
         String brukernavn = brukerfeltid.getText();
         String passord = passwordfieldid.getText();
 
-      /*  if (brukernavn.equals("superbruker") && passord.equals("superpassord")) {
-         */   App.changeView("addon.fxml");
-     /*   }*/
-        //else {
-        //    throw new InvalidInputException("Feil brukernavn og passord. Prøv igjen");
-        //    }
+        if (brukernavn.equals("superbruker") && passord.equals("superpassord")) {
+            App.changeView("addon.fxml");
+        } else {
+            System.out.println("Feil brukernavn eller passord");
+            }
     }
 
 

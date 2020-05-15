@@ -71,19 +71,17 @@ public class MainController {
         String brukernavn = txtBrukernavn.getText();
         String passord = Pasfieldid.getText();
 
-      /*  if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {*/
+        if (brukernavn.equals("Brukernavn") && passord.equals("Passord")) {
             App.changeView("sluttbruker.fxml");
-      /*
+
     } else {
             exceptionid.setText("Feil passord og/eller brukernavn");
         }
 
-       */
+
 }
 
     }
-
-    // exceptionid.setText("Feil passord og/eller brukernavn"))
 
 
 
