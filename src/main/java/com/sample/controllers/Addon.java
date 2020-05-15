@@ -515,7 +515,6 @@ public class Addon {
 
         tableviewengine.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Om alle tekstfeltene er tomte
         if (enginetextfield.getText().isEmpty() && fueltextfield.getText().isEmpty() && horsepowertextfield.getText().isEmpty() && pricetextfield.getText().isEmpty()) {
 
             try (InputStream is = Files.newInputStream(Paths.get("engines.jobj"), StandardOpenOption.READ);) {
