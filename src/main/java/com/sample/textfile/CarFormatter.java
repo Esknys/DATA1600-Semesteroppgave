@@ -2,6 +2,8 @@ package com.sample.textfile;
 
 import com.sample.car.Car;
 
+import java.util.ArrayList;
+
 public class CarFormatter {
 
 
@@ -31,5 +33,14 @@ public class CarFormatter {
                 DELIMITER + gearboxName + DELIMITER + gearboxType + DELIMITER + gearboxPrice +
                 DELIMITER + paintjobName + DELIMITER + color + DELIMITER + type + DELIMITER + paintjobPrice +
                 DELIMITER + wheelName + DELIMITER + wheelType + DELIMITER + wheelSize + DELIMITER + wheelPrice;
+    }
+
+    public static String formatCarArrayList(ArrayList<Car> carArrayList) {
+        String ut = "";
+        for (Car c : carArrayList) {
+            ut = ut.concat(formatCar(c));
+        }
+        ut = ut.trim();
+        return ut;
     }
 }
