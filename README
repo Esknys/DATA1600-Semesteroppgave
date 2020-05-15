@@ -1,0 +1,37 @@
+Instrukser til sensor for kjøring av programmet.
+
+Programmet er et modul-basert Maven Java 13 prosjekt. Det antas at sensor har internett-forbindelse når prosjektet kjøres.
+Det er bilder i prosjektet som må ha internettforbindelse for å lastes.
+
+I tilfelle Kotlin-error ved første oppstart må man trykke på Build/Rebuild project.
+
+Innloggingsinformasjon:
+
+Kundeinnlogging: 
+Brukernavn: brukernavn 
+Passord: passord
+
+Ansattinnlogging:
+Brukernavn: superbruker
+Passord: superpassord
+
+
+Bildekilder:
+
+Bilde på forsiden:
+https://stocksnap.io/photo/nature-plants-9Y1TPQW3B6
+
+MOTOR
+https://image.flaticon.com/icons/svg/1275/1275475.svg
+
+EKSTRAUTSTYR
+https://image.flaticon.com/icons/svg/846/846296.svg
+
+MALING
+https://image.flaticon.com/icons/svg/842/842473.svg
+
+HJUL
+https://image.flaticon.com/icons/svg/2906/2906114.svg
+
+GIRBOKS
+https://image.flaticon.com/icons/svg/2084/2084250.svg
