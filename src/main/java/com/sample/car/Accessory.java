@@ -15,9 +15,7 @@ public class Accessory extends Part implements Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public void setDescription(String description) {this.description = description;}
 
     @Override
     public String toString() {

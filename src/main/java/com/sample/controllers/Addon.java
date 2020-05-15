@@ -17,6 +17,7 @@ import com.sample.validation.Validation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -403,6 +404,7 @@ public class Addon {
     private ChoiceBox<String> choiceboxengine;
 
 
+    private OpenWithThread task;
 
 
     // Det som dukker opp når man loader FXML filen
@@ -467,6 +469,11 @@ public class Addon {
     void EngineInputAction(ActionEvent event) {
 
         tableviewengine.getItems().clear();
+
+        label15.setText(" ");
+        label16.setText(" ");
+        label17.setText(" ");
+        label18.setText(" ");
 
         enginecol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         enginecol2.setCellValueFactory(new PropertyValueFactory<>("fuel"));
@@ -547,9 +554,15 @@ public class Addon {
                     ObjectInputStream ois = new ObjectInputStream(is);
 
                     ArrayList<Engine> engines = (ArrayList<Engine>) ois.readObject();
-
                     engines.add(engine);
-                    WriteEngines.write(file, engines);
+
+                    task = new OpenWithThread("Engine", file, engines);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
 
                     this.globalengine = engines;
 
@@ -670,6 +683,10 @@ public class Addon {
 
         tableviewgearbox.getItems().clear();
 
+        label12.setText(" ");
+        label13.setText(" ");
+        label14.setText(" ");
+
         gearboxcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         gearboxcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
         gearboxcol3.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -741,9 +758,16 @@ public class Addon {
                     ObjectInputStream ois = new ObjectInputStream(is);
 
                     ArrayList<Gearbox> gearboxes = (ArrayList<Gearbox>) ois.readObject();
-
                     gearboxes.add(gearbox);
-                    WriteGearboxes.write(file, gearboxes);
+
+                    task = new OpenWithThread("Gearbox", file, gearboxes);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
+
                     this.globalgearbox = gearboxes;
 
 
@@ -856,6 +880,11 @@ public class Addon {
 
         tableviewpaint.getItems().clear();
 
+        label8.setText(" ");
+        label9.setText(" ");
+        label10.setText(" ");
+        label11.setText(" ");
+
         paintcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         paintcol2.setCellValueFactory(new PropertyValueFactory<>("color"));
         paintcol3.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -939,9 +968,15 @@ public class Addon {
                     ObjectInputStream ois = new ObjectInputStream(is);
 
                     ArrayList<Paintjob> paintjobs = (ArrayList<Paintjob>) ois.readObject();
-
                     paintjobs.add(paintjob);
-                    WritePaintjobs.write(file, paintjobs);
+
+                    task = new OpenWithThread("Wheel", file, paintjobs);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
 
                     this.globalpaint = paintjobs;
 
@@ -1061,6 +1096,12 @@ public class Addon {
 
         tableviewheel.getItems().clear();
 
+        label4.setText(" ");
+        label5.setText(" ");
+        label6.setText(" ");
+        label7.setText(" ");
+
+
         wheelcol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         wheelcol2.setCellValueFactory(new PropertyValueFactory<>("type"));
         wheelcol3.setCellValueFactory(new PropertyValueFactory<>("size"));
@@ -1115,11 +1156,11 @@ public class Addon {
             if (wheeltextfield3.getText().matches("[0-9]*")) {
                 ws = Integer.parseInt(wheeltextfield3.getText());
             } else {value = false;
-            label6.setText("Feil input. Bruk bokstaver uten mellomrom.");}
+            label6.setText("Feil input. Bruk tall uten mellomrom.");}
             if (wheeltextfield4.getText().matches("[0-9]*")) {
                 wp = Integer.parseInt(wheeltextfield4.getText());
             } else {value = false;
-            label7.setText("Feil input. Bruk bokstaver uten mellomrom.");}
+            label7.setText("Feil input. Bruk tall uten mellomrom.");}
 
             if (value) {
 
@@ -1133,12 +1174,18 @@ public class Addon {
             ObjectInputStream ois = new ObjectInputStream(is);
 
             ArrayList<Wheel> wheels = (ArrayList<Wheel>) ois.readObject();
-
-            // Legger til ny
             wheels.add(wheel);
-            WriteWheels.write(file, wheels);
+
+            task = new OpenWithThread("Wheel", file, wheels);
+            task.setOnSucceeded(this::ThreadOpenDone);
+            task.setOnFailed(this::ThreadOpenFailed);
+            Thread th = new Thread(task);
+            th.setDaemon(true);
+            DisableAll();
+            th.start();
 
             this.globalwheels = wheels;
+
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -1255,6 +1302,10 @@ public class Addon {
     void ExtraInputAction(ActionEvent event) {
         tableviewextra.getItems().clear();
 
+            label1.setText(" ");
+            label2.setText(" ");
+            label3.setText(" ");
+
         extracol1.setCellValueFactory(new PropertyValueFactory<>("name"));
         extracol2.setCellValueFactory(new PropertyValueFactory<>("description"));
         extracol3.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -1321,9 +1372,17 @@ public class Addon {
 
                     ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
                     accessories.add(extra);
-                    WriteAccessories.write(file, accessories);
+
+                    task = new OpenWithThread("Accessory", file, accessories);
+                    task.setOnSucceeded(this::ThreadOpenDone);
+                    task.setOnFailed(this::ThreadOpenFailed);
+                    Thread th = new Thread(task);
+                    th.setDaemon(true);
+                    DisableAll();
+                    th.start();
 
                     this.globalaccessories = accessories;
+
 
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -1338,6 +1397,7 @@ public class Addon {
         }
 
     }
+
 
     @FXML
     void ExtraChangeAction(ActionEvent event) {
@@ -1358,37 +1418,91 @@ public class Addon {
     }
 
     @FXML
-    void ExtraChangeAction2(ActionEvent event) {
+    void ExtraChangeActionUpdate(ActionEvent event) {
 
-        /*/ Henter fram det jeg skal endre
-        String extrapartinput = extratextfield.getText();
-        String extraparttype = extratextfield2.getText();
-        Integer extraprice = Integer.parseInt(extratextfield3.getText());
+        //Henter fram det jeg skal endre
 
-         // Henter fra objektet jeg skal endre på
-        Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
-
-        // Endrer på objektet
-        // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
-        // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
-
-        for (int i = 0; i < this.globalaccessories.size(); i++) {
-            if (a.getName() = this.globalaccessories(i).getname()) {
-
-            }
+        if (extratextfield.getText().isEmpty()) {
+            label1.setText("Feltet er tomt");
+        }
+        if (extratextfield2.getText().isEmpty()) {
+            label2.setText("Feltet er tomt");
+        }
+        if (extratextfield3.getText().isEmpty()) {
+            label3.setText("Feltet er tomt");
         }
 
-        // Åpner stream
-        ObjectInputStream ois = new ObjectInputStream(is);
-        ArrayList<Accessory> accessories = (ArrayList<Accessory>) ois.readObject();
-        accessories = this.globalaccessories;
+        boolean valid = true;
 
-        WriteAccessories.write(file, accessories);
+        String extrapartinput = "";
+        String extraparttype = "";
+        Integer extraprice = 0;
 
-/
-         */
+        if (extratextfield.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            extrapartinput = extratextfield.getText();
+        } else {
+            label1.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield2.getText().matches("[A-ZÆØÅa-zæøå]*")) {
+            extraparttype = extratextfield2.getText();
+        } else {
+            label2.setText("Feil input. Bruk bokstaver uten mellomrom.");
+            valid = false;
+        }
+        if (extratextfield3.getText().matches("[0-9]*")) {
+            extraprice = Integer.parseInt(extratextfield3.getText());
+        } else {
+            label3.setText("Feil input. Bruk siffer uten mellomrom.");
+            valid = false;
+        }
+
+        if (valid) {
+
+            // Henter fra objektet jeg skal endre på
+            Accessory a = tableviewextra.getSelectionModel().getSelectedItem();
+
+
+            // Endrer på objektet
+            // Finner ikke fram objektet. Kunne ha gjort en enklere versjon: Slette så legge til ny.
+            // Vi gjør derimot dette: Iterer gjennom for å finne index. Deretter get.
+
+            for (Accessory accessory : this.globalaccessories) {
+                if (a.getUUIDString() == accessory.getUUIDString()) {
+                    accessory.setName(extrapartinput);
+                    accessory.setDescription(extraparttype);
+                    accessory.setPrice(extraprice);
+
+                }
+            }
+
+
+            File file = new File("accessories.jobj");
+
+            try (InputStream is = Files.newInputStream(Paths.get("accessories.jobj"), StandardOpenOption.READ);) {
+
+                ObjectInputStream ois = new ObjectInputStream(is);
+
+                ArrayList<Accessory> accessories = this.globalaccessories;
+
+                task = new OpenWithThread("Accessory", file, accessories);
+                task.setOnSucceeded(this::ThreadOpenDone);
+                task.setOnFailed(this::ThreadOpenFailed);
+                Thread th = new Thread(task);
+                th.setDaemon(true);
+                DisableAll();
+                th.start();
+
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+
+        } else {}
 
     }
+
 
     @FXML
     void ExtraDeleteAction(ActionEvent event) {
@@ -1516,6 +1630,68 @@ public class Addon {
             pane5id.toFront();
         }
     }
+
+
+
+    private void ThreadOpenDone(Event e) {
+        OpenAll();
+    }
+
+    private void ThreadOpenFailed(Event e) {
+        OpenAll();
+    }
+
+    private void OpenAll() {
+
+        engineinputid.setDisable(false);
+        //  enginechangeid.setDisable(false);
+        //  enginechangeid2.setDisable(false);
+
+
+        gearboxinputid.setDisable(false);
+        //  gearboxchangeid.setDisable(false);
+        //  gearboxchangeid2.setDisable(false);
+
+        paintinputid.setDisable(false);
+        //  paintchangeid.setDisable(false);
+        //  paintchangeid2.setDisable(false);
+
+        wheelinputid.setDisable(false);
+        //  wheelchangeid.setDisable(false);
+       //  wheelchangeid2.setDisable(false);
+
+        extrainputid.setDisable(false);
+        extrachangeid.setDisable(false);
+        extrachangeid2.setDisable(false);
+    }
+
+    private void DisableAll() {
+
+        engineinputid.setDisable(true);
+        //  enginechangeid.setDisable(true);
+        //  enginechangeid2.setDisable(true);
+
+        gearboxinputid.setDisable(true);
+        //  gearboxchangeid.setDisable(true);
+        //  gearboxchangeid2.setDisable(true);
+
+        paintinputid.setDisable(true);
+        //  paintchangeid.setDisable(true);
+        //  paintchangeid2.setDisable(true);
+
+        wheelinputid.setDisable(true);
+      //  wheelchangeid.setDisable(true);
+      //  wheelchangeid2.setDisable(true);
+
+        extrainputid.setDisable(true);
+        extrachangeid.setDisable(true);
+        extrachangeid2.setDisable(true);
+
+
+    }
+
+
+
 
 
 
