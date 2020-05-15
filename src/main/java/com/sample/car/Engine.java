@@ -21,9 +21,15 @@ public class Engine extends Part implements Serializable {
         return fuel;
     }
 
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
     public int getHorsepower() {
         return horsepower;
     }
+
+    public void setHorsepower(Integer horsepower) { this.horsepower = horsepower; }
 
 
     @Override
